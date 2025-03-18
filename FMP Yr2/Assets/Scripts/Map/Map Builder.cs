@@ -13,12 +13,9 @@ public class MapBuilder : MonoBehaviour
 
     float rowDist, columnDist;
 
-    GameObject map;
-
     // Start is called before the first frame update    
-    void Start()
+    void Awake()
     {
-        map = Instantiate(gameObject, new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
         StartCoroutine(MakeMap());
     }
     // Update is called once per frame
@@ -44,7 +41,6 @@ public class MapBuilder : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";
-                        temp.transform.parent = map.transform;
                     }
 
                     else if (y >= width - 4)
@@ -52,7 +48,6 @@ public class MapBuilder : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";
-                        temp.transform.parent = map.transform;
                     }
 
                     else if (x <= 4)
@@ -60,7 +55,6 @@ public class MapBuilder : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";
-                        temp.transform.parent = map.transform;
                     }
 
                     else if (x >= height - 4)
@@ -68,16 +62,14 @@ public class MapBuilder : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";
-                        temp.transform.parent = map.transform;
                     }
 
                     else
                     {
-                        int floorTile = Random.Range(1, 6);
+                        int floorTile = Random.Range(1, 8);
                         GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";
-                        temp.transform.parent = map.transform;
                     }
 
                 }
@@ -89,7 +81,6 @@ public class MapBuilder : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";
-                        temp.transform.parent = map.transform;
                     }
 
                     else if (y >= width - 4)
@@ -97,7 +88,6 @@ public class MapBuilder : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";
-                        temp.transform.parent = map.transform;
                     }
 
                     else if (x <= 4)
@@ -105,7 +95,6 @@ public class MapBuilder : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";
-                        temp.transform.parent = map.transform;
                     }
 
                     else if (x >= height - 4)
@@ -113,16 +102,14 @@ public class MapBuilder : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";
-                        temp.transform.parent = map.transform;
                     }
 
                     else
                     {
-                        int floorTile = Random.Range(1, 6);
+                        int floorTile = Random.Range(1, 8);
                         GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist + 0.5f, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";
-                        temp.transform.parent = map.transform;
                     }
 
                 }

@@ -246,14 +246,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorTiles:
-  - {fileID: 4727049970992700903, guid: e83b7b6d0ba822a469e84ac0872493fa, type: 3}
-  - {fileID: 8217142499102567449, guid: c762242932c70454e9a43424d71c0e22, type: 3}
-  - {fileID: 8217142499102567449, guid: c762242932c70454e9a43424d71c0e22, type: 3}
-  - {fileID: 7134412520604586581, guid: cbbdfc3865cc8d94ab8d528b6368adbe, type: 3}
-  - {fileID: 7134412520604586581, guid: cbbdfc3865cc8d94ab8d528b6368adbe, type: 3}
-  - {fileID: 2391350701601594896, guid: 52fda563f4fe2e54194e7f34076b6f64, type: 3}
-  - {fileID: 2391350701601594896, guid: 52fda563f4fe2e54194e7f34076b6f64, type: 3}
-  - {fileID: 7932851923195838629, guid: f20851cfcd51bea49a201e90089a445c, type: 3}
+  - {fileID: 6998547177504189181, guid: 1aa692388251d1c469df4477b18e1fe3, type: 3}
+  - {fileID: 6998547177504189181, guid: b00d6eb3a1c05a04c84c5f8045b6b518, type: 3}
+  - {fileID: 6998547177504189181, guid: b00d6eb3a1c05a04c84c5f8045b6b518, type: 3}
+  - {fileID: 6998547177504189181, guid: 7853ae90e65748e46ab70487ec2ae0b3, type: 3}
+  - {fileID: 6998547177504189181, guid: 7853ae90e65748e46ab70487ec2ae0b3, type: 3}
+  - {fileID: 6998547177504189181, guid: eee245f5e5ef0114fa01bdcd5111ae23, type: 3}
+  - {fileID: 6998547177504189181, guid: eee245f5e5ef0114fa01bdcd5111ae23, type: 3}
+  - {fileID: 698456071293677643, guid: 95d8247cca19d6a4cbded9716f0515af, type: 3}
   height: 50
   width: 50
 --- !u!4 &837136227

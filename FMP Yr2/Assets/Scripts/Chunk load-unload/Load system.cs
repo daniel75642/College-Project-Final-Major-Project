@@ -30,7 +30,7 @@ public class Loadsystem : MonoBehaviour {
             }
             else if (firstCheckDone) {
                 for (int i = 0; i < arrayLength; i++) {
-                    colliderArray[i].transform.GetComponentInChildren<MeshRenderer>().enabled = false;
+                    colliderArray[i].transform.GetComponent<MeshRenderer>().enabled = false;
                 }
             }
 
@@ -42,7 +42,7 @@ public class Loadsystem : MonoBehaviour {
 
             for (int i = 0; i < arrayLength; i++) {
                 colliderArray[i] = Physics.OverlapSphere(transform.position, loadDist)[i];
-                colliderArray[i].transform.GetComponentInChildren<MeshRenderer>().enabled = true;
+                colliderArray[i].transform.GetComponent<MeshRenderer>().enabled = true;
             }
             yield return new WaitForSeconds(0.5f);
         }

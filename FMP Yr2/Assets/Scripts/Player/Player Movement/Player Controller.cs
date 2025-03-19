@@ -4,34 +4,33 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField]Loadsystem loadSystem;
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(0.01f, 0, 0 * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(-0.01f, 0, 0 * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.W))
         {
             transform.Translate(0, 0, 2f * Time.deltaTime);
         }
 
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.S))
         {
             transform.Translate(0, 0, -2f * Time.deltaTime);
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            StartCoroutine(loadSystem.LoadUnload());
+        }
     }
 }
-// if daniel daniels on daniel then daniel might daniel

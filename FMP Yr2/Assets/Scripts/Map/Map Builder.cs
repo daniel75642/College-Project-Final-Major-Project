@@ -66,7 +66,7 @@ public class MapBuilder : MonoBehaviour
 
                     else
                     {
-                        int floorTile = Random.Range(1, 8);
+                        int floorTile = Random.Range(1, 19);
                         GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";
@@ -106,7 +106,7 @@ public class MapBuilder : MonoBehaviour
 
                     else
                     {
-                        int floorTile = Random.Range(1, 8);
+                        int floorTile = Random.Range(1, 19);
                         GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist + 0.5f, 0, columnDist + 0.865f), Quaternion.identity);
                         rowDist += 1f;
                         temp.name = $"{x},{y}";

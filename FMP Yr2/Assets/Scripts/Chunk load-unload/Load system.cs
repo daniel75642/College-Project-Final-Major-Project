@@ -7,45 +7,44 @@ public class Loadsystem : MonoBehaviour {
     public Collider[] colliderArray;
     [SerializeField] float loadDist;
 
-    bool check;
+    [SerializeField] LayerMask mapLayer;
+
     bool firstCheckDone = false;
     int arrayLength;
     // Start is called before the first frame update
-    void Start() {
-        check = true;
-         arrayLength = Physics.OverlapSphere(transform.position, loadDist).Length;
+    void Start() 
+    {
+         arrayLength = Physics.OverlapSphere(transform.position, loadDist, mapLayer).Length;
 
         StartCoroutine(LoadUnload());
     }
 
-    void Update() {
-
-    }
-
     public IEnumerator LoadUnload() {
 
-        while (check == true) {
-            if (!firstCheckDone) {
-                firstCheckDone = true;
+        if (!firstCheckDone)
+        {
+            firstCheckDone = true;
+        }
+        else if (firstCheckDone)
+        {
+            for (int i = 0; i < arrayLength; i++)
+            {
+                colliderArray[i].transform.GetComponent<MeshRenderer>().enabled = false;
             }
-            else if (firstCheckDone) {
-                for (int i = 0; i < arrayLength; i++) {
-                    colliderArray[i].transform.GetComponent<MeshRenderer>().enabled = false;
-                }
-            }
-
-                
-            Array.Clear(colliderArray, 0, colliderArray.Length);
-
-            colliderArray = Physics.OverlapSphere(transform.position, loadDist);
-            arrayLength = Physics.OverlapSphere(transform.position, loadDist).Length;
-
-            for (int i = 0; i < arrayLength; i++) {
-                colliderArray[i] = Physics.OverlapSphere(transform.position, loadDist)[i];
-                colliderArray[i].transform.GetComponent<MeshRenderer>().enabled = true;
-            }
-            yield return new WaitForSeconds(0.5f);
         }
 
+
+        Array.Clear(colliderArray, 0, colliderArray.Length);
+
+        colliderArray = Physics.OverlapSphere(transform.position, loadDist, mapLayer);
+        arrayLength = Physics.OverlapSphere(transform.position, loadDist, mapLayer).Length;
+
+        for (int i = 0; i < arrayLength; i++)
+        {
+            colliderArray[i] = Physics.OverlapSphere(transform.position, loadDist, mapLayer)[i];
+            colliderArray[i].transform.GetComponent<MeshRenderer>().enabled = true;
+        }
+        yield return null;
     }
+
 }

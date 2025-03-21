@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class SixDice : MonoBehaviour
 {
-    public RollNumberToScreen rollNumberToScreen;
+    public DiceManager diceManager;
 
     Rigidbody diceRb;
 
@@ -75,8 +75,8 @@ public class SixDice : MonoBehaviour
         {
             -transform.forward,  //1
             -transform.up,       //2
-            transform.right,     //3
-            -transform.right,    //4
+            -transform.right,     //3
+            transform.right,    //4
             transform.up,        //5
             transform.forward    //6
         };
@@ -108,7 +108,7 @@ public class SixDice : MonoBehaviour
                 default:
                     break;
             }
-            rollNumberToScreen.WhatNum();
+            diceManager.WhatNum();
             return i + 1;
         }
         return 0;

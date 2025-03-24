@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -9,107 +10,133 @@ public class MapManager : MonoBehaviour
 {
     [SerializeField]GameObject[] floorTiles;
 
-    [SerializeField] float height, width;
+    List<GameObject> mapEvenRows = new List<GameObject>();
+    List<GameObject> mapOddRows = new List<GameObject>();
+
+    [SerializeField] public float height, width;
+
+    [SerializeField] GameObject mapHolderOddRows, mapHolderEvenRows;
 
     float rowDist, columnDist;
 
+    int r, q;
+
+    private GrabCoordinates gc;
     // Start is called before the first frame update    
     void Awake()
     {
         StartCoroutine(MakeMap());
-    }
-    // Update is called once per frame
-    void Update()
-    {
-        
+
+        AddMapToParent();
     }
 
     public IEnumerator MakeMap()
     {
-        columnDist = 0;
+        columnDist = -0.865f;
         rowDist = 0;
-        for (int x = 0; x < height; x++)
+        for (r = 0; r < height; r++)
         {
             rowDist = 0;
             columnDist += 0.865f;
-            for (int y = 0; y < width; y++)
+            for (q = 0; q < width; q++)
             {
-                if (x % 2 == 0)
+                if (r % 2 == 0)
                 {
-                    if (y <= 4)
+                    if (q <= 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
-                        rowDist += 1f;
-                        temp.name = $"{x},{y}";
+                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        mapEvenRows.Add(temp);
+                        rowDist += 1f;  
+                        temp.name = $"{q},{r}";
+                        gc = temp.GetComponent<GrabCoordinates>();  gc.row = r;  gc.col = q;
                     }
 
-                    else if (y >= width - 4)
+                    else if (q >= width - 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        mapEvenRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{x},{y}";
+                        temp.name = $"{q},{r}";
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
+
                     }
 
-                    else if (x <= 4)
+                    else if (r <= 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        mapEvenRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{x},{y}";
+                        temp.name = $"{q},{r}";
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
-                    else if (x >= height - 4)
+                    else if (r >= height - 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        mapEvenRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{x},{y}";
+                        temp.name = $"{q},{r}";
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
                     else
                     {
-                        int floorTile = Random.Range(1, 19);
-                        GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist, 0, columnDist + 0.865f), Quaternion.identity);
+                        int floorTile = UnityEngine.Random.Range(1, 19);
+                        GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        mapEvenRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{x},{y}";
+                        temp.name = $"{q},{r}";
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
                 }
 
                 else
                 {
-                    if (y <= 4)
+                    if (q <= 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist + 0.865f), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
+                        mapOddRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{x},{y}";
+                        temp.name = $"{q},{r}";
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
-                    else if (y >= width - 4)
+                    else if (q >= width - 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist + 0.865f), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
+                        mapOddRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{x},{y}";
+                        temp.name = $"{q},{r}";
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
-                    else if (x <= 4)
+                    else if (r <= 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist + 0.865f), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
+                        mapOddRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{x},{y}";
+                        temp.name = $"{q},{r}";
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
-                    else if (x >= height - 4)
+                    else if (r >= height - 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist + 0.865f), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
+                        mapOddRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{x},{y}";
+                        temp.name = $"{q},{r}";
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
                     else
                     {
-                        int floorTile = Random.Range(1, 19);
-                        GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist + 0.5f, 0, columnDist + 0.865f), Quaternion.identity);
+                        int floorTile = UnityEngine.Random.Range(1, 19);
+                        GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
+                        mapOddRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{x},{y}";
+                        temp.name = $"{q},{r}";
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
                 }
@@ -118,4 +145,18 @@ public class MapManager : MonoBehaviour
         }
         yield return null;
     }
+
+    public void AddMapToParent()
+    {
+        for (int i = 0; i < mapEvenRows.Count; i++)
+        {
+            mapEvenRows[i].transform.parent = mapHolderEvenRows.transform;
+        }
+
+        for (int i = 0; i < mapOddRows.Count; i++)
+        {
+            mapOddRows[i].transform.parent = mapHolderOddRows.transform;
+        }
+    }
 }
+

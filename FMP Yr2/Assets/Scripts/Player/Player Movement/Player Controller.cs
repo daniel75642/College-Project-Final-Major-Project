@@ -10,12 +10,12 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(0.01f, 0, 0 * Time.deltaTime);
+            transform.Translate(0.005f, 0, 0 * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(-0.01f, 0, 0 * Time.deltaTime);
+            transform.Translate(-0.005f, 0, 0 * Time.deltaTime);
         }
 
         if (Input.GetKey(KeyCode.W))

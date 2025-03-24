@@ -37,7 +37,10 @@ public class SixDice : MonoBehaviour
         if (diceRb.velocity == Vector3.zero && rolled == true && checkNumber == false)
         {
             DiceValue();
-            StartCoroutine(ResetDice());
+            if (Input.GetKeyDown(diceRoll) && rolled == false)
+            {
+                StartCoroutine(ResetDice());
+            }
         }
 
         if (Input.GetKeyDown(diceRoll) && diceRb.velocity == Vector3.zero && rolled == false)
@@ -70,7 +73,7 @@ public class SixDice : MonoBehaviour
 
     int DiceValue()
     {
-        checkNumber = false;
+        checkNumber = true;
         Vector3[] dir =
         {
             -transform.forward,  //1
@@ -123,6 +126,5 @@ public class SixDice : MonoBehaviour
         diceRb.transform.position = diceSpawn.transform.position;
         diceRb.transform.rotation = Quaternion.Euler(-90, 0, 0);
         yield return new WaitForSeconds(3);
-        rolled = false;
     }
 }

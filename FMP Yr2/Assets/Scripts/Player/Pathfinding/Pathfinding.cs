@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HexGridCoordinates : MonoBehaviour
+public class Pathfinding : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()

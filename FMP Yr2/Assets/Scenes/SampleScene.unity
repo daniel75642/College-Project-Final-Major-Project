@@ -222,6 +222,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadSystem: {fileID: 52034075}
+  nearbyTiles: {fileID: 52034076}
+  mouse: {fileID: 1435025585}
 --- !u!114 &52034075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -541,6 +543,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadSystem: {fileID: 745954544}
+  nearbyTiles: {fileID: 745954548}
+  mouse: {fileID: 1435025585}
 --- !u!114 &745954544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1309,6 +1313,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadSystem: {fileID: 1398041417}
+  nearbyTiles: {fileID: 1398041421}
+  mouse: {fileID: 1435025585}
 --- !u!114 &1398041417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1622,6 +1628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   loadSystem: {fileID: 1511900709}
+  nearbyTiles: {fileID: 1511900713}
+  mouse: {fileID: 1435025585}
 --- !u!114 &1511900709
 MonoBehaviour:
   m_ObjectHideFlags: 0

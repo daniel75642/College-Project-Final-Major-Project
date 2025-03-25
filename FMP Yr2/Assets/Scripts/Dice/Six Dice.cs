@@ -77,10 +77,10 @@ public class SixDice : MonoBehaviour
         Vector3[] dir =
         {
             -transform.forward,  //1
-            -transform.up,       //2
-            -transform.right,     //3
-            transform.right,    //4
-            transform.up,        //5
+            transform.up,       //2
+            transform.right,     //3
+            -transform.right,    //4
+            -transform.up,        //5
             transform.forward    //6
         };
 

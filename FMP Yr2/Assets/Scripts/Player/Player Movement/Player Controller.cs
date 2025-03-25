@@ -1,10 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField]Loadsystem loadSystem;
+    [SerializeField]NearbyTiles nearbyTiles;
+
+    [SerializeField] Transform mouse;
+
+    [SerializeField] bool findPlayerTile, findMouseTile;
+
+    public void Start()
+    {
+        findPlayerTile = false;
+        findMouseTile = false;
+    }
 
     void Update()
     {
@@ -31,6 +43,16 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             StartCoroutine(loadSystem.LoadUnload());
+        }
+
+        if (Input.GetMouseButton(0) && findMouseTile == true)
+        {
+            nearbyTiles.MouseFindHex(mouse.transform);
+        }
+
+        if (findPlayerTile == true)
+        {
+            nearbyTiles.PlayerFindHex(this.transform);
         }
     }
 }

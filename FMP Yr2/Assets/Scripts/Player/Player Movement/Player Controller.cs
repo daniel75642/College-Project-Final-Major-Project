@@ -50,7 +50,7 @@ public class PlayerController : MonoBehaviour
             nearbyTiles.MouseFindHex(mouse.transform);
         }
 
-        if (findPlayerTile == true)
+        if (Input.GetKeyDown(KeyCode.F))
         {
             nearbyTiles.PlayerFindHex(this.transform);
         }

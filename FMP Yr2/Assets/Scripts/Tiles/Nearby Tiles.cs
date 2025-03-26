@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using static NearbyTiles;
@@ -76,20 +77,31 @@ public class NearbyTiles : MonoBehaviour
 
         if (playerHex == true && mouseHex == true)
         {
-            Debug.Log(AxialDist(playerAxialHex, mouseAxialHex));
+            Cube newMouseHex = HexConverter.AxialToCube(mouseAxialHex);
+            Cube newPlayerHex = HexConverter.AxialToCube(playerAxialHex);
+            for (int i = 0; i < AxialDist(playerAxialHex, mouseAxialHex); i++)
+            {
+                Debug.Log(CubeLerp(newPlayerHex, newMouseHex, i));
+            }
+            //Debug.Log(AxialDist(playerAxialHex, mouseAxialHex));
             playerHex = false;
             mouseHex = false;
             done = false;
         }
     }
 
+    public void HexesBetween()
+    {
+
+    }
+
     public struct Cube
     {
-        public int Q;
-        public int R;
-        public int S;
+        public float Q;
+        public float R;
+        public float S;
 
-        public Cube(int q, int r, int s)
+        public Cube(float q, float r, float s)
         {
             Q = q;
             R = r;
@@ -150,8 +162,8 @@ public class NearbyTiles : MonoBehaviour
 
         public static Hex CubeToAxial(Cube cube)
         {
-            int q = cube.Q;
-            int r = cube.R;
+            int q = (int) cube.Q;
+            int r = (int) cube.R;
             return new Hex(q, r);
         }
 
@@ -220,14 +232,28 @@ public class NearbyTiles : MonoBehaviour
     {
         Hex vec = AxialSubtract(a, b);
         return (((Math.Abs(vec.Q) + Math.Abs(vec.Q + vec.R)) + Math.Abs(vec.R)) / 2);
+        //(5, 7)
+        //(2, 5)
+        //vec = (3, 2)
+        //vecQ = 3
+        //VecR = 2
+        //((3) + (3 + 2)) + (2) / 2
+        //(3 + 5) / 2
+        //(8) / 2
+        //4
+    }
+
+    public static float LinePoints(float a, float b, float t)
+    {
+        return a + (b - a) * t;
+    }
+
+    public static Cube CubeLerp(Cube a, Cube b, float t)
+    {
+        return new Cube(
+            LinePoints(a.Q, b.Q, t),
+            LinePoints(a.R, b.R, t),
+            LinePoints(a.S, b.S, t)
+        );
     }
 }
-//(5, 7)
-//(2, 5)
-//vec = (3, 2)
-//vecQ = 3
-//VecR = 2
-//((3) + (3 + 2)) + (2) / 2
-//(3 + 5) / 2
-//(8) / 2
-//4

@@ -12,14 +12,15 @@ public class NearbyTiles : MonoBehaviour
 {
     private GrabCoordinates gb;
     public int moveDist;
-    public bool mouseHex, playerHex, done;
+    public bool mouseHex, playerHex, playerDone, mouseDone;
     Hex playerAxialHex, mouseAxialHex;
 
     public void Start()
     {
         mouseHex = false;
         playerHex = false;
-        done = false;
+        playerDone = false;
+        mouseDone = false;
     }
     public void FindMovableTiles(Transform obj)
     {
@@ -36,10 +37,10 @@ public class NearbyTiles : MonoBehaviour
         Hex centre = new Hex(gb.col, gb.row);
         List<Hex> hexes = GetHexRange(centre, moveDist);
 
-        /*foreach (Hex hexagonal in hexes)
+        foreach (Hex hexagonal in hexes)
         {
             Debug.Log($"{hexagonal.Q} , {hexagonal.R}");
-        }*/
+        }
 
     }
 
@@ -59,34 +60,38 @@ public class NearbyTiles : MonoBehaviour
     }
     public void Update()
     {
-        if (mouseHex == true && playerHex == false && done == false)
+        if (mouseHex == true && playerHex == false && mouseDone == false)
         {
             offsetCoord hex2 = new offsetCoord(gb.col, gb.row);
             mouseAxialHex = HexConverter.CoordToAxial(hex2);
-            Debug.Log($"{mouseAxialHex.Q},{mouseAxialHex.R}");
-            done = true;
+            Debug.Log($"{hex2.Col},{hex2.Row}");
+            mouseDone = true;
         }
 
-        if (playerHex == true && mouseHex == false && done == false)
+        if (playerHex == true && mouseHex == false && playerDone == false)
         {
             offsetCoord hex = new offsetCoord(gb.col, gb.row);
             playerAxialHex = HexConverter.CoordToAxial(hex);
-            Debug.Log($"{playerAxialHex.Q},{playerAxialHex.R}");
-            done = true;
+            Debug.Log($"{hex.Col},{hex.Row}");
+            playerDone = true;
         }
 
         if (playerHex == true && mouseHex == true)
         {
-            Cube newMouseHex = HexConverter.AxialToCube(mouseAxialHex);
+            /*Cube newMouseHex = HexConverter.AxialToCube(mouseAxialHex);
             Cube newPlayerHex = HexConverter.AxialToCube(playerAxialHex);
-            for (int i = 0; i < AxialDist(playerAxialHex, mouseAxialHex); i++)
+            for (int i = AxialDist(playerAxialHex, mouseAxialHex); i > 0;  i--)
             {
-                Debug.Log(CubeLerp(newPlayerHex, newMouseHex, i));
-            }
-            //Debug.Log(AxialDist(playerAxialHex, mouseAxialHex));
+                Cube cube = CubeLerp(newMouseHex, newPlayerHex, i);
+                Hex hex = HexConverter.CubeToAxial(cube);
+                offsetCoord coords = HexConverter.AxialtoCoord(hex);
+                Debug.Log($"{coords.Col}, {coords.Row}");
+            }*/
+            Debug.Log(AxialDist(playerAxialHex, mouseAxialHex)); // always make game find mouse click then player tile for this.
             playerHex = false;
             mouseHex = false;
-            done = false;
+            playerDone = false;
+            mouseDone = false;
         }
     }
 
@@ -137,14 +142,14 @@ public class NearbyTiles : MonoBehaviour
     {
         public static offsetCoord AxialtoCoord(Hex hex)
         {
-            int col = hex.Q + (hex.R - (hex.R & 1)) / 2;
+            int col = hex.Q + (hex.R - (hex.R % 2)) / 2;
             int row = hex.R;
             return new offsetCoord(col, row);
         }
 
         public static Hex CoordToAxial(offsetCoord hex)
         {
-            int q = hex.Col - (hex.Row - (hex.Row % 1)) / 2;
+            int q = hex.Col - (hex.Row - (hex.Row % 2)) / 2;
             int r = hex.Row;
             //(5, 5)
             // q = 5 - (5 - (5 % 1)) / 2

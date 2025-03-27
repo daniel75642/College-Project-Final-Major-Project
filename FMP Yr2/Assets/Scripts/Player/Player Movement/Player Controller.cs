@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(loadSystem.LoadUnload());
         }
 
-        if (Input.GetMouseButton(0) && findMouseTile == true)
+        if (Input.GetMouseButton(0))
         {
             nearbyTiles.MouseFindHex(mouse.transform);
         }

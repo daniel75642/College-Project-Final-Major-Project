@@ -224,6 +224,8 @@ MonoBehaviour:
   loadSystem: {fileID: 52034075}
   nearbyTiles: {fileID: 52034076}
   mouse: {fileID: 1435025585}
+  findPlayerTile: 0
+  findMouseTile: 0
 --- !u!114 &52034075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,6 +256,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDist: 3
+  mouseHex: 0
+  playerHex: 0
+  playerDone: 0
+  mouseDone: 0
+  showPath: {fileID: 6998547177504189181, guid: 4e65d7b8182b28d44bb0f3009e229b08, type: 3}
 --- !u!1 &119418940
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,6 +552,8 @@ MonoBehaviour:
   loadSystem: {fileID: 745954544}
   nearbyTiles: {fileID: 745954548}
   mouse: {fileID: 1435025585}
+  findPlayerTile: 0
+  findMouseTile: 0
 --- !u!114 &745954544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -641,6 +650,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDist: 0
+  mouseHex: 0
+  playerHex: 0
+  playerDone: 0
+  mouseDone: 0
+  showPath: {fileID: 0}
 --- !u!1 &763017257
 GameObject:
   m_ObjectHideFlags: 8
@@ -1315,6 +1329,8 @@ MonoBehaviour:
   loadSystem: {fileID: 1398041417}
   nearbyTiles: {fileID: 1398041421}
   mouse: {fileID: 1435025585}
+  findPlayerTile: 0
+  findMouseTile: 0
 --- !u!114 &1398041417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1411,6 +1427,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDist: 0
+  mouseHex: 0
+  playerHex: 0
+  playerDone: 0
+  mouseDone: 0
+  showPath: {fileID: 0}
 --- !u!1 &1435025581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1630,6 +1651,8 @@ MonoBehaviour:
   loadSystem: {fileID: 1511900709}
   nearbyTiles: {fileID: 1511900713}
   mouse: {fileID: 1435025585}
+  findPlayerTile: 0
+  findMouseTile: 0
 --- !u!114 &1511900709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1726,6 +1749,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveDist: 0
+  mouseHex: 0
+  playerHex: 0
+  playerDone: 0
+  mouseDone: 0
+  showPath: {fileID: 0}
 --- !u!1 &1565359129
 GameObject:
   m_ObjectHideFlags: 0

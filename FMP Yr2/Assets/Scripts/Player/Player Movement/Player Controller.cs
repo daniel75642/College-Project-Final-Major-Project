@@ -45,12 +45,12 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(loadSystem.LoadUnload());
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0) && nearbyTiles.mouseDone == false)
         {
             nearbyTiles.MouseFindHex(mouse.transform);
         }
 
-        if (Input.GetKeyDown(KeyCode.F))
+        if (Input.GetKeyDown(KeyCode.F) && nearbyTiles.playerDone == false)
         {
             nearbyTiles.PlayerFindHex(this.transform);
         }

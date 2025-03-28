@@ -18,6 +18,6 @@ public class Mouse : MonoBehaviour
             worldPos = hit.point;
         }
 
-        transform.position = worldPos + new Vector3(0, 0.15f, 0);
+        transform.position = worldPos + new Vector3(0, 0.05f, 0);
     }
 }

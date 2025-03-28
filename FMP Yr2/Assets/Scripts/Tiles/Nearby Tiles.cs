@@ -13,7 +13,10 @@ public class NearbyTiles : MonoBehaviour
     private GrabCoordinates gb;
     public int moveDist;
     public bool mouseHex, playerHex, playerDone, mouseDone;
+    public GameObject showPath;
     Hex playerAxialHex, mouseAxialHex;
+    List<Cube> cubeLine = new List<Cube>();
+    List<Hex> hexOffsetLine = new List<Hex>();
 
     public void Start()
     {
@@ -49,6 +52,10 @@ public class NearbyTiles : MonoBehaviour
         RaycastHit hit;
         bool tileHit = Physics.Raycast(obj.position, Vector3.down, out hit, 10);
         gb = hit.transform.gameObject.GetComponent<GrabCoordinates>();
+        offsetCoord hex = new offsetCoord(gb.col, gb.row);
+        playerAxialHex = HexConverter.CoordToAxial(hex);
+        Debug.Log($"{hex.Col},{hex.Row}");
+        playerDone = true;
         playerHex = true;
     }
     public void MouseFindHex(Transform obj)
@@ -56,38 +63,40 @@ public class NearbyTiles : MonoBehaviour
         RaycastHit hit;
         bool tileHit = Physics.Raycast(obj.position, Vector3.down, out hit, 10);
         gb = hit.transform.gameObject.GetComponent<GrabCoordinates>();
+        offsetCoord hex2 = new offsetCoord(gb.col, gb.row);
+        mouseAxialHex = HexConverter.CoordToAxial(hex2);
+        Debug.Log($"{hex2.Col},{hex2.Row}");
+        mouseDone = true;
         mouseHex = true;
     }
     public void Update()
     {
-        if (mouseHex == true && playerHex == false && mouseDone == false)
-        {
-            offsetCoord hex2 = new offsetCoord(gb.col, gb.row);
-            mouseAxialHex = HexConverter.CoordToAxial(hex2);
-            Debug.Log($"{hex2.Col},{hex2.Row}");
-            mouseDone = true;
-        }
-
-        if (playerHex == true && mouseHex == false && playerDone == false)
-        {
-            offsetCoord hex = new offsetCoord(gb.col, gb.row);
-            playerAxialHex = HexConverter.CoordToAxial(hex);
-            Debug.Log($"{hex.Col},{hex.Row}");
-            playerDone = true;
-        }
-
         if (playerHex == true && mouseHex == true)
         {
-            /*Cube newMouseHex = HexConverter.AxialToCube(mouseAxialHex);
+            cubeLine.Clear();
+            hexOffsetLine.Clear();
+            Cube newMouseHex = HexConverter.AxialToCube(mouseAxialHex);
             Cube newPlayerHex = HexConverter.AxialToCube(playerAxialHex);
-            for (int i = AxialDist(playerAxialHex, mouseAxialHex); i > 0;  i--)
+            cubeLine = CubeLineDraw(newPlayerHex, newMouseHex);
+            for (int i = 0; i < cubeLine.Count; i++)
             {
-                Cube cube = CubeLerp(newMouseHex, newPlayerHex, i);
-                Hex hex = HexConverter.CubeToAxial(cube);
-                offsetCoord coords = HexConverter.AxialtoCoord(hex);
-                Debug.Log($"{coords.Col}, {coords.Row}");
-            }*/
-            Debug.Log(AxialDist(playerAxialHex, mouseAxialHex)); // always make game find mouse click then player tile for this.
+                    //print(MathF.Ceiling(cubeLine[i].Q) + ", " + MathF.Ceiling(cubeLine[i].R) + ", " + MathF.Ceiling(cubeLine[i].S));
+                Hex newHex = HexConverter.CubeToAxial(cubeLine[i]);
+                    //print($"{newHex.Q}, {newHex.R}");
+                offsetCoord offsetHex = HexConverter.AxialtoCoord(newHex);
+                    //print(offsetHex.Col + ", " + offsetHex.Row);
+                float row = offsetHex.Row * 0.865f;
+                float col = offsetHex.Col;
+                if (offsetHex.Row % 2 == 0)
+                {
+                    col = (float)(offsetHex.Col);
+                }
+                else
+                {
+                    col = (float)(offsetHex.Col + 0.5);
+                }
+                GameObject temp = Instantiate(showPath, new Vector3(col, 0.2f, row), Quaternion.identity);
+            }
             playerHex = false;
             mouseHex = false;
             playerDone = false;
@@ -236,7 +245,7 @@ public class NearbyTiles : MonoBehaviour
     public static int AxialDist(Hex a, Hex b)
     {
         Hex vec = AxialSubtract(a, b);
-        return (((Math.Abs(vec.Q) + Math.Abs(vec.Q + vec.R)) + Math.Abs(vec.R)) / 2);
+        return (Math.Abs(vec.Q) + Math.Abs(vec.Q + vec.R) + Math.Abs(vec.R)) / 2;
         //(5, 7)
         //(2, 5)
         //vec = (3, 2)
@@ -248,9 +257,20 @@ public class NearbyTiles : MonoBehaviour
         //4
     }
 
+    public static Cube CubeSubtract(Cube a, Cube b)
+    {
+        return new Cube(a.Q - b.Q, a.R - b.R, a.S - b.S);
+    }
+
+    public static int CubeDist(Cube a, Cube b)
+    {
+        Cube vec = CubeSubtract(a, b);
+        return (int)((MathF.Abs(a.Q - b.Q) + MathF.Abs(a.R - b.R) + MathF.Abs(a.S - b.S)) / 2);
+    }
+
     public static float LinePoints(float a, float b, float t)
     {
-        return a + (b - a) * t;
+        return (a + (b - a) * t);
     }
 
     public static Cube CubeLerp(Cube a, Cube b, float t)
@@ -260,5 +280,42 @@ public class NearbyTiles : MonoBehaviour
             LinePoints(a.R, b.R, t),
             LinePoints(a.S, b.S, t)
         );
+    }
+
+    public static Cube CubeRound(Cube c)
+    {
+        float q = MathF.Round(c.Q);
+        float r = MathF.Round(c.R);
+        float s = MathF.Round(c.S);
+
+        float qDiff = MathF.Abs(q - c.Q);
+        float rDiff = MathF.Abs(r - c.R);
+        float sDiff = MathF.Abs(s - c.S);
+
+        if(qDiff > rDiff && qDiff > sDiff)
+        {
+            q = -r - s;
+        }
+        else if (rDiff > sDiff)
+        {
+            r = -q - s;
+        }
+        else
+        {
+            s = -q - r;
+        }
+
+        return new Cube(q, r, s);
+    }
+
+    public static List<Cube> CubeLineDraw(Cube a, Cube b)
+    {
+        float d = CubeDist(a, b);
+        List<Cube> results = new List<Cube>();
+        for (int i = 0; i <= d; i++)
+        {
+            results.Add(CubeRound(CubeLerp(a, b, 1.0f / d * i)));
+        }
+        return results;
     }
 }

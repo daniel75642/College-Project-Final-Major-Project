@@ -24,8 +24,9 @@ public class NearbyTiles : MonoBehaviour
         playerHex = false;
         playerDone = false;
         mouseDone = false;
+        moveDist = 5;
     }
-    public void FindMovableTiles(Transform obj)
+    /*public void FindMovableTiles(Transform obj)
     {
 
         RaycastHit hit;
@@ -45,7 +46,7 @@ public class NearbyTiles : MonoBehaviour
             Debug.Log($"{hexagonal.Q} , {hexagonal.R}");
         }
 
-    }
+    }*/
 
     public void PlayerFindHex(Transform obj)
     {
@@ -71,9 +72,28 @@ public class NearbyTiles : MonoBehaviour
     }
     public void Update()
     {
-        if (playerHex == true && mouseHex == true)
+        if (playerHex == true)
         {
-            cubeLine.Clear();
+            HashSet<Hex> reachableHexes = HexReachable(playerAxialHex, moveDist, hex => false);
+            foreach (Hex hex in reachableHexes)
+            {
+                offsetCoord coord = HexConverter.AxialtoCoord(hex);
+                Console.WriteLine($"({coord.Col}, {coord.Row})");
+                float row = hex.R * 0.865f;
+                float col = hex.Q;
+                if (hex.R % 2 == 0)
+                {
+                    col = (float)(hex.Q);
+                }
+                else
+                {
+                    col = (float)(hex.Q + 0.5);
+                }
+                GameObject temp = Instantiate(showPath, new Vector3(col, 0.2f, row), Quaternion.identity);
+            }
+
+
+            /*cubeLine.Clear();
             hexOffsetLine.Clear();
             Cube newMouseHex = HexConverter.AxialToCube(mouseAxialHex);
             Cube newPlayerHex = HexConverter.AxialToCube(playerAxialHex);
@@ -100,7 +120,7 @@ public class NearbyTiles : MonoBehaviour
             playerHex = false;
             mouseHex = false;
             playerDone = false;
-            mouseDone = false;
+            mouseDone = false;*/
         }
     }
 
@@ -206,14 +226,14 @@ public class NearbyTiles : MonoBehaviour
         {
             new int[] { +1,  0 }, new int[] { +1, -1 }, new int[] { 0, -1 },
             new int[] { -1,  0 }, new int[] { 0, +1 }, new int[] { +1, +1 }
-        }
-    };
+        } 
+        };
 
-        public static offsetCoord OddrOffsetNeighbor(offsetCoord hex, int direction)
+                public static Hex Neighbor(Hex hex, int direction)
         {
-            int parity = hex.Row & 1; // Determine even or odd row
+            int parity = hex.R & 1; // Determine even or odd row
             int[] diff = OddrDirectionDifferences[parity][direction];
-            return new offsetCoord(hex.Col + diff[0], hex.Row + diff[1]);
+            return new Hex(hex.Q + diff[0], hex.R + diff[1]);
         }
     }
 
@@ -317,5 +337,34 @@ public class NearbyTiles : MonoBehaviour
             results.Add(CubeRound(CubeLerp(a, b, 1.0f / d * i)));
         }
         return results;
+    }
+
+    public static HashSet<Hex> HexReachable(Hex start, int movement, Func<Hex, bool> isBlocked)
+    {
+        HashSet<Hex> visited = new HashSet<Hex>();
+        visited.Add(start);
+
+        List<List<Hex>> fringes = new List<List<Hex>>();
+        fringes.Add(new List<Hex> { start });
+
+        for (int k = 1; k <= movement; k++)
+        {
+            fringes.Add(new List<Hex>());
+
+            foreach (Hex hex in fringes[k - 1])
+            {
+                for (int dir = 0; dir < 6; dir++)
+                {
+                    Hex neighbor = OffsetGrid.Neighbor(hex, dir);
+                    if (!visited.Contains(neighbor) && !isBlocked(neighbor))
+                    {
+                        visited.Add(neighbor);
+                        fringes[k].Add(neighbor);
+                    }
+                }
+            }
+        }
+
+        return visited;
     }
 }

@@ -14,9 +14,12 @@ public class NearbyTiles : MonoBehaviour
     public int moveDist;
     public bool mouseHex, playerHex, playerDone, mouseDone;
     public GameObject showPath;
+    public GameObject coordGrabPrefab;
     Hex playerAxialHex, mouseAxialHex;
+    offsetCoord hex2, hex1;
     List<Cube> cubeLine = new List<Cube>();
     List<Hex> hexOffsetLine = new List<Hex>();
+    List<Hex> nearbyHexes = new List<Hex>();
 
     public void Start()
     {
@@ -24,9 +27,8 @@ public class NearbyTiles : MonoBehaviour
         playerHex = false;
         playerDone = false;
         mouseDone = false;
-        moveDist = 5;
     }
-    /*public void FindMovableTiles(Transform obj)
+    public void FindMovableTiles(Transform obj)
     {
 
         RaycastHit hit;
@@ -46,16 +48,16 @@ public class NearbyTiles : MonoBehaviour
             Debug.Log($"{hexagonal.Q} , {hexagonal.R}");
         }
 
-    }*/
+    }
 
     public void PlayerFindHex(Transform obj)
     {
         RaycastHit hit;
         bool tileHit = Physics.Raycast(obj.position, Vector3.down, out hit, 10);
         gb = hit.transform.gameObject.GetComponent<GrabCoordinates>();
-        offsetCoord hex = new offsetCoord(gb.col, gb.row);
-        playerAxialHex = HexConverter.CoordToAxial(hex);
-        Debug.Log($"{hex.Col},{hex.Row}");
+        hex1 = new offsetCoord(gb.col, gb.row);
+        playerAxialHex = HexConverter.CoordToAxial(hex1);
+        Debug.Log($"{hex1.Col},{hex1.Row}");
         playerDone = true;
         playerHex = true;
     }
@@ -64,7 +66,7 @@ public class NearbyTiles : MonoBehaviour
         RaycastHit hit;
         bool tileHit = Physics.Raycast(obj.position, Vector3.down, out hit, 10);
         gb = hit.transform.gameObject.GetComponent<GrabCoordinates>();
-        offsetCoord hex2 = new offsetCoord(gb.col, gb.row);
+        hex2 = new offsetCoord(gb.col, gb.row);
         mouseAxialHex = HexConverter.CoordToAxial(hex2);
         Debug.Log($"{hex2.Col},{hex2.Row}");
         mouseDone = true;
@@ -74,7 +76,29 @@ public class NearbyTiles : MonoBehaviour
     {
         if (playerHex == true)
         {
-            HashSet<Hex> reachableHexes = HexReachable(playerAxialHex, moveDist, hex => false);
+            offsetCoord centre = new offsetCoord(gb.col, gb.row);
+            Hex hexCentre = HexConverter.CoordToAxial(centre);
+            nearbyHexes = GetHexRange(hexCentre, moveDist);
+
+            for (int i = 0; i < nearbyHexes.Count; i++)
+            {
+                offsetCoord offset = HexConverter.AxialtoCoord(nearbyHexes[i]);
+                float row = offset.Row * 0.865f;
+                float col = offset.Col;
+                if (offset.Row % 2 == 0)
+                {
+                    col = (float)(offset.Col);
+                }
+                else
+                {
+                    col = (float)(offset.Col + 0.5);
+                }
+                GameObject temp = Instantiate(showPath, new Vector3(col, 0.5f, row), Quaternion.identity);
+            }
+            playerHex = false;
+            playerDone = false;
+
+            /*HashSet<Hex> reachableHexes = HexReachable(playerAxialHex, moveDist, hex => false);
             foreach (Hex hex in reachableHexes)
             {
                 offsetCoord coord = HexConverter.AxialtoCoord(hex);
@@ -90,7 +114,7 @@ public class NearbyTiles : MonoBehaviour
                     col = (float)(hex.Q + 0.5);
                 }
                 GameObject temp = Instantiate(showPath, new Vector3(col, 0.2f, row), Quaternion.identity);
-            }
+            }*/
 
 
             /*cubeLine.Clear();
@@ -229,11 +253,18 @@ public class NearbyTiles : MonoBehaviour
         } 
         };
 
-                public static Hex Neighbor(Hex hex, int direction)
+        public static Hex Neighbor(Hex hex, int direction)
         {
             int parity = hex.R & 1; // Determine even or odd row
             int[] diff = OddrDirectionDifferences[parity][direction];
             return new Hex(hex.Q + diff[0], hex.R + diff[1]);
+        }
+
+        public static offsetCoord OddrOffsetNeighbor(offsetCoord offset, int direction)
+        {
+            int parity = offset.Row & 1; // Determine even or odd row
+            int[] diff = OddrDirectionDifferences[parity][direction];
+            return new offsetCoord(offset.Col + diff[0], offset.Row + diff[1]);
         }
     }
 
@@ -339,32 +370,26 @@ public class NearbyTiles : MonoBehaviour
         return results;
     }
 
-    public static HashSet<Hex> HexReachable(Hex start, int movement, Func<Hex, bool> isBlocked)
+    public static List<Hex> HexReachable(Hex start, int movement)
     {
-        HashSet<Hex> visited = new HashSet<Hex>();
-        visited.Add(start);
-
-        List<List<Hex>> fringes = new List<List<Hex>>();
-        fringes.Add(new List<Hex> { start });
-
-        for (int k = 1; k <= movement; k++)
+        List<Hex> result = new List<Hex>();
+        List<Hex> visited = new List<Hex>();
+        bool isMoveable;
+        result.Add(start);
+        for (int i = 0; i < movement; i++)
         {
-            fringes.Add(new List<Hex>());
 
-            foreach (Hex hex in fringes[k - 1])
+            isMoveable = false;
+            Hex hex = OffsetGrid.Neighbor(start, i);
+
+            if (!visited.Contains(hex) && isMoveable == true)
             {
-                for (int dir = 0; dir < 6; dir++)
-                {
-                    Hex neighbor = OffsetGrid.Neighbor(hex, dir);
-                    if (!visited.Contains(neighbor) && !isBlocked(neighbor))
-                    {
-                        visited.Add(neighbor);
-                        fringes[k].Add(neighbor);
-                    }
-                }
+                result.Add(hex);
+                Debug.Log(hex);
             }
         }
+        return result;
 
-        return visited;
+        
     }
 }

@@ -136,8 +136,11 @@ GameObject:
   - component: {fileID: 52034075}
   - component: {fileID: 52034074}
   - component: {fileID: 52034076}
+  - component: {fileID: 52034078}
+  - component: {fileID: 52034077}
+  - component: {fileID: 52034079}
   m_Layer: 0
-  m_Name: Player 1
+  m_Name: Paladin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -224,8 +227,6 @@ MonoBehaviour:
   loadSystem: {fileID: 52034075}
   nearbyTiles: {fileID: 52034076}
   mouse: {fileID: 1435025585}
-  findPlayerTile: 0
-  findMouseTile: 0
 --- !u!114 &52034075
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -262,6 +263,73 @@ MonoBehaviour:
   mouseDone: 0
   showPath: {fileID: 6998547177504189181, guid: 4e65d7b8182b28d44bb0f3009e229b08, type: 3}
   coordGrabPrefab: {fileID: 4111952655375066588, guid: 0a3dbc21db7549346a91a0ea78277631, type: 3}
+--- !u!114 &52034077
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52034069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b41888bba660494db94e46a8385f101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  slider: {fileID: 0}
+--- !u!114 &52034078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52034069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f845925ab700c14aa0428b4c8ba9798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 0
+  playerMaxHealth: 30
+  playerHealthMin: 0
+  playerExp: 0
+  playerMaxExp: 0
+  playerLvl: 1
+  playerMaxLvl: 15
+  playerDefense: 4
+  playerIntellengenceDefence: 2
+  playerStrength: 4
+  playerIntellegence: 0
+  playerSteady: 0
+  playerAttackSpeed: 40
+  playerCrit: 10
+  playerAttackAccuracy: 5
+  playerLuck: 3
+  playerSpeed: 0
+  playerMoney: 10
+--- !u!114 &52034079
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 52034069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b658ef0c0c2cce54fb14f07779b26bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthIncrease: 1.4
+  levelIncrease: 1
+  expIncrease: 1.3
+  defenseIncrease: 1
+  intellegenceDefenseIncrease: 0
+  strengthIncrease: 1
+  intellegenceIncrease: 0
+  steadyIncrease: 0
+  attackSpeedIncrease: 1.1
+  critIncrease: 1.1
+  attackAccuracyIncrease: 1.2
 --- !u!1 &119418940
 GameObject:
   m_ObjectHideFlags: 0
@@ -531,8 +599,11 @@ GameObject:
   - component: {fileID: 745954544}
   - component: {fileID: 745954543}
   - component: {fileID: 745954548}
+  - component: {fileID: 745954550}
+  - component: {fileID: 745954549}
+  - component: {fileID: 745954551}
   m_Layer: 0
-  m_Name: Player 2
+  m_Name: Mage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -553,8 +624,6 @@ MonoBehaviour:
   loadSystem: {fileID: 745954544}
   nearbyTiles: {fileID: 745954548}
   mouse: {fileID: 1435025585}
-  findPlayerTile: 0
-  findMouseTile: 0
 --- !u!114 &745954544
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -657,6 +726,73 @@ MonoBehaviour:
   mouseDone: 0
   showPath: {fileID: 0}
   coordGrabPrefab: {fileID: 0}
+--- !u!114 &745954549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745954542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b41888bba660494db94e46a8385f101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  slider: {fileID: 0}
+--- !u!114 &745954550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745954542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f845925ab700c14aa0428b4c8ba9798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 0
+  playerMaxHealth: 24
+  playerHealthMin: 0
+  playerExp: 0
+  playerMaxExp: 0
+  playerLvl: 1
+  playerMaxLvl: 15
+  playerDefense: 2
+  playerIntellengenceDefence: 4
+  playerStrength: 1
+  playerIntellegence: 5
+  playerSteady: 0
+  playerAttackSpeed: 70
+  playerCrit: 15
+  playerAttackAccuracy: 15
+  playerLuck: 4
+  playerSpeed: 0
+  playerMoney: 10
+--- !u!114 &745954551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 745954542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b658ef0c0c2cce54fb14f07779b26bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthIncrease: 1.4
+  levelIncrease: 1
+  expIncrease: 1.3
+  defenseIncrease: 0
+  intellegenceDefenseIncrease: 1
+  strengthIncrease: 0
+  intellegenceIncrease: 1
+  steadyIncrease: 0
+  attackSpeedIncrease: 1.05
+  critIncrease: 1.1
+  attackAccuracyIncrease: 1.1
 --- !u!1 &763017257
 GameObject:
   m_ObjectHideFlags: 8
@@ -737,8 +873,8 @@ MonoBehaviour:
   - {fileID: 745954543}
   - {fileID: 1398041416}
   - {fileID: 1511900708}
-  playerTurn: 0
   cc: {fileID: 963194229}
+  playerTurn: 0
 --- !u!1 &810379395
 GameObject:
   m_ObjectHideFlags: 0
@@ -1069,6 +1205,37 @@ MonoBehaviour:
   - {fileID: 1923818129}
   - {fileID: 119418941}
   swapping: 0
+--- !u!1 &1093503772
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1093503773}
+  m_Layer: 0
+  m_Name: Pathfinding
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1093503773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1093503772}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 17.043362, y: 9.593243, z: 8.20694}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1104139772
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1309,8 +1476,11 @@ GameObject:
   - component: {fileID: 1398041417}
   - component: {fileID: 1398041416}
   - component: {fileID: 1398041421}
+  - component: {fileID: 1398041423}
+  - component: {fileID: 1398041422}
+  - component: {fileID: 1398041424}
   m_Layer: 0
-  m_Name: Player 3
+  m_Name: Fighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1331,8 +1501,6 @@ MonoBehaviour:
   loadSystem: {fileID: 1398041417}
   nearbyTiles: {fileID: 1398041421}
   mouse: {fileID: 1435025585}
-  findPlayerTile: 0
-  findMouseTile: 0
 --- !u!114 &1398041417
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1435,6 +1603,73 @@ MonoBehaviour:
   mouseDone: 0
   showPath: {fileID: 0}
   coordGrabPrefab: {fileID: 0}
+--- !u!114 &1398041422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398041415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b41888bba660494db94e46a8385f101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  slider: {fileID: 0}
+--- !u!114 &1398041423
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398041415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f845925ab700c14aa0428b4c8ba9798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 0
+  playerMaxHealth: 28
+  playerHealthMin: 0
+  playerExp: 0
+  playerMaxExp: 0
+  playerLvl: 1
+  playerMaxLvl: 15
+  playerDefense: 2
+  playerIntellengenceDefence: 2
+  playerStrength: 3
+  playerIntellegence: 1
+  playerSteady: 0
+  playerAttackSpeed: 60
+  playerCrit: 12
+  playerAttackAccuracy: 12
+  playerLuck: 2
+  playerSpeed: 0
+  playerMoney: 10
+--- !u!114 &1398041424
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1398041415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b658ef0c0c2cce54fb14f07779b26bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthIncrease: 1.4
+  levelIncrease: 1
+  expIncrease: 1.3
+  defenseIncrease: 1
+  intellegenceDefenseIncrease: 1
+  strengthIncrease: 1
+  intellegenceIncrease: 0
+  steadyIncrease: 0
+  attackSpeedIncrease: 1.05
+  critIncrease: 1.1
+  attackAccuracyIncrease: 1.1
 --- !u!1 &1435025581
 GameObject:
   m_ObjectHideFlags: 0
@@ -1632,8 +1867,11 @@ GameObject:
   - component: {fileID: 1511900709}
   - component: {fileID: 1511900708}
   - component: {fileID: 1511900713}
+  - component: {fileID: 1511900715}
+  - component: {fileID: 1511900714}
+  - component: {fileID: 1511900716}
   m_Layer: 0
-  m_Name: Player 4
+  m_Name: Rogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1654,8 +1892,6 @@ MonoBehaviour:
   loadSystem: {fileID: 1511900709}
   nearbyTiles: {fileID: 1511900713}
   mouse: {fileID: 1435025585}
-  findPlayerTile: 0
-  findMouseTile: 0
 --- !u!114 &1511900709
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1758,6 +1994,73 @@ MonoBehaviour:
   mouseDone: 0
   showPath: {fileID: 0}
   coordGrabPrefab: {fileID: 0}
+--- !u!114 &1511900714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511900707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b41888bba660494db94e46a8385f101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  slider: {fileID: 0}
+--- !u!114 &1511900715
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511900707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f845925ab700c14aa0428b4c8ba9798, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerHealth: 0
+  playerMaxHealth: 24
+  playerHealthMin: 0
+  playerExp: 0
+  playerMaxExp: 0
+  playerLvl: 1
+  playerMaxLvl: 15
+  playerDefense: 2
+  playerIntellengenceDefence: 2
+  playerStrength: 1
+  playerIntellegence: 1
+  playerSteady: 4
+  playerAttackSpeed: 75
+  playerCrit: 18
+  playerAttackAccuracy: 25
+  playerLuck: 3
+  playerSpeed: 0
+  playerMoney: 10
+--- !u!114 &1511900716
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1511900707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b658ef0c0c2cce54fb14f07779b26bc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthIncrease: 1.4
+  levelIncrease: 1
+  expIncrease: 1.3
+  defenseIncrease: 1
+  intellegenceDefenseIncrease: 0
+  strengthIncrease: 0
+  intellegenceIncrease: 0
+  steadyIncrease: 1
+  attackSpeedIncrease: 1.02
+  critIncrease: 1.05
+  attackAccuracyIncrease: 1.05
 --- !u!1 &1565359129
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,6 +2192,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1334851268}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1588917350
+GameObject:
+  m_ObjectHideFlags: 8
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1588917351}
+  m_Layer: 0
+  m_Name: //UI
+  m_TagString: EditorOnly
+  m_Icon: {fileID: 2800000, guid: 4724f3b6006a28f4ca8f7de7bf926d39, type: 3}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1588917351
+Transform:
+  m_ObjectHideFlags: 2
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1588917350}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1751660539
 GameObject:
@@ -2379,3 +2713,5 @@ SceneRoots:
   - {fileID: 451838311}
   - {fileID: 1794127222}
   - {fileID: 951654084}
+  - {fileID: 1093503773}
+  - {fileID: 1588917351}

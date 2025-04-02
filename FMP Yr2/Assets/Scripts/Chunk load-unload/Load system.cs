@@ -5,11 +5,13 @@ using UnityEngine;
 
 public class Loadsystem : MonoBehaviour {
     public Collider[] colliderArray;
+
     [SerializeField] float loadDist;
 
     [SerializeField] LayerMask mapLayer;
 
     bool firstCheckDone = false;
+
     int arrayLength;
     // Start is called before the first frame update
     void Start() 

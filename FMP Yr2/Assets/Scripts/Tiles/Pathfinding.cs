@@ -11,12 +11,18 @@ using static NearbyTiles;
 public class NearbyTiles : MonoBehaviour
 {
     private GrabCoordinates gb;
+
     public int moveDist;
+
     public bool mouseHex, playerHex, playerDone, mouseDone;
+
     public GameObject showPath;
     public GameObject coordGrabPrefab;
+
     Hex playerAxialHex, mouseAxialHex;
+
     offsetCoord hex2, hex1;
+
     List<Cube> cubeLine = new List<Cube>();
     List<Hex> hexOffsetLine = new List<Hex>();
     List<Hex> nearbyHexes = new List<Hex>();

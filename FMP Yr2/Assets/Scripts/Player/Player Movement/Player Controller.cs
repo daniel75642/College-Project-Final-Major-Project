@@ -10,14 +10,6 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] Transform mouse;
 
-    [SerializeField] bool findPlayerTile, findMouseTile;
-
-    public void Start()
-    {
-        findPlayerTile = false;
-        findMouseTile = false;
-    }
-
     void Update()
     {
         if (Input.GetKey(KeyCode.D))

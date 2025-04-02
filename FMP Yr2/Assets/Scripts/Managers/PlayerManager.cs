@@ -5,11 +5,14 @@ using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
+    [Header("Scripts")]
     [SerializeField] PlayerController[] pControllerScripts;
+    public CameraController cc;
 
+    [Header("Player Turn")]
     public int playerTurn;
 
-    public CameraController cc;
+    
 
     // Start is called before the first frame update
     void Start()

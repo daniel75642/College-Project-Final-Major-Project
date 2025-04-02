@@ -4,17 +4,40 @@ using UnityEngine;
 
 public class PlayerStats : MonoBehaviour
 {
-    [SerializeField] int playerHealth, playerHealthMax, playerHealthMin;
 
-    [SerializeField] int playerExp, playerExpMax, playerExpMin;
+    [Header("Health Settings")]
+    [SerializeField] public int playerHealth;
+    [SerializeField] public int playerMaxHealth;
+    [SerializeField] public int playerHealthMin;
 
-    [SerializeField] int playerLvl, playerLvlMax;
 
-    [SerializeField] int playerDefense, playerAttackSpeed, playerCrit, playerStrength, playerIntellegence, playerAttackAccuracy, playerSteady;
+    [Header("Lvl & Exp Settings")]
+    [SerializeField] public int playerExp;
+    [SerializeField] public int playerMaxExp;
+    [SerializeField] public int playerLvl;
+    [SerializeField] public int playerMaxLvl;
 
-    [SerializeField] int playerLuck, playerSpeed;
 
-    [SerializeField] int playerMoney;
+    [Header("Combat Settings")]
+    [SerializeField] public int playerDefense;
+    [SerializeField] public int playerIntellengenceDefence;
+    [SerializeField] public int playerStrength;
+    [SerializeField] public int playerIntellegence;
+    [SerializeField] public int playerSteady;
+    [SerializeField] public int playerAttackSpeed;
+    [SerializeField] public int playerCrit;
+    [SerializeField] public int playerAttackAccuracy;
+
+
+
+    [Header("General Buff Settings")]
+    [SerializeField] public int playerLuck;
+    [SerializeField] public int playerSpeed;
+
+
+    [Header("Money")]
+    [SerializeField] public int playerMoney;
+
 }
 /* Paladin 
  * Health - 30

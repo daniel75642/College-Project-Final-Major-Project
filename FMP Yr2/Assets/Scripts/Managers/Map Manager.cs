@@ -6,7 +6,7 @@ using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-public class MapManager : MonoBehaviour
+public class MapManager : MonoBehaviour, IDataPersistence
 {
     [SerializeField]GameObject[] floorTiles;
 
@@ -20,18 +20,31 @@ public class MapManager : MonoBehaviour
     float rowDist, columnDist;
 
     int r, q;
+    public int seed;
+    public string seedNumber;
 
     private GrabCoordinates gc;
-    // Start is called before the first frame update    
-    void Awake()
-    {
-        StartCoroutine(MakeMap());
 
+    public bool mapMade;
+    // Start is called before the first frame update    
+    void Start()
+    {
+        if(mapMade == false)
+        {
+            seedNumber = UnityEngine.Random.Range(0,10000000).ToString();
+        }
+        StartCoroutine(MakeMap());
         AddMapToParent();
     }
 
     public IEnumerator MakeMap()
     {
+
+        seed = int.Parse(seedNumber);
+
+        UnityEngine.Random.InitState(seed);
+        
+        mapMade = true;
         columnDist = -0.865f;
         rowDist = 0;
         for (r = 0; r < height; r++)
@@ -47,7 +60,6 @@ public class MapManager : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;  
-                        temp.name = $"{q},{r}";
                         gc = temp.GetComponent<GrabCoordinates>();  gc.row = r;  gc.col = q;
                     }
 
@@ -56,7 +68,6 @@ public class MapManager : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{q},{r}";
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
 
                     }
@@ -66,7 +77,6 @@ public class MapManager : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{q},{r}";
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
@@ -75,7 +85,6 @@ public class MapManager : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{q},{r}";
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
@@ -85,7 +94,6 @@ public class MapManager : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{q},{r}";
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
@@ -98,7 +106,6 @@ public class MapManager : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{q},{r}";
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
@@ -107,7 +114,6 @@ public class MapManager : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{q},{r}";
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
@@ -116,7 +122,6 @@ public class MapManager : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{q},{r}";
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
@@ -125,7 +130,6 @@ public class MapManager : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{q},{r}";
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
@@ -135,12 +139,10 @@ public class MapManager : MonoBehaviour
                         GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;
-                        temp.name = $"{q},{r}";
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
                 }
-
             }
         }
         yield return null;
@@ -157,6 +159,18 @@ public class MapManager : MonoBehaviour
         {
             mapOddRows[i].transform.parent = mapHolderOddRows.transform;
         }
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.mapMade = data.mapMade;
+        this.seedNumber = data.seedNumber;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.mapMade = this.mapMade;
+        data.seedNumber = this.seed.ToString();
     }
 }
 

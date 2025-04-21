@@ -26,6 +26,9 @@ public class NearbyTiles : MonoBehaviour
     List<Cube> cubeLine = new List<Cube>();
     List<Hex> hexOffsetLine = new List<Hex>();
     List<Hex> nearbyHexes = new List<Hex>();
+    public List<GameObject> path = new List<GameObject>();
+
+    public bool playerMoving = false;
 
     public void Start()
     {
@@ -80,9 +83,9 @@ public class NearbyTiles : MonoBehaviour
     }
     public void Update()
     {
-        if (playerHex == true)
+        if (playerHex == true && mouseHex == true)
         {
-            offsetCoord centre = new offsetCoord(gb.col, gb.row);
+            /*offsetCoord centre = new offsetCoord(gb.col, gb.row);
             Hex hexCentre = HexConverter.CoordToAxial(centre);
             nearbyHexes = GetHexRange(hexCentre, moveDist);
 
@@ -100,9 +103,7 @@ public class NearbyTiles : MonoBehaviour
                     col = (float)(offset.Col + 0.5);
                 }
                 GameObject temp = Instantiate(showPath, new Vector3(col, 0.5f, row), Quaternion.identity);
-            }
-            playerHex = false;
-            playerDone = false;
+            }*/
 
             /*HashSet<Hex> reachableHexes = HexReachable(playerAxialHex, moveDist, hex => false);
             foreach (Hex hex in reachableHexes)
@@ -122,13 +123,13 @@ public class NearbyTiles : MonoBehaviour
                 GameObject temp = Instantiate(showPath, new Vector3(col, 0.2f, row), Quaternion.identity);
             }*/
 
-
-            /*cubeLine.Clear();
+            path.Clear();
+            cubeLine.Clear();
             hexOffsetLine.Clear();
             Cube newMouseHex = HexConverter.AxialToCube(mouseAxialHex);
             Cube newPlayerHex = HexConverter.AxialToCube(playerAxialHex);
             cubeLine = CubeLineDraw(newPlayerHex, newMouseHex);
-            for (int i = 0; i < cubeLine.Count; i++)
+            for (int i = 1; i < cubeLine.Count; i++)
             {
                     //print(MathF.Ceiling(cubeLine[i].Q) + ", " + MathF.Ceiling(cubeLine[i].R) + ", " + MathF.Ceiling(cubeLine[i].S));
                 Hex newHex = HexConverter.CubeToAxial(cubeLine[i]);
@@ -146,11 +147,14 @@ public class NearbyTiles : MonoBehaviour
                     col = (float)(offsetHex.Col + 0.5);
                 }
                 GameObject temp = Instantiate(showPath, new Vector3(col, 0.2f, row), Quaternion.identity);
+                path.Add(temp);
+
             }
+            playerMoving = true;
             playerHex = false;
             mouseHex = false;
             playerDone = false;
-            mouseDone = false;*/
+            mouseDone = false;
         }
     }
 

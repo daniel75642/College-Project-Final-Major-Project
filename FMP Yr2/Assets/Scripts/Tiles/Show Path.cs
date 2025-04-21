@@ -11,7 +11,7 @@ public class ShowPath : MonoBehaviour
 
     public IEnumerator LifeTime()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(7f);
         Destroy(gameObject);
     }
 }

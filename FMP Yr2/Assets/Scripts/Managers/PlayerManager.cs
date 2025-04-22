@@ -8,8 +8,10 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
 {
     [Header("Scripts")]
     [SerializeField] PlayerController[] pControllerScripts;
+    [SerializeField] PlayerCombat[] pCombatScripts;
     [SerializeField] NearbyTiles[] pNearbyTiles;
     [SerializeField] GameObject[] players;
+    List<Transform> pTransforms;
     public CameraController cc;
     public CombatManager combatManager;
 
@@ -27,22 +29,28 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     // Update is called once per frame
     void Update()
     {
-        if (playerTurn >= 4)
+        if (combatManager.inCombat == false)
         {
-            playerTurn = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.Space) && cc.swapping == false)
-        {
-            StartCoroutine(PlayerSwap());  StartCoroutine(cc.camSwap());
+            if (playerTurn >= 4)
+            {
+                playerTurn = 0;
+            }
+            if (Input.GetKeyDown(KeyCode.Space) && cc.swapping == false)
+            {
+                StartCoroutine(PlayerSwap()); StartCoroutine(cc.camSwap());
+            }
         }
 
         if (combatManager.inCombat == true)
         {
+            pTransforms.Clear();
             for (int i = 0; i < pControllerScripts.Length; i++)
             {
+                cc.enabled = false;
                 pControllerScripts[i].enabled = false;
                 pNearbyTiles[i].enabled = false;
-                cc.enabled = false;
+                pTransforms[i] = players[i].transform;
+                pCombatScripts[i].enabled = true;
             }
         }
     }

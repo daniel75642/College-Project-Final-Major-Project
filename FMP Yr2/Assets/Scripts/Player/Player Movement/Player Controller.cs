@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     public LayerMask interactables;
 
+    public CameraController cc;
     public CameraManger cm;
     public CombatManager combatManager;
 
@@ -96,8 +97,9 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             if (Physics.Raycast(transform.position, Vector3.down, 3, interactables))
             {
                 i = p.path.Count;
-                combatManager.ForestArenaSetUp();
+                cc.enabled = false;
                 cm.ChangeToForest();
+                combatManager.ForestArenaSetUp();
             }
         }
 

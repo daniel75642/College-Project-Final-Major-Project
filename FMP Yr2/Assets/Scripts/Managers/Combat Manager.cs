@@ -18,5 +18,8 @@ public class CombatManager : MonoBehaviour
             forestPlayerPos.Remove(forestPlayerPos[x]);
         }
     }
+    public void CombatOrder()
+    {
+
+    }
 }
-//michael wicks is so beautriful and handosme and i wanan kikss him all day with tongue

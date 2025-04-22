@@ -5,14 +5,14 @@ using UnityEngine;
 public class WeaponStats : MonoBehaviour
 {
     [Header("Basic Weapon Stats")]
-    [SerializeField] int physicalDamage;
-    [SerializeField] int intellengenceDamage;
-    [SerializeField] int attackAccuracy;
-    [SerializeField] int skillChance;
+    [SerializeField] public int physicalDamage;
+    [SerializeField] public int intellengenceDamage;
+    [SerializeField] public int attackAccuracy;
+    [SerializeField] public int skillChance;
 
     [Header("Weapon Skills")]
-    [SerializeField] bool armourBreak;
-    [SerializeField] bool intellegenceArmourBreak;
-    [SerializeField] bool hacked;
-    [SerializeField] bool slowed;
+    [SerializeField] public bool armourBreak;
+    [SerializeField] public bool intellegenceArmourBreak;
+    [SerializeField] public bool hacked;
+    [SerializeField] public bool slowed;
 }

@@ -11,6 +11,11 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     [SerializeField] public Transform mouse;
 
+    public LayerMask interactables;
+
+    public CameraManger cm;
+    public CombatManager combatManager;
+
 
     public float lerpTime = 1f;
 
@@ -88,6 +93,12 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             transform.position = p.path[i].transform.position;
             MeshRenderer temp = p.path[i].GetComponent<MeshRenderer>();
             temp.enabled = false;
+            if (Physics.Raycast(transform.position, Vector3.down, 3, interactables))
+            {
+                i = p.path.Count;
+                combatManager.ForestArenaSetUp();
+                cm.ChangeToForest();
+            }
         }
 
         p.path.Clear();

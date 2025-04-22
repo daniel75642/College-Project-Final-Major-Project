@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour, IDataPersistence
@@ -10,6 +11,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     [SerializeField] NearbyTiles[] pNearbyTiles;
     [SerializeField] GameObject[] players;
     public CameraController cc;
+    public CombatManager combatManager;
 
     [Header("Player Turn")]
     public int playerTurn;
@@ -32,6 +34,16 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
         if (Input.GetKeyDown(KeyCode.Space) && cc.swapping == false)
         {
             StartCoroutine(PlayerSwap());  StartCoroutine(cc.camSwap());
+        }
+
+        if (combatManager.inCombat == true)
+        {
+            for (int i = 0; i < pControllerScripts.Length; i++)
+            {
+                pControllerScripts[i].enabled = false;
+                pNearbyTiles[i].enabled = false;
+                cc.enabled = false;
+            }
         }
     }
     public IEnumerator PlayerSwap()

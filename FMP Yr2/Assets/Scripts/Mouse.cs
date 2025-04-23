@@ -5,13 +5,29 @@ using UnityEngine;
 public class Mouse : MonoBehaviour
 {
     Vector3 screenPos, worldPos;
+
     [SerializeField] LayerMask objsToHit;
+
+    public Camera[] cams;
+
+    public CombatManager CombatManager;
+
+    Ray ray;
 
     void Update()
     {
         screenPos = Input.mousePosition;
 
-        Ray ray = Camera.main.ScreenPointToRay(screenPos);
+        if(CombatManager.inCombat == true)
+        {
+            ray = cams[1].ScreenPointToRay(screenPos);
+        }
+
+        else
+        {
+            ray = cams[0].ScreenPointToRay(screenPos);
+        }
+
 
         if (Physics.Raycast(ray, out RaycastHit hit, 100, objsToHit))
         {

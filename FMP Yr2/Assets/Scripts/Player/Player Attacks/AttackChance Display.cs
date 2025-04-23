@@ -12,30 +12,28 @@ public class AttackChanceDisplay : MonoBehaviour
 
     bool[] attackAmount;
 
-    public GameObject[] attackDisplay;
+    public List<GameObject> attackDisplay;
 
     public GameObject attackIcon;
     public GameObject failedIcon;
 
-    float dist = 0;
+    float dist, height;
 
-    public IEnumerator Attack(Canvas attackcanvas)
+    public IEnumerator Attack()
     {
-        dist = 0;
+        dist = attackCanvas.pixelRect.width / 5;
+        height = attackCanvas.pixelRect.height / 2;
         successs = 0;
         attackAmount = new bool[attempts];
 
-        attackDisplay = new GameObject[attempts];
-        List<GameObject> list = new(attackDisplay);
-
         for (int i = 0; i < attackAmount.Length; i++)
         {
-            if (UnityEngine.Random.value <= chance)
+            if (Random.value <= chance)
             {
                 attackAmount[i] = true;
             }
 
-            else if (UnityEngine.Random.value >= chance)
+            else if (Random.value >= chance)
             {
                 attackAmount[i] = false;
             }
@@ -44,18 +42,22 @@ public class AttackChanceDisplay : MonoBehaviour
 
             if (attackAmount[i] == true)
             {
-                list.Add(Instantiate(attackIcon, new Vector3(dist += 10, 0, 0), Quaternion.Euler(-90, 0, 0)) as GameObject);
-                attackDisplay[i] = list[i];
+                attackDisplay.Add(Instantiate(attackIcon, new Vector3(dist += attackCanvas.pixelRect.width / 10, height, 0), Quaternion.Euler(0, 0, 0),this.transform));
                 successs += 1;
             }
 
             else
             {
-                list.Add(Instantiate(failedIcon, new Vector3(dist += 10, 0, 0), Quaternion.Euler(-90, 0, 0)) as GameObject);
-                attackDisplay[i] = list[i];
+                attackDisplay.Add(Instantiate(failedIcon, new Vector3(dist += attackCanvas.pixelRect.width / 10, height, 0), Quaternion.Euler(0, 0, 0),this.transform));
+                
             }
             yield return new WaitForSeconds(0.5f);
         }
-
+        yield return new WaitForSeconds(1f);
+        for (int i = 0; i < attackDisplay.Count; i++)
+        {
+            Destroy(attackDisplay[i]);
+            attackDisplay.Remove(attackDisplay[i]);
+        }
     }
 }

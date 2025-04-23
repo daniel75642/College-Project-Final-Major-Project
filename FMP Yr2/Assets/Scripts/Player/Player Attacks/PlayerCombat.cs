@@ -9,7 +9,7 @@ public class PlayerCombat : MonoBehaviour
     public EnemyHealth enemyHealth;
     public AttackChanceDisplay attackChanceDisplay;
 
-    public Canvas combatCanvas;
+    public GameObject attackChoice;
 
     public bool isTurn, attackChosen, choosingAttack;
 
@@ -31,7 +31,6 @@ public class PlayerCombat : MonoBehaviour
         if (isTurn == true && attackChosen == false && choosingAttack == false)
         {
             choosingAttack = true;
-            combatCanvas.enabled = true;
         }
 
         if (Input.GetMouseButtonDown(0) && isTurn == true && attackChosen == true)
@@ -56,32 +55,32 @@ public class PlayerCombat : MonoBehaviour
         damage = stats.playerStrength + weaponStats.physicalDamage;
         intDamage = stats.playerIntellegence + weaponStats.intellengenceDamage;
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
-        StartCoroutine(attackChanceDisplay.Attack(combatCanvas));
+        StartCoroutine(attackChanceDisplay.Attack());
         float d = damage * (attackChanceDisplay.successs / 5);
         float id = intDamage * (attackChanceDisplay.successs / 5);
         float sd = steadyDamage * (attackChanceDisplay.successs / 5);
-        combatCanvas.enabled = false; choosingAttack = false;
+        choosingAttack = false; attackChoice.SetActive(false);
     }
     public void Attack2()
     {
         damage = stats.playerStrength + weaponStats.physicalDamage;
         intDamage = stats.playerIntellegence + weaponStats.intellengenceDamage;
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
-        StartCoroutine(attackChanceDisplay.Attack(combatCanvas));
+        StartCoroutine(attackChanceDisplay.Attack());
         float d = damage * (attackChanceDisplay.successs / 5);
         float id = intDamage * (attackChanceDisplay.successs / 5);
         float sd = steadyDamage * (attackChanceDisplay.successs / 5);
-        combatCanvas.enabled = false; choosingAttack = false;
+        choosingAttack = false; attackChoice.SetActive(false);
     }
     public void Attack3()
     {
         damage = stats.playerStrength + weaponStats.physicalDamage;
         intDamage = stats.playerIntellegence + weaponStats.intellengenceDamage;
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
-        StartCoroutine(attackChanceDisplay.Attack(combatCanvas));
+        StartCoroutine(attackChanceDisplay.Attack());
         float d = damage * (attackChanceDisplay.successs / 5);
         float id = intDamage * (attackChanceDisplay.successs / 5);
         float sd = steadyDamage * (attackChanceDisplay.successs / 5);
-        combatCanvas.enabled = false; choosingAttack = false;
+        choosingAttack = false; attackChoice.SetActive(false);
     }
 }

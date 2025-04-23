@@ -11,7 +11,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     [SerializeField] PlayerCombat[] pCombatScripts;
     [SerializeField] NearbyTiles[] pNearbyTiles;
     [SerializeField] GameObject[] players;
-    List<Transform> pTransforms;
+
     public CameraController cc;
     public CombatManager combatManager;
 
@@ -43,13 +43,12 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
 
         if (combatManager.inCombat == true)
         {
-            pTransforms.Clear();
+
             for (int i = 0; i < pControllerScripts.Length; i++)
             {
                 cc.enabled = false;
                 pControllerScripts[i].enabled = false;
                 pNearbyTiles[i].enabled = false;
-                pTransforms[i] = players[i].transform;
                 pCombatScripts[i].enabled = true;
             }
         }

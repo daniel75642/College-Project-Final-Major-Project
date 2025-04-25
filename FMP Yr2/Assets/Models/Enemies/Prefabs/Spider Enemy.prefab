@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 9117465747429053343}
   - component: {fileID: 2226281013139773915}
   - component: {fileID: 9031407423114966317}
-  - component: {fileID: 6408821729140954604}
+  - component: {fileID: -3376662960851104066}
   m_Layer: 11
   m_Name: Spider Enemy
   m_TagString: Untagged
@@ -102,8 +102,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9f17f606205414885bbdd3ea9eabb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &6408821729140954604
-MeshCollider:
+--- !u!65 &-3376662960851104066
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -120,7 +120,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 392607217770241737, guid: 4074e2f2d7fdf56448860b9944588013, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 8.016754, y: 8.708804, z: 8.485254}
+  m_Center: {x: 0.026552916, y: -1.5675454, z: -1.576273}

@@ -38,8 +38,6 @@ public class AttackChanceDisplay : MonoBehaviour
                 attackAmount[i] = false;
             }
 
-            print(attackAmount[i]);
-
             if (attackAmount[i] == true)
             {
                 attackDisplay.Add(Instantiate(attackIcon, new Vector3(dist += attackCanvas.pixelRect.width / 10, height, 0), Quaternion.Euler(0, 0, 0),this.transform));
@@ -54,7 +52,7 @@ public class AttackChanceDisplay : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
         yield return new WaitForSeconds(1f);
-        for (int i = 0; i < attackDisplay.Count; i++)
+        for (int i = 0; i < attackDisplay.Count;)
         {
             Destroy(attackDisplay[i]);
             attackDisplay.Remove(attackDisplay[i]);

@@ -8,6 +8,7 @@ public class PlayerCombat : MonoBehaviour
     public WeaponStats weaponStats;
     public EnemyHealth enemyHealth;
     public AttackChanceDisplay attackChanceDisplay;
+    public CombatManager cm;
 
     public GameObject attackChoice;
 
@@ -21,6 +22,7 @@ public class PlayerCombat : MonoBehaviour
     public int intDamage;
     public int steadyDamage;
 
+    public Canvas combatCanvas;
     public void Start()
     {
         stats = GetComponent<PlayerStats>();
@@ -30,11 +32,15 @@ public class PlayerCombat : MonoBehaviour
     {
         if (isTurn == true && attackChosen == false && choosingAttack == false)
         {
+            Debug.Log("Choosing Attack");
+            attackChosen = true;
             choosingAttack = true;
         }
 
         if (Input.GetMouseButtonDown(0) && isTurn == true && attackChosen == true)
         {
+            attackChosen = false;
+            Debug.Log("Enemy Chosen");
             ChooseEnemy();
         }
     }
@@ -46,12 +52,14 @@ public class PlayerCombat : MonoBehaviour
         {
 
             enemyHealth = hit.collider.GetComponent<EnemyHealth>();
-
+            Debug.Log("Enemy Hit");
+            isTurn = false;
+            cm.turnOver = true;
         }
     }
 
     public void Attack1() 
-    { 
+    {
         damage = stats.playerStrength + weaponStats.physicalDamage;
         intDamage = stats.playerIntellegence + weaponStats.intellengenceDamage;
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
@@ -59,7 +67,8 @@ public class PlayerCombat : MonoBehaviour
         float d = damage * (attackChanceDisplay.successs / 5);
         float id = intDamage * (attackChanceDisplay.successs / 5);
         float sd = steadyDamage * (attackChanceDisplay.successs / 5);
-        choosingAttack = false; attackChoice.SetActive(false);
+        choosingAttack = false; attackChoice.SetActive(false); attackChosen = true;
+        Debug.Log("Attack 1 Chosen");
     }
     public void Attack2()
     {
@@ -70,7 +79,8 @@ public class PlayerCombat : MonoBehaviour
         float d = damage * (attackChanceDisplay.successs / 5);
         float id = intDamage * (attackChanceDisplay.successs / 5);
         float sd = steadyDamage * (attackChanceDisplay.successs / 5);
-        choosingAttack = false; attackChoice.SetActive(false);
+        choosingAttack = false; attackChoice.SetActive(false); attackChosen = true;
+        Debug.Log("Attack 2 Chosen");
     }
     public void Attack3()
     {
@@ -81,6 +91,12 @@ public class PlayerCombat : MonoBehaviour
         float d = damage * (attackChanceDisplay.successs / 5);
         float id = intDamage * (attackChanceDisplay.successs / 5);
         float sd = steadyDamage * (attackChanceDisplay.successs / 5);
-        choosingAttack = false; attackChoice.SetActive(false);
+        choosingAttack = false; attackChoice.SetActive(false); attackChosen = true;
+        Debug.Log("Attack 3 Chosen");
+    }
+
+    public void ShowAttackChoices()
+    {
+        combatCanvas.enabled = true;
     }
 }

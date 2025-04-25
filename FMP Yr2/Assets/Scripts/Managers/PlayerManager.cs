@@ -49,7 +49,6 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
                 cc.enabled = false;
                 pControllerScripts[i].enabled = false;
                 pNearbyTiles[i].enabled = false;
-                pCombatScripts[i].enabled = true;
             }
         }
     }

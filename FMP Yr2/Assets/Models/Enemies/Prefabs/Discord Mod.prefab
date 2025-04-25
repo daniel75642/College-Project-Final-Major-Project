@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8143896300165634456}
   - component: {fileID: 2611551386472103869}
   - component: {fileID: 7602056903506037655}
-  - component: {fileID: 4279335952799835494}
+  - component: {fileID: 6044797509798536712}
   m_Layer: 11
   m_Name: Discord Mod
   m_TagString: Untagged
@@ -105,8 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9f17f606205414885bbdd3ea9eabb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!64 &4279335952799835494
-MeshCollider:
+--- !u!65 &6044797509798536712
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -123,7 +123,6 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -5968190041196646549, guid: 4074e2f2d7fdf56448860b9944588013, type: 3}
+  serializedVersion: 3
+  m_Size: {x: 15.414981, y: 45.609398, z: 20.877853}
+  m_Center: {x: -0.15654469, y: -4.1641264, z: -3.8158169}

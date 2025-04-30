@@ -429,7 +429,7 @@ MonoBehaviour:
   playerCrit: 10
   playerAttackAccuracy: 5
   playerLuck: 3
-  playerSpeed: 0
+  playerSpeed: 2
   playerMoney: 10
 --- !u!114 &52034079
 MonoBehaviour:
@@ -2363,7 +2363,7 @@ MonoBehaviour:
   playerCrit: 15
   playerAttackAccuracy: 15
   playerLuck: 4
-  playerSpeed: 0
+  playerSpeed: 2
   playerMoney: 10
 --- !u!114 &745954551
 MonoBehaviour:
@@ -4950,7 +4950,7 @@ MonoBehaviour:
   playerCrit: 12
   playerAttackAccuracy: 12
   playerLuck: 2
-  playerSpeed: 0
+  playerSpeed: 2
   playerMoney: 10
 --- !u!114 &1398041424
 MonoBehaviour:
@@ -5557,7 +5557,7 @@ MonoBehaviour:
   playerCrit: 18
   playerAttackAccuracy: 25
   playerLuck: 3
-  playerSpeed: 0
+  playerSpeed: 2
   playerMoney: 10
 --- !u!114 &1511900716
 MonoBehaviour:

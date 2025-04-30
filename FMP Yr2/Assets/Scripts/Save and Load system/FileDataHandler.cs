@@ -66,6 +66,5 @@ public class FileDataHandler
         {
             Debug.Log("Error occured while saving" + fullPath + "/N" + e);
         }
-
     }
 }

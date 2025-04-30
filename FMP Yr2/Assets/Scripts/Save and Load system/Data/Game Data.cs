@@ -43,7 +43,7 @@ public class GameData
     {
         //Map Stuff
         mapMade = false;
-        seedNumber = "51233";
+        seedNumber = "";
 
         //Player Manager
         playerTurn = 0;

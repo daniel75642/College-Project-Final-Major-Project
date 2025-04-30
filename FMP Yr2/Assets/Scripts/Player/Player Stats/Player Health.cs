@@ -11,15 +11,27 @@ public class PlayerHealth : MonoBehaviour
     [Header("Slider")]
     public Slider slider;
 
+    public int health;
+    public int maxhealth;
+    public int minhealth;
+
     void Start()
     {
-        stats = GetComponent<PlayerStats>();
-        stats.playerHealth = stats.playerMaxHealth;
+        HealthUpdate();
     }
 
 
     void Update()
     {
         
+    }
+
+    public void HealthUpdate()
+    {
+        stats = GetComponent<PlayerStats>();
+        health = stats.playerHealth;
+        maxhealth = stats.playerMaxHealth;
+        minhealth = stats.playerMinHealth;
+        health = maxhealth;
     }
 }

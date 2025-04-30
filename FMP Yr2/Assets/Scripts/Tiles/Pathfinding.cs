@@ -131,11 +131,8 @@ public class NearbyTiles : MonoBehaviour
             cubeLine = CubeLineDraw(newPlayerHex, newMouseHex);
             for (int i = 1; i < cubeLine.Count; i++)
             {
-                    //print(MathF.Ceiling(cubeLine[i].Q) + ", " + MathF.Ceiling(cubeLine[i].R) + ", " + MathF.Ceiling(cubeLine[i].S));
                 Hex newHex = HexConverter.CubeToAxial(cubeLine[i]);
-                    //print($"{newHex.Q}, {newHex.R}");
                 offsetCoord offsetHex = HexConverter.AxialtoCoord(newHex);
-                    //print(offsetHex.Col + ", " + offsetHex.Row);
                 float row = offsetHex.Row * 0.865f;
                 float col = offsetHex.Col;
                 if (offsetHex.Row % 2 == 0)

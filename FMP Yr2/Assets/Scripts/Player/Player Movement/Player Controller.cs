@@ -16,6 +16,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public CameraController cc;
     public CameraManger cm;
     public CombatManager combatManager;
+    public Loadsystem ls;
 
 
     public float lerpTime = 1f;
@@ -24,29 +25,10 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     private void Start()
     {
         p = GetComponent<NearbyTiles>();
+        ls = GetComponent<Loadsystem>();
     }
     void Update()
     {
-        /*if (Input.GetKey(KeyCode.D))
-        {
-            transform.Translate(0.005f, 0, 0 * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.Translate(-0.005f, 0, 0 * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.Translate(0, 0, 2f * Time.deltaTime);
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.Translate(0, 0, -2f * Time.deltaTime);
-        }*/
-
         if(p.playerMoving == true)
         {
             StartCoroutine(playerMovement());
@@ -60,10 +42,6 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         if (Input.GetMouseButtonDown(0) && nearbyTiles.mouseDone == false)
         {
             nearbyTiles.MouseFindHex(mouse.transform);
-        }
-
-        if (Input.GetKeyDown(KeyCode.F) && nearbyTiles.playerDone == false)
-        {
             nearbyTiles.PlayerFindHex(this.transform);
         }
     }
@@ -102,7 +80,10 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                 combatManager.ForestArenaSetUp();
             }
         }
-
+        StartCoroutine(ls.LoadUnload());
         p.path.Clear();
+
     }
+
+    
 }

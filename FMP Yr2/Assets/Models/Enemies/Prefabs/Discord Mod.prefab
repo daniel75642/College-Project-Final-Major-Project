@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9f17f606205414885bbdd3ea9eabb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 0
+  MaxHealth: 2
   MinHealth: 0
   Health: 0
 --- !u!65 &6044797509798536712
@@ -149,6 +149,8 @@ MonoBehaviour:
   playerChosen: 0
   isTurn: 0
   choiceMade: 0
+  isAttacking: 0
+  isInOrder: 0
 --- !u!114 &4426911832348232121
 MonoBehaviour:
   m_ObjectHideFlags: 0

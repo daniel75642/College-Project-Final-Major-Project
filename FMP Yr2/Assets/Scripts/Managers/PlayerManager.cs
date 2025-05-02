@@ -10,6 +10,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     [SerializeField] PlayerController[] pControllerScripts;
     [SerializeField] PlayerCombat[] pCombatScripts;
     [SerializeField] NearbyTiles[] pNearbyTiles;
+    [SerializeField] Loadsystem[] lScripts;
     [SerializeField] GameObject[] players;
 
     public CameraController cc;
@@ -17,6 +18,8 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
 
     [Header("Player Turn")]
     public int playerTurn;
+
+    public bool combatSomething;
 
     
 
@@ -41,9 +44,9 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
             }
         }
 
-        if (combatManager.inCombat == true)
+        if (combatManager.inCombat == true && combatSomething == true)
         {
-
+            combatSomething = false;
             for (int i = 0; i < pControllerScripts.Length; i++)
             {
                 cc.enabled = false;
@@ -56,9 +59,12 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     {
         pControllerScripts[0].enabled = false;  pControllerScripts[1].enabled = false;  pControllerScripts[2].enabled = false;  pControllerScripts[3].enabled = false;
         pNearbyTiles[0].enabled = false; pNearbyTiles[1].enabled = false; pNearbyTiles[2].enabled = false; pNearbyTiles[3].enabled = false;
+        lScripts[0].enabled = false; lScripts[1].enabled = false; lScripts[2].enabled = false; lScripts[3].enabled = false;
         yield return new WaitForSeconds(1);
         pControllerScripts[playerTurn].enabled = true;
         pNearbyTiles[playerTurn].enabled = true;
+        lScripts[playerTurn].enabled = true;
+        StartCoroutine(lScripts[playerTurn].LoadUnload());
         playerTurn += 1;
     }
 
@@ -71,5 +77,4 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     {
         data.playerTurn = this.playerTurn;
     }
-
 }

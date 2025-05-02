@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         p = GetComponent<NearbyTiles>();
         ls = GetComponent<Loadsystem>();
     }
+
+    public void Awake()
+    {
+        StartCoroutine(loadSystem.LoadUnload());
+    }
     void Update()
     {
         if(p.playerMoving == true)
@@ -39,7 +44,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             StartCoroutine(loadSystem.LoadUnload());
         }
 
-        if (Input.GetMouseButtonDown(0) && nearbyTiles.mouseDone == false)
+        if (Input.GetMouseButtonDown(0))
         {
             nearbyTiles.MouseFindHex(mouse.transform);
             nearbyTiles.PlayerFindHex(this.transform);
@@ -83,6 +88,11 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         StartCoroutine(ls.LoadUnload());
         p.path.Clear();
 
+    }
+
+    public void CamEnable()
+    {
+        cc.enabled = true;
     }
 
     

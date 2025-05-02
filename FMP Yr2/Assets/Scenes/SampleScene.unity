@@ -2743,6 +2743,11 @@ MonoBehaviour:
   - {fileID: 745954548}
   - {fileID: 1398041421}
   - {fileID: 1511900713}
+  lScripts:
+  - {fileID: 52034075}
+  - {fileID: 745954544}
+  - {fileID: 1398041417}
+  - {fileID: 1511900709}
   players:
   - {fileID: 52034069}
   - {fileID: 745954542}
@@ -2751,6 +2756,7 @@ MonoBehaviour:
   cc: {fileID: 963194229}
   combatManager: {fileID: 1904289943}
   playerTurn: 0
+  combatSomething: 0
 --- !u!1 &810379395
 GameObject:
   m_ObjectHideFlags: 0
@@ -6761,8 +6767,29 @@ MonoBehaviour:
   pTransforms: []
   playerOrder: []
   order: 
+  forestPlayerPosOrig:
+  - {fileID: 346007317}
+  - {fileID: 898771533}
+  - {fileID: 1674765672}
+  - {fileID: 310027477}
+  - {fileID: 906740425}
+  - {fileID: 161795243}
+  - {fileID: 2099902757}
+  - {fileID: 1225114584}
+  forestEnemyPosOrig:
+  - {fileID: 370659620}
+  - {fileID: 2104143787}
+  - {fileID: 1602367933}
+  - {fileID: 1282451089}
+  - {fileID: 691175216}
+  - {fileID: 1220388235}
+  - {fileID: 1519937078}
+  - {fileID: 558839452}
   inCombat: 0
   turnOver: 0
+  wasInCombat: 0
+  playersLeft: 0
+  enemiesLeft: 0
   combatCanvas:
   - {fileID: 1272534316}
   - {fileID: 392019915}
@@ -6770,6 +6797,8 @@ MonoBehaviour:
   - {fileID: 1968787803}
   ps: {fileID: 0}
   es: {fileID: 0}
+  camManger: {fileID: 870776515}
+  pm: {fileID: 770530679}
 --- !u!1 &1907153540
 GameObject:
   m_ObjectHideFlags: 0

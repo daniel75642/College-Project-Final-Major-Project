@@ -18,6 +18,11 @@ public class EnemyHealth : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Health <= MinHealth)
+        {
+            CombatManager cm = FindObjectOfType<CombatManager>();
+            cm.enemiesLeft -= 1;
+            Destroy(this.gameObject);
+        }
     }
 }

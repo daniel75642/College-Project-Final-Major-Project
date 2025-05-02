@@ -16,16 +16,21 @@ public class CombatManager : MonoBehaviour
     public List<GameObject> placedPlayers;
     public List<GameObject> placedCharacters;
     [SerializeField] List<Vector3> pTransforms;
-    [SerializeField] List<GameObject> playerOrder;
+    [SerializeField] public List<GameObject> playerOrder;
     [SerializeField] List<int> order;
+    [SerializeField] List<Transform> forestPlayerPosOrig, forestEnemyPosOrig;
     int speed;
 
-    public bool inCombat, turnOver;
+    public bool inCombat, turnOver, wasInCombat;
+
+    public int playersLeft, enemiesLeft;
 
     public Canvas[] combatCanvas;
 
     public PlayerStats ps;
     public EnemyStats es;
+    public CameraManger camManger;
+    public PlayerManager pm;
 
     public void Start()
     {
@@ -35,8 +40,18 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void Update()
+    {
+        if(inCombat == false && wasInCombat == true)
+        {
+            CombatOver();
+            wasInCombat = false;
+        }
+    }
+
     public void ForestArenaSetUp()
     {
+        wasInCombat = true;
         if (pTransforms != null)
         {
             pTransforms.Clear();
@@ -60,7 +75,9 @@ public class CombatManager : MonoBehaviour
             }
 
             int y = UnityEngine.Random.Range(0, forestEnemyPos.Count);
-            GameObject temp = Instantiate(enemies[UnityEngine.Random.Range(0, 2)], new Vector3(forestEnemyPos[y].position.x, forestEnemyPos[y].position.y + 0.15f, forestEnemyPos[y].position.z), Quaternion.Euler(0, 90, 0));
+            GameObject temp = Instantiate(enemies[UnityEngine.Random.Range(0, 2)],
+                new Vector3(forestEnemyPos[y].position.x, forestEnemyPos[y].position.y + 0.15f, forestEnemyPos[y].position.z),
+                Quaternion.Euler(0, 90, 0));
             placedEnemies.Add(temp);
             forestEnemyPos.Remove(forestEnemyPos[y]);
         }
@@ -77,14 +94,11 @@ public class CombatManager : MonoBehaviour
         StartCoroutine(CombatOrder());
     }
 
-    public void ArenaReset()
-    {
-
-    }
 
     public IEnumerator CombatOrder()
     {
-        for (int i = 0; i < 4; i++)
+
+        for (int i = 0; i < players.Count; i++)
         {
             ps = players[i].GetComponent<PlayerStats>();
             speed = ps.playerAttackSpeed;
@@ -130,39 +144,102 @@ public class CombatManager : MonoBehaviour
             }
         }
 
+        enemiesLeft = 0;
+        playersLeft = 0;
 
-        for (int i = 0; i < order.Count; i++)
+        for (int j = 0; j < playerOrder.Count; j++)
         {
+            if (playerOrder[j].gameObject.CompareTag("Enemy"))
+            {
+                enemiesLeft += 1;
+            }
+            if (playerOrder[j].gameObject.CompareTag("Player"))
+            {
+                playersLeft += 1;
+            }
+        }
+
+        for (int i = 0; i < playerOrder.Count; i++)
+        {
+            yield return new WaitForSeconds(1f);
+
+            if (enemiesLeft <= 0)
+            {
+                inCombat = false;
+                StopAllCoroutines();
+                print("Stopped coroutine");
+            }
+
+            if (playersLeft <= 0)
+            {
+                inCombat = false;
+                StopAllCoroutines();
+                print("Stopped coroutine");
+                
+            }
+
             print(i);
-            if (playerOrder[i].gameObject.CompareTag("Player"))
+            if (playerOrder[i].gameObject != null)
             {
-                print("Player Turn Started");
-                PlayerCombat pc = playerOrder[i].GetComponent<PlayerCombat>();
-                pc.isTurn = true;
-                pc.enabled = true;
-                yield return new WaitForSeconds(1);
-                pc.ShowAttackChoices();
-                yield return new WaitForSeconds(0.01f);
+                if (playerOrder[i].gameObject.CompareTag("Player"))
+                {
+                    print("Player Turn Started");
+                    PlayerCombat pc = playerOrder[i].GetComponent<PlayerCombat>();
+                    pc.isTurn = true;
+                    pc.enabled = true;
+                    yield return new WaitForSeconds(1);
+                    pc.ShowAttackChoices();
+                    yield return new WaitForSeconds(0.01f);
 
-                yield return new WaitUntil(() => turnOver == true);
-                turnOver = false;
-                playerOrder[i].GetComponent<PlayerCombat>().enabled = false;
-            }
-            else if (playerOrder[i].gameObject.CompareTag("Enemy"))
-            {
-                print("Enemy Turn Started");
-                EnemyAttack ea = playerOrder[i].GetComponent<EnemyAttack>();
-                ea.isTurn = true;
-                yield return new WaitUntil(() => turnOver == true);
-                turnOver = false;
-                playerOrder[i].GetComponent<EnemyAttack>().enabled = false;
+                    yield return new WaitUntil(() => turnOver == true);
+                    turnOver = false;
+                    playerOrder[i].GetComponent<PlayerCombat>().enabled = false;
+                }
+                else if (playerOrder[i].gameObject.CompareTag("Enemy"))
+                {
+                    print("Enemy Turn Started");
+                    EnemyAttack ea = playerOrder[i].GetComponent<EnemyAttack>();
+                    ea.isTurn = true;
+                    yield return new WaitUntil(() => turnOver == true);
+                    turnOver = false;
+                    playerOrder[i].GetComponent<EnemyAttack>().enabled = false;
+                }
             }
 
-            if(i == 7)
+
+
+
+            if (i == playerOrder.Count - 1)
             {
                 i = 0;
             }
             Debug.Log("Missed");
         }
+    }
+
+    public void CombatOver()
+    {
+        forestPlayerPos.Clear();
+        forestEnemyPos.Clear();
+        print("positions cleared");
+        camManger.ChangeBack();
+
+        for (int i = 0; i < players.Count; i++)
+        {
+            players[i].transform.position = pTransforms[i];
+            PlayerController pc = players[i].GetComponent<PlayerController>();
+            Loadsystem ls = players[i].GetComponent<Loadsystem>();
+            pc.CamEnable();
+            StartCoroutine(ls.LoadUnload());
+        }
+
+        for(int i = 0; i < forestPlayerPosOrig.Count; i++)
+        {
+            forestPlayerPos.Add(forestPlayerPosOrig[i]);
+            forestEnemyPos.Add(forestEnemyPosOrig[i]);
+        }
+        pTransforms.Clear();
+        pm.combatSomething = true;
+        print("Combat Over");
     }
 }

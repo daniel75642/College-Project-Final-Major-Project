@@ -60,6 +60,7 @@ public class PlayerCombat : MonoBehaviour
 
     public void Attack1() 
     {
+        weaponStats = GetComponentInChildren<WeaponStats>();
         damage = stats.playerStrength + weaponStats.physicalDamage;
         intDamage = stats.playerIntellegence + weaponStats.intellengenceDamage;
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
@@ -72,6 +73,7 @@ public class PlayerCombat : MonoBehaviour
     }
     public void Attack2()
     {
+        weaponStats = GetComponentInChildren<WeaponStats>();
         damage = stats.playerStrength + weaponStats.physicalDamage;
         intDamage = stats.playerIntellegence + weaponStats.intellengenceDamage;
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
@@ -84,6 +86,7 @@ public class PlayerCombat : MonoBehaviour
     }
     public void Attack3()
     {
+        weaponStats = GetComponentInChildren<WeaponStats>();
         damage = stats.playerStrength + weaponStats.physicalDamage;
         intDamage = stats.playerIntellegence + weaponStats.intellengenceDamage;
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;

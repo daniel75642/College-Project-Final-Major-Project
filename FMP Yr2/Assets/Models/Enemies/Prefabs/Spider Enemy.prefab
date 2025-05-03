@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 2226281013139773915}
   - component: {fileID: 9031407423114966317}
   - component: {fileID: -3376662960851104066}
+  - component: {fileID: 1320533605416382869}
+  - component: {fileID: 953093620305572021}
   m_Layer: 11
   m_Name: Spider Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -102,6 +104,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9f17f606205414885bbdd3ea9eabb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 2
+  MinHealth: 0
+  Health: 0
 --- !u!65 &-3376662960851104066
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -123,3 +128,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 8.016754, y: 8.708804, z: 8.485254}
   m_Center: {x: 0.026552916, y: -1.5675454, z: -1.576273}
+--- !u!114 &1320533605416382869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5863015450463668261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4ebd19cd720d54b8c42d52064a5cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cm: {fileID: 0}
+  stats: {fileID: 0}
+  acd: {fileID: 0}
+  playerChosen: 0
+  isTurn: 0
+  choiceMade: 0
+  isAttacking: 0
+  isInOrder: 0
+--- !u!114 &953093620305572021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5863015450463668261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc63d5841759094bbcfbbe8b294ba52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAttackSpeed: 72
+  enemyDamage: 10

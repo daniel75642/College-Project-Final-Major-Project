@@ -13,9 +13,11 @@ GameObject:
   - component: {fileID: 2611551386472103869}
   - component: {fileID: 7602056903506037655}
   - component: {fileID: 6044797509798536712}
+  - component: {fileID: 8198307331660637581}
+  - component: {fileID: 4426911832348232121}
   m_Layer: 11
   m_Name: Discord Mod
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -105,6 +107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f9f17f606205414885bbdd3ea9eabb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MaxHealth: 2
+  MinHealth: 0
+  Health: 0
 --- !u!65 &6044797509798536712
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -126,3 +131,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 15.414981, y: 45.609398, z: 20.877853}
   m_Center: {x: -0.15654469, y: -4.1641264, z: -3.8158169}
+--- !u!114 &8198307331660637581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228698080321194922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f4ebd19cd720d54b8c42d52064a5cd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cm: {fileID: 0}
+  stats: {fileID: 0}
+  acd: {fileID: 0}
+  playerChosen: 0
+  isTurn: 0
+  choiceMade: 0
+  isAttacking: 0
+  isInOrder: 0
+--- !u!114 &4426911832348232121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1228698080321194922}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cc63d5841759094bbcfbbe8b294ba52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAttackSpeed: 55
+  enemyDamage: 8

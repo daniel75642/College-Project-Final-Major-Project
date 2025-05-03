@@ -251,7 +251,7 @@ GameObject:
   - component: {fileID: 52034081}
   m_Layer: 0
   m_Name: Paladin
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -343,6 +343,7 @@ MonoBehaviour:
   cc: {fileID: 963194229}
   cm: {fileID: 870776515}
   combatManager: {fileID: 1904289943}
+  ls: {fileID: 0}
   lerpTime: 1
 --- !u!114 &52034075
 MonoBehaviour:
@@ -396,6 +397,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
   slider: {fileID: 0}
+  health: 0
+  maxhealth: 0
+  minhealth: 0
 --- !u!114 &52034078
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -413,7 +417,7 @@ MonoBehaviour:
   playerMaxHealth: 30
   playerMinHealth: 0
   playerExp: 0
-  playerMaxExp: 0
+  playerMaxExp: 100
   playerLvl: 1
   playerMaxLvl: 15
   playerDefense: 4
@@ -425,7 +429,7 @@ MonoBehaviour:
   playerCrit: 10
   playerAttackAccuracy: 5
   playerLuck: 3
-  playerSpeed: 0
+  playerSpeed: 2
   playerMoney: 10
 --- !u!114 &52034079
 MonoBehaviour:
@@ -439,7 +443,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b658ef0c0c2cce54fb14f07779b26bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthIncrease: 1.4
+  healthIncrease: 1.1
   levelIncrease: 1
   expIncrease: 1.3
   defenseIncrease: 1
@@ -447,7 +451,7 @@ MonoBehaviour:
   strengthIncrease: 1
   intellegenceIncrease: 0
   steadyIncrease: 0
-  attackSpeedIncrease: 1.1
+  attackSpeedIncrease: 1.001
   critIncrease: 1.1
   attackAccuracyIncrease: 1.2
 --- !u!114 &52034080
@@ -1437,7 +1441,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392019911}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -2181,7 +2185,7 @@ GameObject:
   - component: {fileID: 745954553}
   m_Layer: 0
   m_Name: Mage
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2207,6 +2211,7 @@ MonoBehaviour:
   cc: {fileID: 963194229}
   cm: {fileID: 870776515}
   combatManager: {fileID: 1904289943}
+  ls: {fileID: 0}
   lerpTime: 1
 --- !u!114 &745954544
 MonoBehaviour:
@@ -2326,6 +2331,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
   slider: {fileID: 0}
+  health: 0
+  maxhealth: 0
+  minhealth: 0
 --- !u!114 &745954550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2343,7 +2351,7 @@ MonoBehaviour:
   playerMaxHealth: 24
   playerMinHealth: 0
   playerExp: 0
-  playerMaxExp: 0
+  playerMaxExp: 100
   playerLvl: 1
   playerMaxLvl: 15
   playerDefense: 2
@@ -2355,7 +2363,7 @@ MonoBehaviour:
   playerCrit: 15
   playerAttackAccuracy: 15
   playerLuck: 4
-  playerSpeed: 0
+  playerSpeed: 2
   playerMoney: 10
 --- !u!114 &745954551
 MonoBehaviour:
@@ -2369,7 +2377,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b658ef0c0c2cce54fb14f07779b26bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthIncrease: 1.4
+  healthIncrease: 1.1
   levelIncrease: 1
   expIncrease: 1.3
   defenseIncrease: 0
@@ -2377,7 +2385,7 @@ MonoBehaviour:
   strengthIncrease: 0
   intellegenceIncrease: 1
   steadyIncrease: 0
-  attackSpeedIncrease: 1.05
+  attackSpeedIncrease: 1.001
   critIncrease: 1.1
   attackAccuracyIncrease: 1.1
 --- !u!114 &745954552
@@ -2735,6 +2743,11 @@ MonoBehaviour:
   - {fileID: 745954548}
   - {fileID: 1398041421}
   - {fileID: 1511900713}
+  lScripts:
+  - {fileID: 52034075}
+  - {fileID: 745954544}
+  - {fileID: 1398041417}
+  - {fileID: 1511900709}
   players:
   - {fileID: 52034069}
   - {fileID: 745954542}
@@ -2743,6 +2756,7 @@ MonoBehaviour:
   cc: {fileID: 963194229}
   combatManager: {fileID: 1904289943}
   playerTurn: 0
+  combatSomething: 0
 --- !u!1 &810379395
 GameObject:
   m_ObjectHideFlags: 0
@@ -4382,7 +4396,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1272534313}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -4483,7 +4497,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1334851268
 Transform:
   m_ObjectHideFlags: 0
@@ -4764,7 +4778,7 @@ GameObject:
   - component: {fileID: 1398041426}
   m_Layer: 0
   m_Name: Fighter
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4790,6 +4804,7 @@ MonoBehaviour:
   cc: {fileID: 963194229}
   cm: {fileID: 870776515}
   combatManager: {fileID: 1904289943}
+  ls: {fileID: 0}
   lerpTime: 1
 --- !u!114 &1398041417
 MonoBehaviour:
@@ -4909,6 +4924,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
   slider: {fileID: 0}
+  health: 0
+  maxhealth: 0
+  minhealth: 0
 --- !u!114 &1398041423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4926,7 +4944,7 @@ MonoBehaviour:
   playerMaxHealth: 28
   playerMinHealth: 0
   playerExp: 0
-  playerMaxExp: 0
+  playerMaxExp: 100
   playerLvl: 1
   playerMaxLvl: 15
   playerDefense: 2
@@ -4938,7 +4956,7 @@ MonoBehaviour:
   playerCrit: 12
   playerAttackAccuracy: 12
   playerLuck: 2
-  playerSpeed: 0
+  playerSpeed: 2
   playerMoney: 10
 --- !u!114 &1398041424
 MonoBehaviour:
@@ -4952,7 +4970,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b658ef0c0c2cce54fb14f07779b26bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthIncrease: 1.4
+  healthIncrease: 1.1
   levelIncrease: 1
   expIncrease: 1.3
   defenseIncrease: 1
@@ -4960,7 +4978,7 @@ MonoBehaviour:
   strengthIncrease: 1
   intellegenceIncrease: 0
   steadyIncrease: 0
-  attackSpeedIncrease: 1.05
+  attackSpeedIncrease: 1.001
   critIncrease: 1.1
   attackAccuracyIncrease: 1.1
 --- !u!114 &1398041425
@@ -5367,7 +5385,7 @@ GameObject:
   - component: {fileID: 1511900718}
   m_Layer: 0
   m_Name: Rogue
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5393,6 +5411,7 @@ MonoBehaviour:
   cc: {fileID: 963194229}
   cm: {fileID: 870776515}
   combatManager: {fileID: 1904289943}
+  ls: {fileID: 0}
   lerpTime: 1
 --- !u!114 &1511900709
 MonoBehaviour:
@@ -5512,6 +5531,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stats: {fileID: 0}
   slider: {fileID: 0}
+  health: 0
+  maxhealth: 0
+  minhealth: 0
 --- !u!114 &1511900715
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5529,7 +5551,7 @@ MonoBehaviour:
   playerMaxHealth: 24
   playerMinHealth: 0
   playerExp: 0
-  playerMaxExp: 0
+  playerMaxExp: 100
   playerLvl: 1
   playerMaxLvl: 15
   playerDefense: 2
@@ -5541,7 +5563,7 @@ MonoBehaviour:
   playerCrit: 18
   playerAttackAccuracy: 25
   playerLuck: 3
-  playerSpeed: 0
+  playerSpeed: 2
   playerMoney: 10
 --- !u!114 &1511900716
 MonoBehaviour:
@@ -5555,7 +5577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b658ef0c0c2cce54fb14f07779b26bc4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthIncrease: 1.4
+  healthIncrease: 1.1
   levelIncrease: 1
   expIncrease: 1.3
   defenseIncrease: 1
@@ -5563,7 +5585,7 @@ MonoBehaviour:
   strengthIncrease: 0
   intellegenceIncrease: 0
   steadyIncrease: 1
-  attackSpeedIncrease: 1.02
+  attackSpeedIncrease: 1.001
   critIncrease: 1.05
   attackAccuracyIncrease: 1.05
 --- !u!114 &1511900717
@@ -6069,6 +6091,127 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1808482377
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1808482381}
+  - component: {fileID: 1808482380}
+  - component: {fileID: 1808482379}
+  - component: {fileID: 1808482378}
+  - component: {fileID: 1808482382}
+  m_Layer: 5
+  m_Name: Enemy Attack Display
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1808482378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808482377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &1808482379
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808482377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_UiScaleMode: 0
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 800, y: 600}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &1808482380
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808482377}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_TargetDisplay: 0
+--- !u!224 &1808482381
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808482377}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
+--- !u!114 &1808482382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1808482377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ce32d20239420946b0cf409bca5f855, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attempts: 5
+  successs: 0
+  chance: 0.83
+  attackCanvas: {fileID: 1808482380}
+  attackDisplay: []
+  attackIcon: {fileID: 1427600686046664276, guid: c464e71f18634104bab57aaba2d45136, type: 3}
+  failedIcon: {fileID: 363365085128286733, guid: a52ad685f9c2caa4cbf21993dea28457, type: 3}
 --- !u!1 &1820600217
 GameObject:
   m_ObjectHideFlags: 0
@@ -6616,18 +6759,46 @@ MonoBehaviour:
   - {fileID: 1519937078}
   - {fileID: 558839452}
   enemies:
-  - {fileID: 8792857574107142099, guid: b29305d0c04923f4bae3816d5ab750c4, type: 3}
-  - {fileID: 1630281024460846499, guid: 0a146249510e6114696c0235388752bc, type: 3}
+  - {fileID: 1228698080321194922, guid: b29305d0c04923f4bae3816d5ab750c4, type: 3}
+  - {fileID: 5863015450463668261, guid: 0a146249510e6114696c0235388752bc, type: 3}
+  placedEnemies: []
+  placedPlayers: []
+  placedCharacters: []
   pTransforms: []
   playerOrder: []
   order: 
+  forestPlayerPosOrig:
+  - {fileID: 346007317}
+  - {fileID: 898771533}
+  - {fileID: 1674765672}
+  - {fileID: 310027477}
+  - {fileID: 906740425}
+  - {fileID: 161795243}
+  - {fileID: 2099902757}
+  - {fileID: 1225114584}
+  forestEnemyPosOrig:
+  - {fileID: 370659620}
+  - {fileID: 2104143787}
+  - {fileID: 1602367933}
+  - {fileID: 1282451089}
+  - {fileID: 691175216}
+  - {fileID: 1220388235}
+  - {fileID: 1519937078}
+  - {fileID: 558839452}
   inCombat: 0
   turnOver: 0
+  wasInCombat: 0
+  playersLeft: 0
+  enemiesLeft: 0
   combatCanvas:
   - {fileID: 1272534316}
   - {fileID: 392019915}
   - {fileID: 2083779831}
   - {fileID: 1968787803}
+  ps: {fileID: 0}
+  es: {fileID: 0}
+  camManger: {fileID: 870776515}
+  pm: {fileID: 770530679}
 --- !u!1 &1907153540
 GameObject:
   m_ObjectHideFlags: 0
@@ -6959,7 +7130,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1968787799}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -7478,7 +7649,7 @@ Canvas:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083779827}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_RenderMode: 0
   m_Camera: {fileID: 0}
@@ -8092,8 +8263,8 @@ MonoBehaviour:
   - {fileID: 8505444184551705365, guid: 95d8247cca19d6a4cbded9716f0515af, type: 3}
   - {fileID: 1963550484744554543, guid: 0bd3188ce563e594ea669a682ca77fc9, type: 3}
   - {fileID: 5991747010691459578, guid: 86cae50c2bc0cb4459d74dc18c9d34c9, type: 3}
-  height: 20
-  width: 20
+  height: 200
+  width: 200
   mapHolderOddRows: {fileID: 1794127221}
   mapHolderEvenRows: {fileID: 451838310}
   seed: 0
@@ -36838,3 +37009,4 @@ SceneRoots:
   - {fileID: 2083779832}
   - {fileID: 1968787804}
   - {fileID: 1820600220}
+  - {fileID: 1808482381}

@@ -29,7 +29,7 @@ public class Loadsystem : MonoBehaviour {
         }
         else if (firstCheckDone)
         {
-            for (int i = 0; i < arrayLength; i++)
+            for (int i = 0; i < colliderArray.Length; i++)
             {
                 colliderArray[i].transform.GetComponent<MeshRenderer>().enabled = false;
             }

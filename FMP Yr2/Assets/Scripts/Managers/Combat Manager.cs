@@ -27,6 +27,8 @@ public class CombatManager : MonoBehaviour
 
     public Canvas[] combatCanvas;
 
+    public Canvas rewardScreen;
+
     public PlayerStats ps;
     public EnemyStats es;
     public CameraManger camManger;
@@ -38,13 +40,14 @@ public class CombatManager : MonoBehaviour
         {
             combatCanvas[i].enabled = false;
         }
+        rewardScreen.enabled = false;
     }
 
     public void Update()
     {
         if(inCombat == false && wasInCombat == true)
         {
-            CombatOver();
+            RewardScreen();
             wasInCombat = false;
         }
     }
@@ -69,14 +72,15 @@ public class CombatManager : MonoBehaviour
             {
                 int x = UnityEngine.Random.Range(0, forestPlayerPos.Count);
                 pTransforms.Add(players[i].transform.position);
-                players[i].transform.position = forestPlayerPos[x].position;
+                players[i].transform.position = forestPlayerPos[x].position - new Vector3(0, 0.2f, 0);
+                players[i].transform.rotation = Quaternion.Euler(0, 90, 0);
                 placedPlayers.Add(players[i]);
                 forestPlayerPos.Remove(forestPlayerPos[x]);
             }
 
             int y = UnityEngine.Random.Range(0, forestEnemyPos.Count);
             GameObject temp = Instantiate(enemies[UnityEngine.Random.Range(0, 2)],
-                new Vector3(forestEnemyPos[y].position.x, forestEnemyPos[y].position.y + 0.15f, forestEnemyPos[y].position.z),
+                new Vector3(forestEnemyPos[y].position.x, forestEnemyPos[y].position.y - 0.2f, forestEnemyPos[y].position.z),
                 Quaternion.Euler(0, 90, 0));
             placedEnemies.Add(temp);
             forestEnemyPos.Remove(forestEnemyPos[y]);
@@ -217,8 +221,14 @@ public class CombatManager : MonoBehaviour
         }
     }
 
+    public void RewardScreen()
+    {
+        rewardScreen.enabled = true;
+    }
+
     public void CombatOver()
     {
+        rewardScreen.enabled = false;
         forestPlayerPos.Clear();
         forestEnemyPos.Clear();
         print("positions cleared");

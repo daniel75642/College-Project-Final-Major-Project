@@ -15,7 +15,7 @@ public class MapManager : MonoBehaviour, IDataPersistence
     List<GameObject> mapEvenRows = new List<GameObject>();
     List<GameObject> mapOddRows = new List<GameObject>();
 
-    [SerializeField] public float height, width;
+    [SerializeField] public int height, width;
 
     [SerializeField] GameObject mapHolderOddRows, mapHolderEvenRows;
 
@@ -28,6 +28,9 @@ public class MapManager : MonoBehaviour, IDataPersistence
     private GrabCoordinates gc;
 
     public bool mapMade;
+
+    public Vector3 startPos;
+
     // Start is called before the first frame update    
     void Start()
     {
@@ -47,6 +50,7 @@ public class MapManager : MonoBehaviour, IDataPersistence
         UnityEngine.Random.InitState(seed);
         
         mapMade = true;
+
         columnDist = -0.865f;
         rowDist = 0;
         for (r = 0; r < height; r++)
@@ -57,26 +61,11 @@ public class MapManager : MonoBehaviour, IDataPersistence
             {
                 if (r % 2 == 0)
                 {
-                    if (q <= 4)
-                    {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
-                        mapEvenRows.Add(temp);
-                        rowDist += 1f;  
-                        gc = temp.GetComponent<GrabCoordinates>();  gc.row = r;  gc.col = q;
-                    }
 
-                    else if (q >= width - 4)
-                    {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
-                        mapEvenRows.Add(temp);
-                        rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
 
-                    }
-
-                    else if (r <= 4)
+                    if (r <= 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
@@ -84,15 +73,15 @@ public class MapManager : MonoBehaviour, IDataPersistence
 
                     else if (r >= height - 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
-                    else if (q == 5 && r == 5)
+                    else if (q == 15 && r == 15)
                     {
-                        GameObject temp = Instantiate(floorTiles[1], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[1], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
@@ -100,8 +89,8 @@ public class MapManager : MonoBehaviour, IDataPersistence
 
                     else
                     {
-                        int floorTile = UnityEngine.Random.Range(1, 19);
-                        GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        int floorTile = UnityEngine.Random.Range(1, floorTiles.Length);
+                        GameObject temp = Instantiate(floorTiles[floorTile], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
@@ -111,25 +100,10 @@ public class MapManager : MonoBehaviour, IDataPersistence
 
                 else
                 {
-                    if (q <= 4)
-                    {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
-                        mapOddRows.Add(temp);
-                        rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
-                    }
 
-                    else if (q >= width - 4)
+                    if (r <= 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
-                        mapOddRows.Add(temp);
-                        rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
-                    }
-
-                    else if (r <= 4)
-                    {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
@@ -137,15 +111,15 @@ public class MapManager : MonoBehaviour, IDataPersistence
 
                     else if (r >= height - 4)
                     {
-                        GameObject temp = Instantiate(floorTiles[0], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
-                    else if (q == 5 && r == 5)
+                    else if (q == 15 && r == 15)
                     {
-                        GameObject temp = Instantiate(floorTiles[1], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
+                        GameObject temp = Instantiate(floorTiles[1], startPos + new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
@@ -153,8 +127,8 @@ public class MapManager : MonoBehaviour, IDataPersistence
 
                     else
                     {
-                        int floorTile = UnityEngine.Random.Range(1, 19);
-                        GameObject temp = Instantiate(floorTiles[floorTile], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
+                        int floorTile = UnityEngine.Random.Range(1, floorTiles.Length);
+                        GameObject temp = Instantiate(floorTiles[floorTile], startPos + new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;

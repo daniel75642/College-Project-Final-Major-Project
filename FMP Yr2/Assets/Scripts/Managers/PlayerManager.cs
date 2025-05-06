@@ -11,6 +11,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     [SerializeField] PlayerCombat[] pCombatScripts;
     [SerializeField] NearbyTiles[] pNearbyTiles;
     [SerializeField] Loadsystem[] lScripts;
+    [SerializeField] EnemySpawnManager[] esScripts;
     [SerializeField] GameObject[] players, diceSpawnPos;
 
     public GameObject dice, diceLimiter;
@@ -41,7 +42,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
             {
                 playerTurn = 0;
             }
-            if (Input.GetKeyDown(KeyCode.Space) && cc.swapping == false)
+            if (Input.GetKeyDown(KeyCode.Space) && cc.swapping == false && pNearbyTiles[playerTurn].playerMoving == false)
             {
                 StartCoroutine(PlayerSwap()); StartCoroutine(cc.camSwap());
             }
@@ -66,18 +67,26 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
         StartCoroutine(sd.ResetDice());
 
         pControllerScripts[playerTurn].hasHadTurn = false;
+        esScripts[0].enabled = false; esScripts[1].enabled = false; esScripts[2].enabled = false; esScripts[3].enabled = false;
         pControllerScripts[0].enabled = false;  pControllerScripts[1].enabled = false;  pControllerScripts[2].enabled = false;  pControllerScripts[3].enabled = false;
         pNearbyTiles[0].enabled = false; pNearbyTiles[1].enabled = false; pNearbyTiles[2].enabled = false; pNearbyTiles[3].enabled = false;
         lScripts[0].enabled = false; lScripts[1].enabled = false; lScripts[2].enabled = false; lScripts[3].enabled = false;
 
         yield return new WaitForSeconds(1);
 
+        esScripts[playerTurn].enabled = true;
         pControllerScripts[playerTurn].enabled = true;
         pControllerScripts[playerTurn].hasHadTurn = false;
         pNearbyTiles[playerTurn].enabled = true;
         lScripts[playerTurn].enabled = true;
 
         StartCoroutine(lScripts[playerTurn].LoadUnload());
+
+        if (esScripts[0].enemyPlaces != null)
+        {
+            esScripts[playerTurn].RemoveEnemies();
+        }
+        esScripts[playerTurn].SpawnNewEnemies();
 
         playerTurn += 1;
     }

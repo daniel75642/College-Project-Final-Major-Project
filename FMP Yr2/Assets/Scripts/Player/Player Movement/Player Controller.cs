@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     [SerializeField] public Transform mouse;
 
-    public LayerMask interactables;
+    public LayerMask interactables, enemyCamps;
 
     public SixDice sd;
     public CameraController cc;
@@ -58,6 +58,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         if(Input.GetMouseButtonDown(0) && diceRolled == true && hasHadTurn == false)
         {
             diceRolled = false;
+            hasHadTurn = true;
             nearbyTiles.PlayerFindHex(this.transform);
             nearbyTiles.MouseFindHex(mouse.transform);
         }
@@ -90,12 +91,19 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             transform.position = p.path[i].transform.position;
             MeshRenderer temp = p.path[i].GetComponent<MeshRenderer>();
             temp.enabled = false;
-            if (Physics.Raycast(transform.position, Vector3.down, 3, interactables))
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, enemyCamps))
             {
                 i = p.path.Count;
                 cc.enabled = false;
                 cm.ChangeToForest();
                 combatManager.ForestArenaSetUp();
+                Destroy(hit.collider.gameObject);
+            }
+
+            if (Physics.Raycast(transform.position, Vector3.down, 3, interactables))
+            {
+                print("Interactable");
             }
         }
         StartCoroutine(ls.LoadUnload());

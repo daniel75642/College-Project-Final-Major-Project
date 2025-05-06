@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class DiceManager : MonoBehaviour
 {
     public SixDice sixDice;
-    public Text numberText;
+    public TextMeshProUGUI numberText;
 
     
     public void WhatNum()

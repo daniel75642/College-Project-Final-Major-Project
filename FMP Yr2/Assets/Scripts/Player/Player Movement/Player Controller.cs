@@ -13,13 +13,19 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     public LayerMask interactables;
 
+    public SixDice sd;
     public CameraController cc;
     public CameraManger cm;
     public CombatManager combatManager;
     public Loadsystem ls;
 
+    public GameObject dice, diceLimiter;
+
+    public bool diceRolled, hasHadTurn;
 
     public float lerpTime = 1f;
+
+    public int playerNumber;
 
     private NearbyTiles p;
     private void Start()
@@ -39,15 +45,21 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             StartCoroutine(playerMovement());
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.Q) && sd.rolled == false && hasHadTurn == false)
         {
-            StartCoroutine(loadSystem.LoadUnload());
+            StartCoroutine(sd.Roll());
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if(sd.checkNumber == true)
         {
-            nearbyTiles.MouseFindHex(mouse.transform);
+            StartCoroutine(HideDice());
+        }
+
+        if(Input.GetMouseButtonDown(0) && diceRolled == true && hasHadTurn == false)
+        {
+            diceRolled = false;
             nearbyTiles.PlayerFindHex(this.transform);
+            nearbyTiles.MouseFindHex(mouse.transform);
         }
     }
 
@@ -58,11 +70,12 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     public void SaveData(ref GameData data)
     {
-        
+
     }
 
     public IEnumerator playerMovement()
     {
+        hasHadTurn = true;
         p.playerMoving = false;
         for (int i = 0; i < p.path.Count; i++)
         {
@@ -87,12 +100,20 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         }
         StartCoroutine(ls.LoadUnload());
         p.path.Clear();
-
     }
 
     public void CamEnable()
     {
         cc.enabled = true;
+    }
+
+    public IEnumerator HideDice()
+    {
+        yield return new WaitForSeconds(3f);
+        sd.checkNumber = false;
+        dice.SetActive(false);
+        diceLimiter.SetActive(false);
+        diceRolled = true;
     }
 
     

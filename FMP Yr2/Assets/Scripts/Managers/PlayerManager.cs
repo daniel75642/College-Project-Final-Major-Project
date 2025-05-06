@@ -11,10 +11,13 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     [SerializeField] PlayerCombat[] pCombatScripts;
     [SerializeField] NearbyTiles[] pNearbyTiles;
     [SerializeField] Loadsystem[] lScripts;
-    [SerializeField] GameObject[] players;
+    [SerializeField] GameObject[] players, diceSpawnPos;
+
+    public GameObject dice, diceLimiter;
 
     public CameraController cc;
     public CombatManager combatManager;
+    public SixDice sd;
 
     [Header("Player Turn")]
     public int playerTurn;
@@ -57,14 +60,25 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     }
     public IEnumerator PlayerSwap()
     {
+        dice.SetActive(true);
+        diceLimiter.SetActive(true);
+        diceLimiter.transform.position = diceSpawnPos[playerTurn].transform.position + new Vector3 (0, 4.3f, 0);
+        StartCoroutine(sd.ResetDice());
+
+        pControllerScripts[playerTurn].hasHadTurn = false;
         pControllerScripts[0].enabled = false;  pControllerScripts[1].enabled = false;  pControllerScripts[2].enabled = false;  pControllerScripts[3].enabled = false;
         pNearbyTiles[0].enabled = false; pNearbyTiles[1].enabled = false; pNearbyTiles[2].enabled = false; pNearbyTiles[3].enabled = false;
         lScripts[0].enabled = false; lScripts[1].enabled = false; lScripts[2].enabled = false; lScripts[3].enabled = false;
+
         yield return new WaitForSeconds(1);
+
         pControllerScripts[playerTurn].enabled = true;
+        pControllerScripts[playerTurn].hasHadTurn = false;
         pNearbyTiles[playerTurn].enabled = true;
         lScripts[playerTurn].enabled = true;
+
         StartCoroutine(lScripts[playerTurn].LoadUnload());
+
         playerTurn += 1;
     }
 

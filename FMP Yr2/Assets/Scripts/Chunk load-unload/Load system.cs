@@ -16,7 +16,7 @@ public class Loadsystem : MonoBehaviour {
     // Start is called before the first frame update
     void Start() 
     {
-         arrayLength = Physics.OverlapSphere(transform.position, loadDist, mapLayer).Length;
+        arrayLength = Physics.OverlapSphere(transform.position, loadDist, mapLayer).Length;
 
         StartCoroutine(LoadUnload());
     }

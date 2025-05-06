@@ -8,24 +8,21 @@ public class SixDice : MonoBehaviour
 {
     public DiceManager diceManager;
 
-    Rigidbody diceRb;
+    public Rigidbody diceRb;
 
-    KeyCode diceRoll = KeyCode.Q;
-
-    int upForce, spinUp, rightLeft, forwardBackward, spinRight;
+    public int upForce, spinUp, rightLeft, forwardBackward, spinRight, rollNumber;
 
     public bool rolled, checkNumber;
     
-    public float lerpSpeed, rollNumber;
+    public float lerpSpeed;
 
     public LayerMask floor;
 
-    [SerializeField] GameObject diceSpawn;
+    [SerializeField] public GameObject diceSpawn;
 
     // Start is called before the first frame update
     void Start()
     {
-        diceRb = gameObject.GetComponent<Rigidbody>();
 
         rolled = false;
         checkNumber = false;
@@ -37,22 +34,10 @@ public class SixDice : MonoBehaviour
         if (diceRb.velocity == Vector3.zero && rolled == true && checkNumber == false)
         {
             DiceValue();
-            if (Input.GetKeyDown(diceRoll) && rolled == false)
-            {
-                StartCoroutine(ResetDice());
-            }
         }
-
-        if (Input.GetKeyDown(diceRoll) && diceRb.velocity == Vector3.zero && rolled == false)
-        {
-            StartCoroutine(Roll());
-            return;
-        }
-
-
     }
 
-    private IEnumerator Roll()
+    public IEnumerator Roll()
     {
         checkNumber = false;
         upForce = Random.Range(6, 8);
@@ -66,7 +51,7 @@ public class SixDice : MonoBehaviour
         diceRb.AddForce(Vector3.forward * 10f * forwardBackward);
         diceRb.AddTorque(Vector3.up * 90f * spinRight);
         diceRb.AddTorque(Vector3.right * 90f * spinUp);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         rolled = true;
 
     }
@@ -121,8 +106,10 @@ public class SixDice : MonoBehaviour
     }
    
     
-    private IEnumerator ResetDice()
+    public IEnumerator ResetDice()
     {
+        rolled = false;
+        checkNumber = false;
         diceRb.transform.position = diceSpawn.transform.position;
         diceRb.transform.rotation = Quaternion.Euler(-90, 0, 0);
         yield return new WaitForSeconds(3);

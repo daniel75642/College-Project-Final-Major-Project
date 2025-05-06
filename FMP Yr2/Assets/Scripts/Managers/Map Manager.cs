@@ -8,6 +8,8 @@ using UnityEngine.UIElements;
 
 public class MapManager : MonoBehaviour, IDataPersistence
 {
+    public Loadsystem ls;
+
     [SerializeField]GameObject[] floorTiles;
 
     List<GameObject> mapEvenRows = new List<GameObject>();
@@ -88,6 +90,14 @@ public class MapManager : MonoBehaviour, IDataPersistence
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
+                    else if (q == 5 && r == 5)
+                    {
+                        GameObject temp = Instantiate(floorTiles[1], new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        mapEvenRows.Add(temp);
+                        rowDist += 1f;
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
+                    }
+
                     else
                     {
                         int floorTile = UnityEngine.Random.Range(1, 19);
@@ -133,6 +143,14 @@ public class MapManager : MonoBehaviour, IDataPersistence
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
+                    else if (q == 5 && r == 5)
+                    {
+                        GameObject temp = Instantiate(floorTiles[1], new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
+                        mapEvenRows.Add(temp);
+                        rowDist += 1f;
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
+                    }
+
                     else
                     {
                         int floorTile = UnityEngine.Random.Range(1, 19);
@@ -145,6 +163,7 @@ public class MapManager : MonoBehaviour, IDataPersistence
                 }
             }
         }
+        StartCoroutine(ls.LoadUnload());
         yield return null;
     }
 

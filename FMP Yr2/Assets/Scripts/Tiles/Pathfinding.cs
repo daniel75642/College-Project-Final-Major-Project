@@ -10,7 +10,8 @@ using static NearbyTiles;
 
 public class NearbyTiles : MonoBehaviour
 {
-    private GrabCoordinates gb;
+    public GrabCoordinates gb;
+    public SixDice sd;
 
     public int moveDist;
 
@@ -29,6 +30,8 @@ public class NearbyTiles : MonoBehaviour
     public List<GameObject> path = new List<GameObject>();
 
     public bool playerMoving = false;
+
+    public LayerMask moveable;
 
     public void Start()
     {
@@ -62,7 +65,7 @@ public class NearbyTiles : MonoBehaviour
     public void PlayerFindHex(Transform obj)
     {
         RaycastHit hit;
-        bool tileHit = Physics.Raycast(obj.position, Vector3.down, out hit, 10);
+        bool tileHit = Physics.Raycast(obj.position, Vector3.down, out hit, 10, moveable);
         gb = hit.transform.gameObject.GetComponent<GrabCoordinates>();
         hex1 = new offsetCoord(gb.col, gb.row);
         playerAxialHex = HexConverter.CoordToAxial(hex1);
@@ -73,7 +76,7 @@ public class NearbyTiles : MonoBehaviour
     public void MouseFindHex(Transform obj)
     {
         RaycastHit hit;
-        bool tileHit = Physics.Raycast(obj.position, Vector3.down, out hit, 10);
+        bool tileHit = Physics.Raycast(obj.position, Vector3.down, out hit, 10, moveable);
         gb = hit.transform.gameObject.GetComponent<GrabCoordinates>();
         hex2 = new offsetCoord(gb.col, gb.row);
         mouseAxialHex = HexConverter.CoordToAxial(hex2);
@@ -123,13 +126,14 @@ public class NearbyTiles : MonoBehaviour
                 GameObject temp = Instantiate(showPath, new Vector3(col, 0.2f, row), Quaternion.identity);
             }*/
 
+            moveDist = sd.rollNumber + 1;
             path.Clear();
             cubeLine.Clear();
             hexOffsetLine.Clear();
             Cube newMouseHex = HexConverter.AxialToCube(mouseAxialHex);
             Cube newPlayerHex = HexConverter.AxialToCube(playerAxialHex);
             cubeLine = CubeLineDraw(newPlayerHex, newMouseHex);
-            for (int i = 1; i < cubeLine.Count; i++)
+            for (int i = 1; i < cubeLine.Count && i < moveDist; i++ )
             {
                 Hex newHex = HexConverter.CubeToAxial(cubeLine[i]);
                 offsetCoord offsetHex = HexConverter.AxialtoCoord(newHex);

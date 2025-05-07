@@ -61,25 +61,7 @@ public class MapManager : MonoBehaviour, IDataPersistence
             {
                 if (r % 2 == 0)
                 {
-
-
-                    if (r <= 4)
-                    {
-                        GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
-                        mapEvenRows.Add(temp);
-                        rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
-                    }
-
-                    else if (r >= height - 4)
-                    {
-                        GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
-                        mapEvenRows.Add(temp);
-                        rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
-                    }
-
-                    else if (q == 15 && r == 15)
+                    if (q == 15 && r == 15)
                     {
                         GameObject temp = Instantiate(floorTiles[1], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
@@ -100,24 +82,7 @@ public class MapManager : MonoBehaviour, IDataPersistence
 
                 else
                 {
-
-                    if (r <= 4)
-                    {
-                        GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
-                        mapOddRows.Add(temp);
-                        rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
-                    }
-
-                    else if (r >= height - 4)
-                    {
-                        GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
-                        mapOddRows.Add(temp);
-                        rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
-                    }
-
-                    else if (q == 15 && r == 15)
+                    if (q == 15 && r == 15)
                     {
                         GameObject temp = Instantiate(floorTiles[1], startPos + new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);

@@ -7,6 +7,8 @@ TagManager:
   - Map Manager
   - Obstacle
   - Enemy
+  - EnemyTile
+  - Final City Entrace
   layers:
   - Default
   - TransparentFX

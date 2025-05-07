@@ -8,26 +8,27 @@ public class EnemySpawnManager : MonoBehaviour
 
     public int row, col;
 
-    public LayerMask Spawnable;
+    public LayerMask notSpawnable, spawnable;
 
     public RaycastHit hit;
 
     public List<GameObject> enemyPlaces;
     public void SpawnNewEnemies()
     {
-        for(int i = 0; i < 3;  i++)
+        for(int i = 0; i < 2;  i++)
         {
             row = Random.Range(-5, 5);
             col = Random.Range(-5, 5);
             GameObject temp = Instantiate(enemyCamps[0], this.transform.position + new Vector3(row, 0.5f, col), Quaternion.identity);
-            if (Physics.Raycast(temp.transform.position, Vector3.down, out hit, 3f, Spawnable))
+            if (Physics.Raycast(temp.transform.position, Vector3.down, out hit, 3f, notSpawnable))
             {
-                GameObject temp2 = Instantiate(enemyCamps[Random.Range(1, enemyCamps.Length)], hit.collider.gameObject.transform.position + new Vector3 (0, 0.2f, 0), Quaternion.identity);
-                enemyPlaces.Add(temp2);
+                i -= 1;
             }
             else
             {
-                i -= 1;
+                Physics.Raycast(temp.transform.position, Vector3.down, out hit, 3f, spawnable);
+                GameObject temp2 = Instantiate(enemyCamps[Random.Range(1, enemyCamps.Length)], hit.collider.gameObject.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
+                enemyPlaces.Add(temp2);
             }
 
 

@@ -116,9 +116,10 @@ GameObject:
   - component: {fileID: 6519667073026727243}
   - component: {fileID: 7682963472698099247}
   - component: {fileID: 763768895376706590}
+  - component: {fileID: 6129141420627204665}
   m_Layer: 14
   m_Name: Cube.005
-  m_TagString: Untagged
+  m_TagString: EnemyTile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -190,3 +191,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &6129141420627204665
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5780346798957268082}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 4.436434, y: 1.9263314, z: 4.0794806}
+  m_Center: {x: 0.043710228, y: 0.59727997, z: 0.32223853}

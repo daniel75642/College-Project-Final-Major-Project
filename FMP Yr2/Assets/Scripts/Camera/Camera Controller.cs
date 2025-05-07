@@ -19,7 +19,7 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         swapping = false;
-        cam = 0;
+        cam = pm.playerTurn;
     }
 
     // Update is called once per frame

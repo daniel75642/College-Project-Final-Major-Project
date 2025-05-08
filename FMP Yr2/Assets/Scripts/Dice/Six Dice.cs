@@ -112,6 +112,6 @@ public class SixDice : MonoBehaviour
         checkNumber = false;
         diceRb.transform.position = diceSpawn.transform.position;
         diceRb.transform.rotation = Quaternion.Euler(-90, 0, 0);
-        yield return new WaitForSeconds(3);
+        yield return null;
     }
 }

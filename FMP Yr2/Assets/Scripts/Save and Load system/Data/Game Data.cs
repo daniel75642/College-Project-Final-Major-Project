@@ -40,6 +40,10 @@ public class GameData
 
     public SerializableDictionary<int, int> playerMoney;
 
+    //Camera Stuff
+
+    public int camNum;
+
     public GameData()
     {
         //Map Stuff
@@ -72,5 +76,9 @@ public class GameData
         playerSpeed = new SerializableDictionary<int, int>();
 
         playerMoney = new SerializableDictionary<int, int>();
+
+        //Camera Stuff
+
+        camNum = 0;
     }
 }

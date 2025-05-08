@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour, IDataPersistence
 {
     [SerializeField] PlayerManager pm;
 
@@ -19,7 +19,6 @@ public class CameraController : MonoBehaviour
     void Start()
     {
         swapping = false;
-        cam = pm.playerTurn;
     }
 
     // Update is called once per frame
@@ -61,5 +60,15 @@ public class CameraController : MonoBehaviour
         swapping = false;
         cam += 1;
         swapping = false;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        this.cam = data.camNum;
+    }
+
+    public void LoadData(GameData data)
+    {
+        data.camNum = this.cam;
     }
 }

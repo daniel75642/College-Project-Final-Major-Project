@@ -73,13 +73,13 @@ public class CombatManager : MonoBehaviour
                 int x = UnityEngine.Random.Range(0, forestPlayerPos.Count);
                 pTransforms.Add(players[i].transform.position);
                 players[i].transform.position = forestPlayerPos[x].position - new Vector3(0, 0.2f, 0);
-                players[i].transform.rotation = Quaternion.Euler(0, 90, 0);
+                players[i].transform.rotation = Quaternion.Euler(0, -90, 0);
                 placedPlayers.Add(players[i]);
                 forestPlayerPos.Remove(forestPlayerPos[x]);
             }
 
             int y = UnityEngine.Random.Range(0, forestEnemyPos.Count);
-            GameObject temp = Instantiate(enemies[UnityEngine.Random.Range(0, 2)],
+            GameObject temp = Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Count)],
                 new Vector3(forestEnemyPos[y].position.x, forestEnemyPos[y].position.y - 0.2f, forestEnemyPos[y].position.z),
                 Quaternion.Euler(0, 90, 0));
             placedEnemies.Add(temp);
@@ -124,11 +124,13 @@ public class CombatManager : MonoBehaviour
         {
             for(int j = 0; j < order.Count; j++) 
             {
-                if (placedCharacters[j].gameObject.CompareTag("Player"))
+                if (placedCharacters[j].gameObject.CompareTag("Player") && placedCharacters[j].GetComponent<PlayerCombat>().isInOrder == false)
                 {
                     ps = placedCharacters[j].GetComponent<PlayerStats>();
                     if (ps.playerAttackSpeed == order[i])
                     {
+                        PlayerCombat pc = placedCharacters[j].GetComponent<PlayerCombat>();
+                        pc.isInOrder = true;
                         playerOrder.Add(placedCharacters[j]);
                         break;
                     }
@@ -210,10 +212,7 @@ public class CombatManager : MonoBehaviour
                 }
             }
 
-
-
-
-            if (i == playerOrder.Count - 1)
+            if (i >= playerOrder.Count - 1)
             {
                 i = 0;
             }
@@ -237,6 +236,7 @@ public class CombatManager : MonoBehaviour
         for (int i = 0; i < players.Count; i++)
         {
             players[i].transform.position = pTransforms[i];
+            players[i].transform.rotation = Quaternion.Euler(0, 0, 0);
             PlayerController pc = players[i].GetComponent<PlayerController>();
             Loadsystem ls = players[i].GetComponent<Loadsystem>();
             pc.CamEnable();

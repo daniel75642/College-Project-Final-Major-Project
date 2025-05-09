@@ -12,7 +12,7 @@ public class PlayerCombat : MonoBehaviour
 
     public GameObject attackChoice;
 
-    public bool isTurn, attackChosen, choosingAttack;
+    public bool isTurn, attackChosen, choosingAttack, isInOrder;
 
     public Transform mouse3D;
 

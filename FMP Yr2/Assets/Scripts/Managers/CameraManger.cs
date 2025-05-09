@@ -19,4 +19,5 @@ public class CameraManger : MonoBehaviour
         }
         cameras[0].targetDisplay = 0;
     }
+
 }

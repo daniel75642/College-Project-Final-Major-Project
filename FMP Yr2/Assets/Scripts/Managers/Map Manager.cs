@@ -69,9 +69,17 @@ public class MapManager : MonoBehaviour, IDataPersistence
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
+                    else if (q == 22 && r == 22)
+                    {
+                        GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        mapEvenRows.Add(temp);
+                        rowDist += 1f;
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
+                    }
+
                     else
                     {
-                        int floorTile = UnityEngine.Random.Range(1, floorTiles.Length);
+                        int floorTile = UnityEngine.Random.Range(2, floorTiles.Length);
                         GameObject temp = Instantiate(floorTiles[floorTile], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
@@ -85,14 +93,23 @@ public class MapManager : MonoBehaviour, IDataPersistence
                     if (q == 15 && r == 15)
                     {
                         GameObject temp = Instantiate(floorTiles[1], startPos + new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
-                        mapEvenRows.Add(temp);
+                        mapOddRows.Add(temp);
+                        rowDist += 1f;
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
+                    }
+
+
+                    else if (q == 22 && r == 22)
+                    {
+                        GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
+                        mapOddRows.Add(temp);
                         rowDist += 1f;
                         gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
                     }
 
                     else
                     {
-                        int floorTile = UnityEngine.Random.Range(1, floorTiles.Length);
+                        int floorTile = UnityEngine.Random.Range(2, floorTiles.Length);
                         GameObject temp = Instantiate(floorTiles[floorTile], startPos + new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour, IDataPersistence
 {
@@ -13,8 +14,13 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     [SerializeField] Loadsystem[] lScripts;
     [SerializeField] EnemySpawnManager[] esScripts;
     [SerializeField] GameObject[] players, diceSpawnPos;
+    [SerializeField] GameObject[] bannerStats;
 
     public GameObject dice, diceLimiter;
+
+    public Slider hackBar;
+
+    int hacked;
 
     public CameraController cc;
     public CombatManager combatManager;
@@ -30,12 +36,13 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     // Start is called before the first frame update
     void Start()
     {
-
+        hackBar.value = hacked;
     }
 
     // Update is called once per frame
     void Update()
     {
+        hackBar.value = hacked;
         if (combatManager.inCombat == false)
         {
             if (playerTurn >= 4)
@@ -44,7 +51,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
             }
             if (Input.GetKeyDown(KeyCode.Space) && cc.swapping == false && pNearbyTiles[playerTurn].playerMoving == false)
             {
-                StartCoroutine(PlayerSwap()); StartCoroutine(cc.camSwap());
+                Switch();
             }
         }
 
@@ -59,8 +66,16 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
             }
         }
     }
+
+    public void Switch()
+    {
+        StartCoroutine(PlayerSwap()); StartCoroutine(cc.camSwap());
+    }
     public IEnumerator PlayerSwap()
     {
+        hacked += 20;
+        hackBar.value = hacked;
+
         dice.SetActive(true);
         diceLimiter.SetActive(true);
         diceLimiter.transform.position = diceSpawnPos[playerTurn].transform.position + new Vector3 (0, 4.3f, 0);
@@ -71,6 +86,8 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
         pControllerScripts[0].enabled = false;  pControllerScripts[1].enabled = false;  pControllerScripts[2].enabled = false;  pControllerScripts[3].enabled = false;
         pNearbyTiles[0].enabled = false; pNearbyTiles[1].enabled = false; pNearbyTiles[2].enabled = false; pNearbyTiles[3].enabled = false;
         lScripts[0].enabled = false; lScripts[1].enabled = false; lScripts[2].enabled = false; lScripts[3].enabled = false;
+        bannerStats[0].SetActive(false); bannerStats[1].SetActive(false); bannerStats[2].SetActive(false); bannerStats[3].SetActive(false);
+        bannerStats[playerTurn].SetActive(true);
 
         yield return new WaitForSeconds(1);
 
@@ -94,10 +111,12 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     public void LoadData(GameData data)
     {
         this.playerTurn = data.playerTurn;
+        this.hacked = data.hacked;
     }
 
     public void SaveData(ref GameData data)
     {
         data.playerTurn = this.playerTurn;
+        data.hacked = this.hacked;
     }
 }

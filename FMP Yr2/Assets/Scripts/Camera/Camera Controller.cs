@@ -30,6 +30,7 @@ public class CameraController : MonoBehaviour, IDataPersistence
     // Update is called once per frame
     void Update()
     {
+        cam = pm.playerTurn;
         if(Input.mouseScrollDelta.y < 0 && ahhhhh.fieldOfView < 90)
         {
             ahhhhh.fieldOfView += 1;

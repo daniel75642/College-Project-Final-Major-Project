@@ -27,7 +27,7 @@ public class CombatManager : MonoBehaviour
 
     public Canvas[] combatCanvas;
 
-    public Canvas rewardScreen;
+    public Canvas rewardScreen, explorationCanvas;
 
     public PlayerStats ps;
     public EnemyStats es;
@@ -54,6 +54,7 @@ public class CombatManager : MonoBehaviour
 
     public void ForestArenaSetUp()
     {
+        explorationCanvas.enabled = false;
         wasInCombat = true;
         if (pTransforms != null)
         {
@@ -249,6 +250,7 @@ public class CombatManager : MonoBehaviour
             forestEnemyPos.Add(forestEnemyPosOrig[i]);
         }
         pTransforms.Clear();
+        explorationCanvas.enabled = true;
         pm.combatSomething = true;
         print("Combat Over");
     }

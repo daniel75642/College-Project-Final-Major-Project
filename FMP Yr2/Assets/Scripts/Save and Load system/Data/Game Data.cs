@@ -13,6 +13,7 @@ public class GameData
 
     //Player Manager
     public int playerTurn;
+    public int hacked;
 
     //Player Stats
     public SerializableDictionary<int, GameObject> players;
@@ -39,6 +40,12 @@ public class GameData
     public SerializableDictionary<int, int> playerSpeed;
 
     public SerializableDictionary<int, int> playerMoney;
+
+    //Player Locations
+
+    public SerializableDictionary<int, float> playerXPositions;
+    public SerializableDictionary<int, float> playerYPositions;
+    public SerializableDictionary<int, float> playerZPositions;
 
     //Camera Stuff
 
@@ -76,6 +83,12 @@ public class GameData
         playerSpeed = new SerializableDictionary<int, int>();
 
         playerMoney = new SerializableDictionary<int, int>();
+
+        //Player Positions
+
+        playerXPositions = new SerializableDictionary<int, float>();
+        playerYPositions = new SerializableDictionary<int, float>();
+        playerZPositions = new SerializableDictionary<int, float>();
 
         //Camera Stuff
 

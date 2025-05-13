@@ -123,3 +123,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMoveable: 0
+  moveable:
+    serializedVersion: 2
+    m_Bits: 0

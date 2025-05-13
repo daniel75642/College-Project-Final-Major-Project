@@ -66,12 +66,35 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     public void LoadData(GameData data)
     {
+        PlayerStats ps = GetComponent<PlayerStats>();
 
+        float x = data.playerXPositions[ps.playerNumber];
+        float y = data.playerYPositions[ps.playerNumber];
+        float z = data.playerZPositions[ps.playerNumber];
+
+        this.transform.position = new Vector3(x, y, z);
     }
 
     public void SaveData(ref GameData data)
     {
+        PlayerStats ps = GetComponent<PlayerStats>();
+        if (data.playerXPositions.ContainsKey(ps.playerNumber))
+        {
+            data.playerXPositions.Clear();
+        }
+        data.playerXPositions.Add(ps.playerNumber, this.transform.position.x);
 
+        if (data.playerYPositions.ContainsKey(ps.playerNumber))
+        {
+            data.playerYPositions.Clear();
+        }
+        data.playerYPositions.Add(ps.playerNumber, this.transform.position.y);
+
+        if (data.playerZPositions.ContainsKey(ps.playerNumber))
+        {
+            data.playerZPositions.Clear();
+        }
+        data.playerZPositions.Add(ps.playerNumber, this.transform.position.z);
     }
 
     public IEnumerator playerMovement()

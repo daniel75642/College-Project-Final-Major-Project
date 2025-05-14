@@ -81,6 +81,7 @@ public class CameraController : MonoBehaviour, IDataPersistence
 
     public IEnumerator ShowTown()
     {
+        yield return new WaitForSeconds(1f);
         swapping = true;
         Vector3 startPos = transform.position;
         float elapsedTime = 0;
@@ -92,10 +93,11 @@ public class CameraController : MonoBehaviour, IDataPersistence
             //transform.position = newCamPos;
         }
         transform.position = townCams[townCam].position;
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
         swapping = false;
         townCam += 1;
         swapping = false;
+        pm.Switch();
     }
 
     public void SaveData(ref GameData data)

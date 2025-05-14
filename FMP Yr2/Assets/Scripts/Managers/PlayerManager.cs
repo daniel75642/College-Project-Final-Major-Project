@@ -37,6 +37,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     void Start()
     {
         hackBar.value = hacked;
+        StartCoroutine(cc.ShowTown());
     }
 
     // Update is called once per frame
@@ -48,10 +49,6 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
             if (playerTurn >= 4)
             {
                 playerTurn = 0;
-            }
-            if (Input.GetKeyDown(KeyCode.Space) && cc.swapping == false && pNearbyTiles[playerTurn].playerMoving == false)
-            {
-                Switch();
             }
         }
 
@@ -69,7 +66,10 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
 
     public void Switch()
     {
-        StartCoroutine(PlayerSwap()); StartCoroutine(cc.camSwap());
+        if(cc.swapping == false && pNearbyTiles[playerTurn].playerMoving == false)
+        {
+            StartCoroutine(PlayerSwap()); StartCoroutine(cc.camSwap());
+        }
     }
     public IEnumerator PlayerSwap()
     {

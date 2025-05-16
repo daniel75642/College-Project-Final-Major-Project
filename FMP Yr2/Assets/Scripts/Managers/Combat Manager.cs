@@ -33,6 +33,7 @@ public class CombatManager : MonoBehaviour
     public EnemyStats es;
     public CameraManger camManger;
     public PlayerManager pm;
+    public DataPersistenceManager dpm;
 
     public void Start()
     {
@@ -54,6 +55,7 @@ public class CombatManager : MonoBehaviour
 
     public void ForestArenaSetUp()
     {
+        dpm.SaveGame();
         explorationCanvas.enabled = false;
         wasInCombat = true;
         if (pTransforms != null)

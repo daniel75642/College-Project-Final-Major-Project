@@ -15,6 +15,8 @@ public class DataPersistenceManager : MonoBehaviour
 
     private FileDataHandler dataHandler;
 
+    public CombatManager combatManager;
+
     public void Awake()
     {
         if (Instance != null)
@@ -53,17 +55,23 @@ public class DataPersistenceManager : MonoBehaviour
 
     public void SaveGame()
     {
-        foreach(IDataPersistence dataPersistence in dataPersistenceObjects)
+        if(combatManager.inCombat == false)
         {
-            dataPersistence.SaveData(ref gameData);
-        }
+            foreach (IDataPersistence dataPersistence in dataPersistenceObjects)
+            {
+                dataPersistence.SaveData(ref gameData);
+            }
 
-        dataHandler.Save(gameData);
+            dataHandler.Save(gameData);
+        }
     }
 
     private void OnApplicationQuit()
     {
-        SaveGame();
+        if (combatManager.inCombat == false)
+        {
+            SaveGame();
+        }  
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects()

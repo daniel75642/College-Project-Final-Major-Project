@@ -93,6 +93,45 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -100,10 +139,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_0
       rect:
         serializedVersion: 2
-        x: 20
-        y: 213
-        width: 22
-        height: 21
+        x: 0
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -121,10 +160,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_1
       rect:
         serializedVersion: 2
-        x: 87
-        y: 218
-        width: 18
-        height: 10
+        x: 64
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -142,10 +181,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_2
       rect:
         serializedVersion: 2
-        x: 147
-        y: 217
-        width: 22
-        height: 18
+        x: 128
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -163,10 +202,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_3
       rect:
         serializedVersion: 2
-        x: 213
-        y: 213
-        width: 23
-        height: 18
+        x: 192
+        y: 192
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -184,10 +223,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_4
       rect:
         serializedVersion: 2
-        x: 13
-        y: 144
-        width: 34
-        height: 37
+        x: 0
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -205,10 +244,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_5
       rect:
         serializedVersion: 2
-        x: 80
-        y: 150
-        width: 24
-        height: 28
+        x: 64
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -226,10 +265,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_6
       rect:
         serializedVersion: 2
-        x: 144
-        y: 147
-        width: 26
-        height: 35
+        x: 128
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -247,10 +286,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_7
       rect:
         serializedVersion: 2
-        x: 210
-        y: 140
-        width: 28
-        height: 27
+        x: 192
+        y: 128
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -268,10 +307,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_8
       rect:
         serializedVersion: 2
-        x: 10
-        y: 93
-        width: 16
-        height: 15
+        x: 0
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -289,10 +328,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_9
       rect:
         serializedVersion: 2
-        x: 30
-        y: 93
-        width: 16
-        height: 15
+        x: 64
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -310,10 +349,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_10
       rect:
         serializedVersion: 2
-        x: 77
-        y: 87
-        width: 18
-        height: 16
+        x: 128
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -331,10 +370,10 @@ TextureImporter:
       name: Armour weapons grid-6.png_11
       rect:
         serializedVersion: 2
-        x: 98
-        y: 87
-        width: 18
-        height: 16
+        x: 192
+        y: 64
+        width: 64
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -344,90 +383,6 @@ TextureImporter:
       bones: []
       spriteID: b7e6444782f4e3d47bd0dae79899b8ce
       internalID: 879328357
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Armour weapons grid-6.png_12
-      rect:
-        serializedVersion: 2
-        x: 138
-        y: 84
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 990c25496679af2419112457d86f0610
-      internalID: 121849427
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Armour weapons grid-6.png_13
-      rect:
-        serializedVersion: 2
-        x: 155
-        y: 84
-        width: 15
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: af549e74220ae4743824048ed4167724
-      internalID: -1660852870
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Armour weapons grid-6.png_14
-      rect:
-        serializedVersion: 2
-        x: 207
-        y: 84
-        width: 19
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: cf37ba5998123fd43b6ad45e0454d3aa
-      internalID: -1479822262
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Armour weapons grid-6.png_15
-      rect:
-        serializedVersion: 2
-        x: 228
-        y: 84
-        width: 19
-        height: 15
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 21658bda309f55f4aa8470e471281970
-      internalID: -200099228
       vertices: []
       indices: 
       edges: []
@@ -447,10 +402,6 @@ TextureImporter:
       Armour weapons grid-6.png_1: -224005517
       Armour weapons grid-6.png_10: 1895133587
       Armour weapons grid-6.png_11: 879328357
-      Armour weapons grid-6.png_12: 121849427
-      Armour weapons grid-6.png_13: -1660852870
-      Armour weapons grid-6.png_14: -1479822262
-      Armour weapons grid-6.png_15: -200099228
       Armour weapons grid-6.png_2: -1192729661
       Armour weapons grid-6.png_3: -1268152844
       Armour weapons grid-6.png_4: -412399033

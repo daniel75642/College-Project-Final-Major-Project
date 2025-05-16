@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     [SerializeField] EnemySpawnManager[] esScripts;
     [SerializeField] GameObject[] players, diceSpawnPos;
     [SerializeField] GameObject[] bannerStats;
+    [SerializeField] GameObject[] playersSideProfile;
 
     public GameObject dice, diceLimiter;
 
@@ -96,6 +97,46 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
         pControllerScripts[playerTurn].hasHadTurn = false;
         pNearbyTiles[playerTurn].enabled = true;
         lScripts[playerTurn].enabled = true;
+
+        if(playerTurn == 0)
+        {
+            playersSideProfile[0].SetActive(false);
+            playersSideProfile[1].SetActive(true);
+            playersSideProfile[2].SetActive(false);
+            playersSideProfile[3].SetActive(true);
+            playersSideProfile[4].SetActive(false);
+            playersSideProfile[5].SetActive(true);
+        }
+
+        else if (playerTurn == 1)
+        {
+            playersSideProfile[0].SetActive(true);
+            playersSideProfile[1].SetActive(false);
+            playersSideProfile[2].SetActive(false);
+            playersSideProfile[3].SetActive(true);
+            playersSideProfile[4].SetActive(false);
+            playersSideProfile[5].SetActive(true);
+        }
+
+        else if (playerTurn == 2)
+        {
+            playersSideProfile[0].SetActive(true);
+            playersSideProfile[1].SetActive(false);
+            playersSideProfile[2].SetActive(true);
+            playersSideProfile[3].SetActive(false);
+            playersSideProfile[4].SetActive(false);
+            playersSideProfile[5].SetActive(true);
+        }
+
+        else if (playerTurn == 3)
+        {
+            playersSideProfile[0].SetActive(true);
+            playersSideProfile[1].SetActive(false);
+            playersSideProfile[2].SetActive(true);
+            playersSideProfile[3].SetActive(false);
+            playersSideProfile[4].SetActive(true);
+            playersSideProfile[5].SetActive(false);
+        }
 
         StartCoroutine(lScripts[playerTurn].LoadUnload());
 

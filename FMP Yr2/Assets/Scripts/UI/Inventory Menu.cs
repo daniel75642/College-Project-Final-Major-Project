@@ -9,24 +9,32 @@ public class InventoryMenu : MonoBehaviour
     {
         Time.timeScale = 0f;
         p1Inv.enabled = true;
+        PlayerInventory pi = p1Inv.GetComponent<PlayerInventory>();
+        pi.SetInventory();
     }
 
     public void P2OpenInventory()
     {
         Time.timeScale = 0f;
         p2Inv.enabled = true;
+        PlayerInventory pi = p2Inv.GetComponent<PlayerInventory>();
+        pi.SetInventory();
     }
 
     public void P3OpenInventory()
     {
         Time.timeScale = 0f;
         p3Inv.enabled = true;
+        PlayerInventory pi = p3Inv.GetComponent<PlayerInventory>();
+        pi.SetInventory();
     }
 
     public void P4OpenInventory()
     {
         Time.timeScale = 0f;
         p4Inv.enabled = true;
+        PlayerInventory pi = p4Inv.GetComponent<PlayerInventory>();
+        pi.SetInventory();
     }
 
     public void CloseInventories()

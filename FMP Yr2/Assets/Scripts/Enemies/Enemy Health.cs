@@ -8,6 +8,7 @@ public class EnemyHealth : MonoBehaviour
     public int MaxHealth;
     public int MinHealth;
     public int Health;
+    public int physicalDefense, intDefense, steadyDefense;
 
     // Start is called before the first frame update
     void Awake()

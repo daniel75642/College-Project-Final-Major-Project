@@ -13,6 +13,8 @@ public class EnemySpawnManager : MonoBehaviour
     public RaycastHit hit;
 
     public List<GameObject> enemyPlaces;
+
+    public GameObject bossCamp;
     public void SpawnNewEnemies()
     {
         for(int i = 0; i < 2;  i++)
@@ -27,12 +29,19 @@ public class EnemySpawnManager : MonoBehaviour
             else
             {
                 Physics.Raycast(temp.transform.position, Vector3.down, out hit, 3f, spawnable);
-                GameObject temp2 = Instantiate(enemyCamps[Random.Range(1, enemyCamps.Length)], hit.collider.gameObject.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
+                GameObject temp2 = Instantiate(enemyCamps[Random.Range(2, enemyCamps.Length)], hit.collider.gameObject.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
                 enemyPlaces.Add(temp2);
             }
 
 
         }
+    }
+
+    public void SpawnBossCamp()
+    {
+        row = Random.Range(-10, 10);
+        col = Random.Range(7, 20);
+        bossCamp = Instantiate(enemyCamps[1], this.transform.position + new Vector3(row, 0.5f, col), Quaternion.identity);
     }
 
     public void RemoveEnemies()

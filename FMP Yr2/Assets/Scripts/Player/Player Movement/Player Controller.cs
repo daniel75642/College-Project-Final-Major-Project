@@ -11,17 +11,19 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     [SerializeField] public Transform mouse;
 
-    public LayerMask interactables, enemyCamps;
+    public LayerMask interactables, enemyCamps, shopMask;
 
     public SixDice sd;
     public CameraController cc;
     public CameraManger cm;
     public CombatManager combatManager;
+    public PlayerManager playerManager;
     public Loadsystem ls;
+    public Shop shop;
 
     public GameObject dice, diceLimiter;
 
-    public bool diceRolled, hasHadTurn;
+    public bool diceRolled, hasHadTurn, beenInShop;
 
     public float lerpTime = 1f;
 
@@ -61,6 +63,14 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             hasHadTurn = true;
             nearbyTiles.PlayerFindHex(this.transform);
             nearbyTiles.MouseFindHex(mouse.transform);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0))
+        {
+            if(Physics.Raycast(mouse.transform.position, Vector3.down, 3f, shopMask))
+            {
+                shop.OpenShop();
+            }
         }
     }
 
@@ -124,9 +134,15 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                 Destroy(hit.collider.gameObject);
             }
 
-            if (Physics.Raycast(transform.position, Vector3.down, 3, interactables))
+            if (Physics.Raycast(transform.position, Vector3.down, 3, shopMask) && beenInShop == false)
             {
-                print("Interactable");
+                playerManager.FirstShop();
+                beenInShop = true;
+            }
+
+            else if (Physics.Raycast(transform.position, Vector3.down, 3, shopMask) && beenInShop == true)
+            {
+                shop.OpenShop();
             }
         }
         StartCoroutine(ls.LoadUnload());

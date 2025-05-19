@@ -7,16 +7,19 @@ using UnityEngine.UIElements;
 public class CameraController : MonoBehaviour, IDataPersistence
 {
     [SerializeField] PlayerManager pm;
+    public Shop shop;
 
     [SerializeField] Transform[] cams;
 
     public Transform[] townCams;
 
+    public List<Transform> bossCampCams;
+
     public bool swapping;
 
     float lerpTime = 1;
 
-    int cam, townCam;
+    int cam, townCam, bossCam;
 
     public Camera ahhhhh;
 
@@ -98,6 +101,37 @@ public class CameraController : MonoBehaviour, IDataPersistence
         townCam += 1;
         swapping = false;
         pm.Switch();
+    }
+
+    public IEnumerator ShowBossCamp()
+    {
+        yield return new WaitForSeconds(1f);
+        swapping = true;
+        Vector3 startPos = transform.position;
+        float elapsedTime = 0;
+        while (elapsedTime < lerpTime)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.position = Vector3.Lerp(startPos, bossCampCams[bossCam].position, elapsedTime / lerpTime);
+            yield return null;
+            //transform.position = newCamPos;
+        }
+        transform.position = bossCampCams[bossCam].position;
+
+        yield return new WaitForSeconds(2f);
+
+        while (elapsedTime < lerpTime)
+        {
+            elapsedTime += Time.deltaTime;
+            transform.position = Vector3.Lerp(bossCampCams[bossCam].position, startPos, elapsedTime / lerpTime);
+            yield return null;
+            //transform.position = newCamPos;
+        }
+        transform.position = bossCampCams[bossCam].position;
+        swapping = false;
+        bossCam += 1;
+        swapping = false;
+        shop.OpenShop();
     }
 
     public void SaveData(ref GameData data)

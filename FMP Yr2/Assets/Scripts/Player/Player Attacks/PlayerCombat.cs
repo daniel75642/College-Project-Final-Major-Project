@@ -72,9 +72,9 @@ public class PlayerCombat : MonoBehaviour
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
         StartCoroutine(attackChanceDisplay.Attack());
         StartCoroutine(Stop());
-        float d = damage * (attackChanceDisplay.successs / 5);
-        float id = intDamage * (attackChanceDisplay.successs / 5);
-        float sd = steadyDamage * (attackChanceDisplay.successs / 5);
+        float d = damage * (attackChanceDisplay.successs / 5) - enemyHealth.physicalDefense;
+        float id = intDamage * (attackChanceDisplay.successs / 5) - enemyHealth.intDefense;
+        float sd = steadyDamage * (attackChanceDisplay.successs / 5) - enemyHealth.steadyDefense;
         Debug.Log("Attack 1 Chosen");
     }
     public void Attack2()
@@ -85,9 +85,9 @@ public class PlayerCombat : MonoBehaviour
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
         StartCoroutine(attackChanceDisplay.Attack());
         StartCoroutine(Stop());
-        float d = damage * (attackChanceDisplay.successs / 5);
-        float id = intDamage * (attackChanceDisplay.successs / 5);
-        float sd = steadyDamage * (attackChanceDisplay.successs / 5);
+        float d = damage * (attackChanceDisplay.successs / 5) - enemyHealth.physicalDefense;
+        float id = intDamage * (attackChanceDisplay.successs / 5) - enemyHealth.intDefense;
+        float sd = steadyDamage * (attackChanceDisplay.successs / 5) - enemyHealth.steadyDefense;
         Debug.Log("Attack 2 Chosen");
     }
     public void Attack3()
@@ -98,15 +98,16 @@ public class PlayerCombat : MonoBehaviour
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
         StartCoroutine(attackChanceDisplay.Attack());
         StartCoroutine(Stop());
-        float d = damage * (attackChanceDisplay.successs / 5);
-        float id = intDamage * (attackChanceDisplay.successs / 5);
-        float sd = steadyDamage * (attackChanceDisplay.successs / 5);
+        float d = damage * (attackChanceDisplay.successs / 5) - enemyHealth.physicalDefense;
+        float id = intDamage * (attackChanceDisplay.successs / 5) - enemyHealth.intDefense;
+        float sd = steadyDamage * (attackChanceDisplay.successs / 5) - enemyHealth.steadyDefense;
         Debug.Log("Attack 3 Chosen");
     }
 
     public void ShowAttackChoices()
     {
         combatCanvas.enabled = true;
+        attackChoice.SetActive(true);
     }
 
     public IEnumerator Stop()

@@ -17,7 +17,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     [SerializeField] GameObject[] bannerStats;
     [SerializeField] GameObject[] playersSideProfile;
 
-    public GameObject dice, diceLimiter;
+    public GameObject dice, diceLimiter, obj1, obj2;
 
     public Slider hackBar;
 
@@ -147,6 +147,18 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
         esScripts[playerTurn].SpawnNewEnemies();
 
         playerTurn += 1;
+    }
+
+    public void FirstShop()
+    {
+        esScripts[playerTurn].SpawnBossCamp();
+        for (int i = 0; i < pControllerScripts.Length; i++)
+        {
+            pControllerScripts[i].beenInShop = true;
+        }
+        obj1.SetActive(false);
+        obj2.SetActive(true);
+        StartCoroutine(cc.ShowBossCamp());
     }
 
     public void LoadData(GameData data)

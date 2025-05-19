@@ -240,6 +240,8 @@ public class CombatManager : MonoBehaviour
         {
             players[i].transform.position = pTransforms[i];
             players[i].transform.rotation = Quaternion.Euler(0, 0, 0);
+            PlayerCombat playerCombat = players[i].GetComponent<PlayerCombat>();
+            playerCombat.isInOrder = false;
             PlayerController pc = players[i].GetComponent<PlayerController>();
             Loadsystem ls = players[i].GetComponent<Loadsystem>();
             pc.CamEnable();
@@ -252,6 +254,11 @@ public class CombatManager : MonoBehaviour
             forestEnemyPos.Add(forestEnemyPosOrig[i]);
         }
         pTransforms.Clear();
+        placedCharacters.Clear();
+        order.Clear();
+        playerOrder.Clear();
+        placedPlayers.Clear();
+        placedEnemies.Clear();
         explorationCanvas.enabled = true;
         pm.combatSomething = true;
         print("Combat Over");

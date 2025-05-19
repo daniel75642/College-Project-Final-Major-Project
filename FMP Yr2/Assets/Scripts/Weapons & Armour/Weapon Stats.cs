@@ -4,15 +4,22 @@ using UnityEngine;
 
 public class WeaponStats : MonoBehaviour
 {
+    public GameObject weaponEquipSlot;
+    public WeaponAndArmourShopStuff weapon;
+
     [Header("Basic Weapon Stats")]
     [SerializeField] public int physicalDamage;
     [SerializeField] public int intellengenceDamage;
-    [SerializeField] public int attackAccuracy;
-    [SerializeField] public int skillChance;
+    [SerializeField] public int steadyDamage;
 
-    [Header("Weapon Skills")]
-    [SerializeField] public bool armourBreak;
-    [SerializeField] public bool intellegenceArmourBreak;
-    [SerializeField] public bool hacked;
-    [SerializeField] public bool slowed;
+    public void Update()
+    {
+        if(weaponEquipSlot.GetComponentInChildren<WeaponAndArmourShopStuff>() != null)
+        {
+            weapon = weaponEquipSlot.GetComponentInChildren<WeaponAndArmourShopStuff>();
+            physicalDamage = weapon.physicalDamage;
+            intellengenceDamage = weapon.intDamage;
+            steadyDamage = weapon.steadyDamage;
+        }
+    }
 }

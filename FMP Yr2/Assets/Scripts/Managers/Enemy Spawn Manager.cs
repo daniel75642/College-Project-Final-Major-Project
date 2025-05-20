@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawnManager : MonoBehaviour
 {
-    public GameObject[] enemyCamps;
+    public GameObject[] enemyCamps, bossCamps;
 
     public int row, col;
 
@@ -15,6 +15,10 @@ public class EnemySpawnManager : MonoBehaviour
     public List<GameObject> enemyPlaces;
 
     public GameObject bossCamp;
+    public void Start()
+    {
+        
+    }
     public void SpawnNewEnemies()
     {
         for(int i = 0; i < 2;  i++)
@@ -39,9 +43,25 @@ public class EnemySpawnManager : MonoBehaviour
 
     public void SpawnBossCamp()
     {
-        row = Random.Range(-10, 10);
-        col = Random.Range(7, 20);
-        bossCamp = Instantiate(enemyCamps[1], this.transform.position + new Vector3(row, 0.5f, col), Quaternion.identity);
+
+
+        for (int i = 0; i < 1; i++)
+        {
+            row = Random.Range(-10, 10);
+            col = Random.Range(7, 20);
+            GameObject temp = Instantiate(enemyCamps[0], this.transform.position + new Vector3(row, 0.5f, col), Quaternion.identity);
+            if (Physics.Raycast(temp.transform.position, Vector3.down, out hit, 3f, notSpawnable))
+            {
+                i -= 1;
+            }
+            else
+            {
+                Physics.Raycast(temp.transform.position, Vector3.down, out hit, 3f, spawnable);
+                bossCamp = Instantiate(bossCamps[0], hit.collider.gameObject.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
+            }
+
+
+        }
     }
 
     public void RemoveEnemies()

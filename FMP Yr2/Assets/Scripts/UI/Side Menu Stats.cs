@@ -8,9 +8,9 @@ public class SideMenuStats : MonoBehaviour
     public PlayerHealth ph;
     public PlayerStats stats;
 
-    public TextMeshProUGUI health, physicalDefense, intDefense;
+    public TextMeshProUGUI health, physicalDefense, intDefense, credits;
 
-    public string healthText, physicalDefenseText, intDefenseText;
+    public string healthText, physicalDefenseText, intDefenseText, creditsText;
 
     public void Update()
     {
@@ -22,5 +22,8 @@ public class SideMenuStats : MonoBehaviour
 
         intDefenseText = stats.playerIntellengenceDefence.ToString();
         intDefense.text = intDefenseText;
+
+        creditsText = stats.playerMoney.ToString();
+        credits.text = creditsText;
     }
 }

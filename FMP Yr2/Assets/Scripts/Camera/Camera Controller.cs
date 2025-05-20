@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -7,13 +8,14 @@ using UnityEngine.UIElements;
 public class CameraController : MonoBehaviour, IDataPersistence
 {
     [SerializeField] PlayerManager pm;
+    public EnemySpawnManager[] esm;
     public Shop shop;
 
     [SerializeField] Transform[] cams;
 
     public Transform[] townCams;
 
-    public List<Transform> bossCampCams;
+    public List<GameObject> bossCampCams;
 
     public bool swapping;
 
@@ -105,6 +107,7 @@ public class CameraController : MonoBehaviour, IDataPersistence
 
     public IEnumerator ShowBossCamp()
     {
+        bossCampCams.Add(esm[pm.playerTurn].bossCamp.GetComponentInChildren<BossCampCam>().gameObject);
         yield return new WaitForSeconds(1f);
         swapping = true;
         Vector3 startPos = transform.position;
@@ -112,25 +115,27 @@ public class CameraController : MonoBehaviour, IDataPersistence
         while (elapsedTime < lerpTime)
         {
             elapsedTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(startPos, bossCampCams[bossCam].position, elapsedTime / lerpTime);
+            transform.position = Vector3.Lerp(startPos, bossCampCams[0].transform.position, elapsedTime / lerpTime);
             yield return null;
             //transform.position = newCamPos;
         }
-        transform.position = bossCampCams[bossCam].position;
+        transform.position = bossCampCams[bossCam].transform.position;
 
         yield return new WaitForSeconds(2f);
 
+        elapsedTime = 0;
         while (elapsedTime < lerpTime)
         {
             elapsedTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(bossCampCams[bossCam].position, startPos, elapsedTime / lerpTime);
+            transform.position = Vector3.Lerp(bossCampCams[0].transform.position, startPos, elapsedTime / lerpTime);
             yield return null;
             //transform.position = newCamPos;
         }
-        transform.position = bossCampCams[bossCam].position;
+        transform.position = bossCampCams[bossCam].transform.position;
         swapping = false;
         bossCam += 1;
         swapping = false;
+        yield return new WaitForSeconds(1f);
         shop.OpenShop();
     }
 

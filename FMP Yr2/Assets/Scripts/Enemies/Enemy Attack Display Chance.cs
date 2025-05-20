@@ -19,8 +19,11 @@ public class EnemyAttackDisplayChance : MonoBehaviour
 
     float dist, height;
 
+    public GameObject enemyAttackChanceDisplay;
+
     public IEnumerator Attack()
     {
+        enemyAttackChanceDisplay.SetActive(true);
         dist = attackCanvas.pixelRect.width / 5;
         height = attackCanvas.pixelRect.height / 2;
         successs = 0;
@@ -41,13 +44,14 @@ public class EnemyAttackDisplayChance : MonoBehaviour
             if (attackAmount[i] == true)
             {
                 attackDisplay.Add(Instantiate(attackIcon, new Vector3(dist += attackCanvas.pixelRect.width / 10, height, 0), Quaternion.Euler(0, 0, 0), this.transform));
+                attackDisplay[i].transform.localScale = new Vector3(2, 2, 2);
                 successs += 1;
             }
 
             else
             {
                 attackDisplay.Add(Instantiate(failedIcon, new Vector3(dist += attackCanvas.pixelRect.width / 10, height, 0), Quaternion.Euler(0, 0, 0), this.transform));
-
+                attackDisplay[i].transform.localScale = new Vector3(2, 2, 2);
             }
             yield return new WaitForSeconds(0.5f);
         }
@@ -57,5 +61,7 @@ public class EnemyAttackDisplayChance : MonoBehaviour
             Destroy(attackDisplay[i]);
             attackDisplay.Remove(attackDisplay[i]);
         }
+
+        enemyAttackChanceDisplay.SetActive(false);
     }
 }

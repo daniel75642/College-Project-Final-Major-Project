@@ -31,7 +31,7 @@ public class Shop : MonoBehaviour
     public PlayerStats[] playersStats;
     public PlayerInventory[] inventories;
 
-    public GameObject itemDisplay, bossEnemyCamp;
+    public GameObject itemDisplay, cantBuy;
 
     public void Start()
     {
@@ -42,6 +42,7 @@ public class Shop : MonoBehaviour
     public void OpenShop()
     {
         shop.enabled = true;
+        Time.timeScale = 0f;
         if (firstShopOpen == false)
         {
             for (int i = 0; i < howManyCommons; i++)
@@ -122,6 +123,7 @@ public class Shop : MonoBehaviour
 
     public void CloseShop()
     {
+        Time.timeScale = 1f;
         itemDisplay.SetActive(false);
         shop.enabled = false;
     }
@@ -136,7 +138,7 @@ public class Shop : MonoBehaviour
 
     public void BuySomething()
     {
-        for(int i = 0; i < selectButtons.Length; i++)
+        for (int i = 0; i < selectButtons.Length; i++)
         {
             int player = pm.playerTurn;
             bool playerTurnSwapped = false;
@@ -148,19 +150,27 @@ public class Shop : MonoBehaviour
             if (selectButtons[i].selectedItem != null)
             {
                 blah = selectButtons[i].selectedItem.GetComponent<WeaponAndArmourShopStuff>();
-                playersStats[player].playerMoney -= blah.weaponArmourCost;
-                inventories[player].itemsBought.Add(selectButtons[i].selectedItem);
-                //inventories[pm.playerTurn].SetInventory();
-                selectButtons[i].selectedItem = null;
-                selectButtons[i].GetComponent<Button>().enabled = false;
-                selectButtons[i].GetComponent<UnityEngine.UI.Image>().color = Color.red;
-                itemDisplay.SetActive(false);
+                if (playersStats[player].playerMoney >= blah.weaponArmourCost)
+                {
+                    playersStats[player].playerMoney -= blah.weaponArmourCost;
+                    inventories[player].itemsBought.Add(selectButtons[i].selectedItem);
+                    //inventories[pm.playerTurn].SetInventory();
+                    selectButtons[i].selectedItem = null;
+                    selectButtons[i].GetComponent<Button>().enabled = false;
+                    selectButtons[i].GetComponent<UnityEngine.UI.Image>().color = Color.red;
+                    itemDisplay.SetActive(false);
+                }
+
+                else
+                {
+                    cantBuy.SetActive(true);
+                }
             }
         }
     }
 
-    public void SetUpBossCamp()
+    public void CloseThis()
     {
-
+        cantBuy.SetActive(false);
     }
 }

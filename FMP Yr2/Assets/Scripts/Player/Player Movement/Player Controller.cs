@@ -131,7 +131,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                 cc.enabled = false;
                 cm.ChangeToForest();
                 combatManager.ForestArenaSetUp();
-                Destroy(hit.collider.gameObject);
+                Destroy(hit.collider.transform.parent.gameObject);
             }
 
             if (Physics.Raycast(transform.position, Vector3.down, 3, shopMask) && beenInShop == false)

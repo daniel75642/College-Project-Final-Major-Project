@@ -10,9 +10,9 @@ public class PlayerCombat : MonoBehaviour
     public AttackChanceDisplay attackChanceDisplay;
     public CombatManager cm;
 
-    public GameObject attackChoice;
+    public GameObject attackChoice, chooseEnemy, tutorialAttackDisplayChance, attackDisplayChance;
 
-    public bool isTurn, attackChosen, choosingAttack, isInOrder;
+    public bool isTurn, attackChosen, choosingAttack, isInOrder, firstCombat;
 
     public Transform mouse3D;
 
@@ -61,6 +61,7 @@ public class PlayerCombat : MonoBehaviour
             Debug.Log("Enemy Hit");
             isTurn = false;
             cm.turnOver = true;
+            chooseEnemy.SetActive(false);
         }
     }
 
@@ -71,10 +72,12 @@ public class PlayerCombat : MonoBehaviour
         intDamage = stats.playerIntellegence + weaponStats.intellengenceDamage;
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
         StartCoroutine(attackChanceDisplay.Attack());
+        attackDisplayChance.SetActive(true);
+        if (firstCombat == true) { tutorialAttackDisplayChance.SetActive(true);}
         StartCoroutine(Stop());
-        float d = damage * (attackChanceDisplay.successs / 5) - enemyHealth.physicalDefense;
-        float id = intDamage * (attackChanceDisplay.successs / 5) - enemyHealth.intDefense;
-        float sd = steadyDamage * (attackChanceDisplay.successs / 5) - enemyHealth.steadyDefense;
+        damage = damage * (attackChanceDisplay.successs / 5) - enemyHealth.physicalDefense;
+        intDamage = intDamage * (attackChanceDisplay.successs / 5) - enemyHealth.intDefense;
+        steadyDamage = steadyDamage * (attackChanceDisplay.successs / 5) - enemyHealth.steadyDefense;
         Debug.Log("Attack 1 Chosen");
     }
     public void Attack2()
@@ -84,10 +87,12 @@ public class PlayerCombat : MonoBehaviour
         intDamage = stats.playerIntellegence + weaponStats.intellengenceDamage;
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
         StartCoroutine(attackChanceDisplay.Attack());
+        attackDisplayChance.SetActive(true);
+        if (firstCombat == true) { tutorialAttackDisplayChance.SetActive(true); }
         StartCoroutine(Stop());
-        float d = damage * (attackChanceDisplay.successs / 5) - enemyHealth.physicalDefense;
-        float id = intDamage * (attackChanceDisplay.successs / 5) - enemyHealth.intDefense;
-        float sd = steadyDamage * (attackChanceDisplay.successs / 5) - enemyHealth.steadyDefense;
+        damage = damage * (attackChanceDisplay.successs / 5) - enemyHealth.physicalDefense;
+        intDamage = intDamage * (attackChanceDisplay.successs / 5) - enemyHealth.intDefense;
+        steadyDamage = steadyDamage * (attackChanceDisplay.successs / 5) - enemyHealth.steadyDefense;
         Debug.Log("Attack 2 Chosen");
     }
     public void Attack3()
@@ -97,10 +102,12 @@ public class PlayerCombat : MonoBehaviour
         intDamage = stats.playerIntellegence + weaponStats.intellengenceDamage;
         steadyDamage = stats.playerSteady + weaponStats.physicalDamage;
         StartCoroutine(attackChanceDisplay.Attack());
+        attackDisplayChance.SetActive(true);
+        if (firstCombat == true) { tutorialAttackDisplayChance.SetActive(true); }
         StartCoroutine(Stop());
-        float d = damage * (attackChanceDisplay.successs / 5) - enemyHealth.physicalDefense;
-        float id = intDamage * (attackChanceDisplay.successs / 5) - enemyHealth.intDefense;
-        float sd = steadyDamage * (attackChanceDisplay.successs / 5) - enemyHealth.steadyDefense;
+        damage = damage * (attackChanceDisplay.successs / 5) - enemyHealth.physicalDefense;
+        intDamage = intDamage * (attackChanceDisplay.successs / 5) - enemyHealth.intDefense;
+        steadyDamage = steadyDamage * (attackChanceDisplay.successs / 5) - enemyHealth.steadyDefense;
         Debug.Log("Attack 3 Chosen");
     }
 
@@ -114,5 +121,8 @@ public class PlayerCombat : MonoBehaviour
     {
         yield return new WaitForSeconds(3.5f);
         choosingAttack = false; attackChosen = true;
+        attackDisplayChance.SetActive(false);
+        chooseEnemy.SetActive(true);
+        if (firstCombat == true) { tutorialAttackDisplayChance.SetActive(false); firstCombat = false; }
     }
 }

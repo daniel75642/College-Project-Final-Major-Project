@@ -151,6 +151,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
 
     public void FirstShop()
     {
+        esScripts[playerTurn].enabled = true;
         esScripts[playerTurn].SpawnBossCamp();
         for (int i = 0; i < pControllerScripts.Length; i++)
         {
@@ -159,6 +160,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
         obj1.SetActive(false);
         obj2.SetActive(true);
         StartCoroutine(cc.ShowBossCamp());
+        esScripts[playerTurn].enabled = false;
     }
 
     public void LoadData(GameData data)

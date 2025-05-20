@@ -27,7 +27,7 @@ public class CombatManager : MonoBehaviour
 
     public Canvas[] combatCanvas;
 
-    public Canvas rewardScreen, explorationCanvas;
+    public Canvas rewardScreen, explorationCanvas, playerStatsInCombat;
 
     public PlayerStats ps;
     public EnemyStats es;
@@ -97,6 +97,8 @@ public class CombatManager : MonoBehaviour
         {
             placedCharacters.Add(placedEnemies[i]);
         }
+
+        playerStatsInCombat.enabled = true;
 
         StartCoroutine(CombatOrder());
     }
@@ -225,6 +227,7 @@ public class CombatManager : MonoBehaviour
 
     public void RewardScreen()
     {
+        playerStatsInCombat.enabled = false;
         rewardScreen.enabled = true;
     }
 

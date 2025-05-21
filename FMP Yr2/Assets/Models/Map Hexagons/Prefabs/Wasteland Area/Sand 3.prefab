@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 296c7ab07c442e74ebc51dd614d782ed, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
+      value: -1.0703223
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 296c7ab07c442e74ebc51dd614d782ed, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.37779614
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 296c7ab07c442e74ebc51dd614d782ed, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 1.7587856
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 296c7ab07c442e74ebc51dd614d782ed, type: 3}
       propertyPath: m_LocalRotation.w
@@ -78,7 +78,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 296c7ab07c442e74ebc51dd614d782ed, type: 3}
       propertyPath: m_TagString
-      value: Untagged
+      value: Wasteland Area
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -9,6 +9,12 @@ TagManager:
   - Enemy
   - EnemyTile
   - Final City Entrace
+  - Meadows Bay
+  - Wasteland Shop
+  - Toxic Shop
+  - Forest Area
+  - Wasteland Area
+  - Toxic Area
   layers:
   - Default
   - TransparentFX

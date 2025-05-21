@@ -20,6 +20,8 @@ public class SixDice : MonoBehaviour
 
     [SerializeField] public GameObject diceSpawn;
 
+    public GameObject diceTut;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -96,6 +98,7 @@ public class SixDice : MonoBehaviour
                 default:
                     break;
             }
+            diceTut.SetActive(false);
             diceManager.WhatNum();
             return i + 1;
         }

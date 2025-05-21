@@ -17,7 +17,9 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     [SerializeField] GameObject[] bannerStats;
     [SerializeField] GameObject[] playersSideProfile;
 
-    public GameObject dice, diceLimiter, obj1, obj2;
+    public GameObject dice, diceLimiter;
+
+    public GameObject[] objs;
 
     public Slider hackBar;
 
@@ -30,9 +32,9 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     [Header("Player Turn")]
     public int playerTurn;
 
-    public bool combatSomething;
+    public bool combatSomething, firstTurn;
 
-    
+    public GameObject diceTut, hackBarTut, invAccessTut, endTurnTut;
 
     // Start is called before the first frame update
     void Start()
@@ -90,13 +92,18 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
         bannerStats[0].SetActive(false); bannerStats[1].SetActive(false); bannerStats[2].SetActive(false); bannerStats[3].SetActive(false);
         bannerStats[playerTurn].SetActive(true);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1f);
 
         esScripts[playerTurn].enabled = true;
         pControllerScripts[playerTurn].enabled = true;
         pControllerScripts[playerTurn].hasHadTurn = false;
         pNearbyTiles[playerTurn].enabled = true;
         lScripts[playerTurn].enabled = true;
+        if(firstTurn == true)
+        {
+            diceTut.SetActive(true);
+            firstTurn = false;
+        }
 
         if(playerTurn == 0)
         {
@@ -149,7 +156,7 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
         playerTurn += 1;
     }
 
-    public void FirstShop()
+    public void MeadowsFirstShop()
     {
         esScripts[playerTurn].enabled = true;
         esScripts[playerTurn].SpawnBossCamp();
@@ -157,8 +164,36 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
         {
             pControllerScripts[i].beenInShop = true;
         }
-        obj1.SetActive(false);
-        obj2.SetActive(true);
+        objs[0].SetActive(false);
+        objs[1].SetActive(true);
+        StartCoroutine(cc.ShowBossCamp());
+        esScripts[playerTurn].enabled = false;
+    }
+
+    public void WastelandFirstShop()
+    {
+        esScripts[playerTurn].enabled = true;
+        esScripts[playerTurn].SpawnBossCamp();
+        for (int i = 0; i < pControllerScripts.Length; i++)
+        {
+            pControllerScripts[i].beenInShop = true;
+        }
+        objs[2].SetActive(false);
+        objs[3].SetActive(true);
+        StartCoroutine(cc.ShowBossCamp());
+        esScripts[playerTurn].enabled = false;
+    }
+
+    public void ToxicFirstShop()
+    {
+        esScripts[playerTurn].enabled = true;
+        esScripts[playerTurn].SpawnBossCamp();
+        for (int i = 0; i < pControllerScripts.Length; i++)
+        {
+            pControllerScripts[i].beenInShop = true;
+        }
+        objs[4].SetActive(false);
+        objs[5].SetActive(true);
         StartCoroutine(cc.ShowBossCamp());
         esScripts[playerTurn].enabled = false;
     }
@@ -173,5 +208,21 @@ public class PlayerManager : MonoBehaviour, IDataPersistence
     {
         data.playerTurn = this.playerTurn;
         data.hacked = this.hacked;
+    }
+    public void EndHackBar()
+    {
+        hackBarTut.SetActive(false);
+        invAccessTut.SetActive(true);
+    }
+
+    public void EndInvTut()
+    {
+        invAccessTut.SetActive(false);
+        endTurnTut.SetActive(true);
+    }
+
+    public void EndTurnTut()
+    {
+        endTurnTut.SetActive(false);
     }
 }

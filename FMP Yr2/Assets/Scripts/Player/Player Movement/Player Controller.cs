@@ -19,17 +19,22 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public CombatManager combatManager;
     public PlayerManager playerManager;
     public Loadsystem ls;
-    public Shop shop;
+    public Shop[] shop;
+    public PlayerController[] pc;
 
     public GameObject dice, diceLimiter;
 
-    public bool diceRolled, hasHadTurn, beenInShop;
+    public bool diceRolled, hasHadTurn, beenInShop, firstTurn;
 
     public float lerpTime = 1f;
 
     public int playerNumber;
 
     private NearbyTiles p;
+
+    public GameObject hackBarTut, moveTut;
+
+    public bool inForest, inWasteland, inToxic;
     private void Start()
     {
         p = GetComponent<NearbyTiles>();
@@ -64,12 +69,22 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             nearbyTiles.PlayerFindHex(this.transform);
             nearbyTiles.MouseFindHex(mouse.transform);
         }
-
+        RaycastHit hit;
         if (Input.GetKey(KeyCode.LeftShift) && Input.GetMouseButtonDown(0))
         {
-            if(Physics.Raycast(mouse.transform.position, Vector3.down, 3f, shopMask))
+            if(Physics.Raycast(mouse.transform.position, Vector3.down, out hit, 3f, shopMask) && hit.collider.CompareTag("Meadows Bay"))
             {
-                shop.OpenShop();
+                shop[0].OpenShop();
+            }
+
+            if (Physics.Raycast(mouse.transform.position, Vector3.down, out hit, 3f, shopMask) && hit.collider.CompareTag("Wasteland Shop"))
+            {
+                shop[1].OpenShop();
+            }
+
+            if (Physics.Raycast(mouse.transform.position, Vector3.down, out hit, 3f, shopMask) && hit.collider.CompareTag("Toxic Shop"))
+            {
+                shop[2].OpenShop();
             }
         }
     }
@@ -109,6 +124,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
     public IEnumerator playerMovement()
     {
+
         hasHadTurn = true;
         p.playerMoving = false;
         for (int i = 0; i < p.path.Count; i++)
@@ -125,7 +141,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             MeshRenderer temp = p.path[i].GetComponent<MeshRenderer>();
             temp.enabled = false;
             RaycastHit hit;
-            if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, enemyCamps))
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, enemyCamps) && inForest == true)
             {
                 i = p.path.Count;
                 cc.enabled = false;
@@ -134,19 +150,68 @@ public class PlayerController : MonoBehaviour, IDataPersistence
                 Destroy(hit.collider.transform.parent.gameObject);
             }
 
-            if (Physics.Raycast(transform.position, Vector3.down, 3, shopMask) && beenInShop == false)
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, enemyCamps) && inWasteland == true)
             {
-                playerManager.FirstShop();
+                i = p.path.Count;
+                cc.enabled = false;
+                cm.ChangeToWasteland();
+                combatManager.ForestArenaSetUp();
+                Destroy(hit.collider.transform.parent.gameObject);
+            }
+
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, enemyCamps) && inToxic == true)
+            {
+                i = p.path.Count;
+                cc.enabled = false;
+                cm.ChangeToToxic();
+                combatManager.ForestArenaSetUp();
+                Destroy(hit.collider.transform.parent.gameObject);
+            }
+
+            if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, shopMask) && hit.collider.CompareTag("Meadows Bay") && beenInShop == false)
+            {
+                playerManager.MeadowsFirstShop();
                 beenInShop = true;
             }
 
-            else if (Physics.Raycast(transform.position, Vector3.down, 3, shopMask) && beenInShop == true)
+            else if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, shopMask) && hit.collider.CompareTag("Wasteland Shop") && beenInShop == false)
             {
-                shop.OpenShop();
+                playerManager.WastelandFirstShop();
+                beenInShop = true;
+            }
+
+            else if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, shopMask) && hit.collider.CompareTag("Toxic Shop") && beenInShop == false)
+            {
+                playerManager.ToxicFirstShop();
+                beenInShop = true;
+            }
+
+            else if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, shopMask) && hit.collider.CompareTag("Meadows Bay") && beenInShop == true)
+            {
+                shop[0].OpenShop();
+            }
+
+            else if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, shopMask) && hit.collider.CompareTag("Wasteland Shop") && beenInShop == true)
+            {
+                shop[1].OpenShop();
+            }
+
+            else if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, shopMask) && hit.collider.CompareTag("Toxic Shop") && beenInShop == true)
+            {
+                shop[2].OpenShop();
             }
         }
         StartCoroutine(ls.LoadUnload());
         p.path.Clear();
+        if(firstTurn == true)
+        {
+            moveTut.SetActive(false);
+            hackBarTut.SetActive(true);
+            for(int i = 0; i < pc.Length; i++)
+            {
+                pc[i].firstTurn = false;
+            }
+        }
     }
 
     public void CamEnable()
@@ -163,5 +228,51 @@ public class PlayerController : MonoBehaviour, IDataPersistence
         diceRolled = true;
     }
 
-    
+    public void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.CompareTag("Forest Area"))
+        {
+            inForest = true;
+            inWasteland = false;
+            inToxic = false;
+        }
+
+        else if (other.gameObject.CompareTag("Wasteland Area"))
+        {
+            inWasteland = true;
+            inForest = false;
+            inToxic = false;
+        }
+
+        else if (other.gameObject.CompareTag("Toxic Area"))
+        {
+            inToxic = true;
+            inWasteland = false;
+            inForest = false;
+        }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
+        if (other.gameObject.CompareTag("Forest Area"))
+        {
+            inForest = true;
+            inWasteland = false;
+            inToxic = false;
+        }
+
+        else if (other.gameObject.CompareTag("Wasteland Area"))
+        {
+            inWasteland = true;
+            inForest = false;
+            inToxic = false;
+        }
+
+        else if (other.gameObject.CompareTag("Toxic Area"))
+        {
+            inToxic = true;
+            inWasteland = false;
+            inForest = false;
+        }
+    }
 }

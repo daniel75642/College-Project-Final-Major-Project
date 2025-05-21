@@ -8,9 +8,12 @@ using UnityEngine;
 
 public class CombatManager : MonoBehaviour
 {
-    [SerializeField] List<Transform> forestPlayerPos;
+    [SerializeField] List<Transform> forestPlayerPos, wastelandPlayerPos, toxicPlayerPos;
+    [SerializeField] List<Transform> forestEnemyPos, wastelandEnemyPos, toxicEnemyPos;
+    [SerializeField] List<Transform> forestPlayerPosOrig, forestEnemyPosOrig,
+    wastelandPlayerPosOrig, wastelandEnemyPosOrig,
+    toxicPlayerPosOrig, toxicEnemyPosOrig;
     [SerializeField] List<GameObject> players;
-    [SerializeField] List<Transform> forestEnemyPos;
     [SerializeField] List<GameObject> enemies;
     public List<GameObject> placedEnemies;
     public List<GameObject> placedPlayers;
@@ -18,7 +21,7 @@ public class CombatManager : MonoBehaviour
     [SerializeField] List<Vector3> pTransforms;
     [SerializeField] public List<GameObject> playerOrder;
     [SerializeField] List<int> order;
-    [SerializeField] List<Transform> forestPlayerPosOrig, forestEnemyPosOrig;
+
     int speed;
 
     public bool inCombat, turnOver, wasInCombat;
@@ -90,6 +93,106 @@ public class CombatManager : MonoBehaviour
         }
 
         for (int i = 0; i < placedPlayers.Count;i++)
+        {
+            placedCharacters.Add(placedPlayers[i]);
+        }
+        for (int i = 0; i < placedEnemies.Count; i++)
+        {
+            placedCharacters.Add(placedEnemies[i]);
+        }
+
+        playerStatsInCombat.enabled = true;
+
+        StartCoroutine(CombatOrder());
+    }
+
+    public void WastelandArenaSetUp()
+    {
+        dpm.SaveGame();
+        explorationCanvas.enabled = false;
+        wasInCombat = true;
+        if (pTransforms != null)
+        {
+            pTransforms.Clear();
+        }
+
+        if (placedEnemies != null)
+        {
+            placedEnemies.Clear();
+        }
+
+        inCombat = true;
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i] != null)
+            {
+                int x = UnityEngine.Random.Range(0, wastelandPlayerPos.Count);
+                pTransforms.Add(players[i].transform.position);
+                players[i].transform.position = wastelandPlayerPos[x].position - new Vector3(0, 0.2f, 0);
+                players[i].transform.rotation = Quaternion.Euler(0, -90, 0);
+                placedPlayers.Add(players[i]);
+                wastelandPlayerPos.Remove(wastelandPlayerPos[x]);
+            }
+
+            int y = UnityEngine.Random.Range(0, wastelandEnemyPos.Count);
+            GameObject temp = Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Count)],
+                new Vector3(wastelandEnemyPos[y].position.x, wastelandEnemyPos[y].position.y - 0.2f, wastelandEnemyPos[y].position.z),
+                Quaternion.Euler(0, 90, 0));
+            placedEnemies.Add(temp);
+            wastelandEnemyPos.Remove(wastelandEnemyPos[y]);
+        }
+
+        for (int i = 0; i < placedPlayers.Count; i++)
+        {
+            placedCharacters.Add(placedPlayers[i]);
+        }
+        for (int i = 0; i < placedEnemies.Count; i++)
+        {
+            placedCharacters.Add(placedEnemies[i]);
+        }
+
+        playerStatsInCombat.enabled = true;
+
+        StartCoroutine(CombatOrder());
+    }
+
+    public void ToxicArenaSetUp()
+    {
+        dpm.SaveGame();
+        explorationCanvas.enabled = false;
+        wasInCombat = true;
+        if (pTransforms != null)
+        {
+            pTransforms.Clear();
+        }
+
+        if (placedEnemies != null)
+        {
+            placedEnemies.Clear();
+        }
+
+        inCombat = true;
+        for (int i = 0; i < players.Count; i++)
+        {
+            if (players[i] != null)
+            {
+                int x = UnityEngine.Random.Range(0, toxicPlayerPos.Count);
+                pTransforms.Add(players[i].transform.position);
+                players[i].transform.position = toxicPlayerPos[x].position - new Vector3(0, 0.2f, 0);
+                players[i].transform.rotation = Quaternion.Euler(0, -90, 0);
+                placedPlayers.Add(players[i]);
+                toxicPlayerPos.Remove(toxicPlayerPos[x]);
+            }
+
+            int y = UnityEngine.Random.Range(0, toxicEnemyPos.Count);
+            GameObject temp = Instantiate(enemies[UnityEngine.Random.Range(0, enemies.Count)],
+                new Vector3(toxicEnemyPos[y].position.x, toxicEnemyPos[y].position.y - 0.2f, toxicEnemyPos[y].position.z),
+                Quaternion.Euler(0, 90, 0));
+            placedEnemies.Add(temp);
+            toxicEnemyPos.Remove(toxicEnemyPos[y]);
+        }
+
+        for (int i = 0; i < placedPlayers.Count; i++)
         {
             placedCharacters.Add(placedPlayers[i]);
         }
@@ -236,6 +339,10 @@ public class CombatManager : MonoBehaviour
         rewardScreen.enabled = false;
         forestPlayerPos.Clear();
         forestEnemyPos.Clear();
+        wastelandPlayerPos.Clear();
+        wastelandEnemyPos.Clear();
+        toxicPlayerPos.Clear();
+        toxicEnemyPos.Clear();
         print("positions cleared");
         camManger.ChangeBack();
 
@@ -255,6 +362,10 @@ public class CombatManager : MonoBehaviour
         {
             forestPlayerPos.Add(forestPlayerPosOrig[i]);
             forestEnemyPos.Add(forestEnemyPosOrig[i]);
+            wastelandPlayerPos.Add(wastelandPlayerPosOrig[i]);
+            wastelandEnemyPos.Add(wastelandEnemyPosOrig[i]);
+            toxicPlayerPos.Add(toxicPlayerPosOrig[i]);
+            toxicEnemyPos.Add(toxicEnemyPosOrig[i]);
         }
         pTransforms.Clear();
         placedCharacters.Clear();

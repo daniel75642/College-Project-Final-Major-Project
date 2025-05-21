@@ -15,6 +15,8 @@ public class EnemySpawnManager : MonoBehaviour
     public List<GameObject> enemyPlaces;
 
     public GameObject bossCamp;
+
+    int bossToSpawn;
     public void Start()
     {
         
@@ -57,7 +59,8 @@ public class EnemySpawnManager : MonoBehaviour
             else
             {
                 Physics.Raycast(temp.transform.position, Vector3.down, out hit, 3f, spawnable);
-                bossCamp = Instantiate(bossCamps[0], hit.collider.gameObject.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
+                bossCamp = Instantiate(bossCamps[bossToSpawn], hit.collider.gameObject.transform.position + new Vector3(0, 0.2f, 0), Quaternion.identity);
+                bossToSpawn += 1;
             }
 
 

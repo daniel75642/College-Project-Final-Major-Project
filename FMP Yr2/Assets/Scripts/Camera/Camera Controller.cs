@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour, IDataPersistence
 {
     [SerializeField] PlayerManager pm;
     public EnemySpawnManager[] esm;
-    public Shop shop;
+    public Shop[] shop;
 
     [SerializeField] Transform[] cams;
 
@@ -21,7 +21,7 @@ public class CameraController : MonoBehaviour, IDataPersistence
 
     float lerpTime = 1;
 
-    int cam, townCam, bossCam;
+    int cam, townCam, bossCam, shopCam;
 
     public Camera ahhhhh;
 
@@ -115,7 +115,7 @@ public class CameraController : MonoBehaviour, IDataPersistence
         while (elapsedTime < lerpTime)
         {
             elapsedTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(startPos, bossCampCams[0].transform.position, elapsedTime / lerpTime);
+            transform.position = Vector3.Lerp(startPos, bossCampCams[bossCam].transform.position, elapsedTime / lerpTime);
             yield return null;
             //transform.position = newCamPos;
         }
@@ -127,7 +127,7 @@ public class CameraController : MonoBehaviour, IDataPersistence
         while (elapsedTime < lerpTime)
         {
             elapsedTime += Time.deltaTime;
-            transform.position = Vector3.Lerp(bossCampCams[0].transform.position, startPos, elapsedTime / lerpTime);
+            transform.position = Vector3.Lerp(bossCampCams[bossCam].transform.position, startPos, elapsedTime / lerpTime);
             yield return null;
             //transform.position = newCamPos;
         }
@@ -136,7 +136,8 @@ public class CameraController : MonoBehaviour, IDataPersistence
         bossCam += 1;
         swapping = false;
         yield return new WaitForSeconds(1f);
-        shop.OpenShop();
+        shop[shopCam].OpenShop();
+        shopCam += 1;
     }
 
     public void SaveData(ref GameData data)

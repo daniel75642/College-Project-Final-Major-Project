@@ -8,6 +8,8 @@ public class DiceManager : MonoBehaviour
 {
     public SixDice sixDice;
     public TextMeshProUGUI numberText;
+    public GameObject moveTut;
+    public bool firstTurn;
 
     
     public void WhatNum()
@@ -20,5 +22,10 @@ public class DiceManager : MonoBehaviour
         numberText.text = "You rolled a " + sixDice.rollNumber.ToString();
         yield return new WaitForSeconds(3);
         numberText.text = "";
+        if(firstTurn == true)
+        {
+            moveTut.SetActive(true);
+            firstTurn = false;
+        }
     }
 }

@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Loadsystem : MonoBehaviour {
+public class Loadsystem : MonoBehaviour 
+{
     public Collider[] colliderArray;
 
     [SerializeField] float loadDist;
@@ -21,7 +22,8 @@ public class Loadsystem : MonoBehaviour {
         StartCoroutine(LoadUnload());
     }
 
-    public IEnumerator LoadUnload() {
+    public IEnumerator LoadUnload() 
+    {
 
         if (!firstCheckDone)
         {

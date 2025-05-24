@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &9065929335637703702
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -5012563245798260459, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: MaxHealth
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.40765724
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.050495308
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.40765724
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.2547176
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.09807402
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.01105243
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 313827081777140526, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2319778344417647560, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: enemyDamage
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3781784877058860968, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      propertyPath: m_Name
+      value: Boss Variant 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3781784877058860968, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6406339870481763159}
+  m_SourcePrefab: {fileID: 100100000, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+--- !u!1 &5308406944320707518 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3781784877058860968, guid: 61eaca6b1ada0444d8eafb5283ea25b1, type: 3}
+  m_PrefabInstance: {fileID: 9065929335637703702}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6406339870481763159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308406944320707518}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30930bb9553253542a811ecc83000011, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  health: {fileID: 0}
+  healthIncrease: 0
+  defenseIncrease: 0
+  intellegenceDefenseIncrease: 0
+  steadyDefenseIncrease: 0
+  damageIncrease: 0

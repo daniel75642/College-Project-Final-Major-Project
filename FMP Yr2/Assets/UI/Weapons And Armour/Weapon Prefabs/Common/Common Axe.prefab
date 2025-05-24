@@ -89,4 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponArmourName: Axe
+  weaponArmourType: Weapon
   weaponArmourCost: 23
+  physicalDamage: 6
+  intDamage: 0
+  steadyDamage: 0
+  defense: 0
+  intDefense: 0

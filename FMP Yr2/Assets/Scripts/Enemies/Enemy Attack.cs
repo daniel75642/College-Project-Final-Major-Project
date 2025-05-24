@@ -29,6 +29,7 @@ public class EnemyAttack : MonoBehaviour
         if(isTurn == true && choiceMade == true && isAttacking == false)
         {
             isAttacking = true;
+            choiceMade = false;
             StartCoroutine(Attack());
         }
     }
@@ -44,7 +45,6 @@ public class EnemyAttack : MonoBehaviour
     public IEnumerator Attack()
     {
         print("Enemy Attacking");
-        choiceMade = false;
         PlayerHealth ph = cm.placedPlayers[playerChosen].GetComponent<PlayerHealth>();
         stats = GetComponent<EnemyStats>();
         StartCoroutine(acd.Attack());

@@ -89,4 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponArmourName: Crossbow
+  weaponArmourType: Weapon
   weaponArmourCost: 39
+  physicalDamage: 0
+  intDamage: 0
+  steadyDamage: 16
+  defense: 0
+  intDefense: 0

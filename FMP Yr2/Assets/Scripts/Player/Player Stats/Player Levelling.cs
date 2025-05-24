@@ -27,6 +27,7 @@ public class PlayerLevelling : MonoBehaviour
     [SerializeField] public float critIncrease;
     [SerializeField] public float attackAccuracyIncrease;
 
+    public int level;
 
     void Start()
     {
@@ -61,5 +62,7 @@ public class PlayerLevelling : MonoBehaviour
         stats.playerAttackSpeed = (int)Mathf.Round((float)(stats.playerAttackSpeed * attackSpeedIncrease));
         stats.playerCrit = (int)Mathf.Round((float)(stats.playerCrit * critIncrease));
         stats.playerAttackAccuracy = (int)Mathf.Round((float)(stats.playerAttackAccuracy * attackAccuracyIncrease));
+
+        level += 1;
     }
 }

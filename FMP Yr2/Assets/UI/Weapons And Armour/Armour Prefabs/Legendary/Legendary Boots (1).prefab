@@ -89,4 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponArmourName: Boots
+  weaponArmourType: Boots
   weaponArmourCost: 57
+  physicalDamage: 0
+  intDamage: 0
+  steadyDamage: 0
+  defense: 13
+  intDefense: 0

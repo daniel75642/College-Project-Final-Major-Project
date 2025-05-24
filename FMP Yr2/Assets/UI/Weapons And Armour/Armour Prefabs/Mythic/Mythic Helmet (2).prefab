@@ -89,4 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponArmourName: Helmet
+  weaponArmourType: Helmet
   weaponArmourCost: 63
+  physicalDamage: 0
+  intDamage: 0
+  steadyDamage: 0
+  defense: 7
+  intDefense: 13

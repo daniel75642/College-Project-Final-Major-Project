@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour, IDataPersistence
     public GameObject hackBarTut, moveTut;
 
     public bool inForest, inWasteland, inToxic;
+
     private void Start()
     {
         p = GetComponent<NearbyTiles>();
@@ -143,6 +144,10 @@ public class PlayerController : MonoBehaviour, IDataPersistence
             RaycastHit hit;
             if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, enemyCamps) && inForest == true)
             {
+                if (hit.collider.GetComponentInParent<BossCamp>())
+                {
+                    combatManager.isBossCamp = true;
+                }
                 i = p.path.Count;
                 cc.enabled = false;
                 cm.ChangeToForest();
@@ -152,19 +157,27 @@ public class PlayerController : MonoBehaviour, IDataPersistence
 
             if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, enemyCamps) && inWasteland == true)
             {
+                if (hit.collider.GetComponentInParent<BossCamp>())
+                {
+                    combatManager.isBossCamp = true;
+                }
                 i = p.path.Count;
                 cc.enabled = false;
                 cm.ChangeToWasteland();
-                combatManager.ForestArenaSetUp();
+                combatManager.WastelandArenaSetUp();
                 Destroy(hit.collider.transform.parent.gameObject);
             }
 
             if (Physics.Raycast(transform.position, Vector3.down, out hit, 3, enemyCamps) && inToxic == true)
             {
+                if (hit.collider.GetComponentInParent<BossCamp>())
+                {
+                    combatManager.isBossCamp = true;
+                }
                 i = p.path.Count;
                 cc.enabled = false;
                 cm.ChangeToToxic();
-                combatManager.ForestArenaSetUp();
+                combatManager.ToxicArenaSetUp();
                 Destroy(hit.collider.transform.parent.gameObject);
             }
 

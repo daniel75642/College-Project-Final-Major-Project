@@ -89,4 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponArmourName: Shield
+  weaponArmourType: Weapon
   weaponArmourCost: 39
+  physicalDamage: 17
+  intDamage: 0
+  steadyDamage: 0
+  defense: 0
+  intDefense: 0

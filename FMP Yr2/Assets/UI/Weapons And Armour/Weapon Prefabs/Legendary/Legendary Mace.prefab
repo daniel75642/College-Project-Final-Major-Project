@@ -89,4 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponArmourName: Mace
+  weaponArmourType: Weapon
   weaponArmourCost: 55
+  physicalDamage: 30
+  intDamage: 0
+  steadyDamage: 0
+  defense: 0
+  intDefense: 0

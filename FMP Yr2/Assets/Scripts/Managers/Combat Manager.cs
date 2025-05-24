@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using TMPro.Examples;
 using Unity.VisualScripting.Antlr3.Runtime;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CombatManager : MonoBehaviour
 {
@@ -15,6 +17,7 @@ public class CombatManager : MonoBehaviour
     toxicPlayerPosOrig, toxicEnemyPosOrig;
     [SerializeField] List<GameObject> players;
     [SerializeField] List<GameObject> enemies;
+    [SerializeField] List<GameObject> bosses;
     public List<GameObject> placedEnemies;
     public List<GameObject> placedPlayers;
     public List<GameObject> placedCharacters;
@@ -24,11 +27,14 @@ public class CombatManager : MonoBehaviour
 
     int speed;
 
-    public bool inCombat, turnOver, wasInCombat;
+    public bool inCombat, turnOver, wasInCombat, forest, wasteland, toxic;
 
     public int playersLeft, enemiesLeft;
 
     public Canvas[] combatCanvas;
+    public GameObject[] objs;
+
+    public int objNum;
 
     public Canvas rewardScreen, explorationCanvas, playerStatsInCombat;
 
@@ -37,6 +43,15 @@ public class CombatManager : MonoBehaviour
     public CameraManger camManger;
     public PlayerManager pm;
     public DataPersistenceManager dpm;
+    public CameraController cc;
+
+    public GameObject tutorialAttackDisplayChance;
+
+    public bool isBossCamp;
+
+    public int enemyLevelUp;
+
+    public Slider hackBar;
 
     public void Start()
     {
@@ -58,6 +73,7 @@ public class CombatManager : MonoBehaviour
 
     public void ForestArenaSetUp()
     {
+        forest = true;
         dpm.SaveGame();
         explorationCanvas.enabled = false;
         wasInCombat = true;
@@ -92,6 +108,16 @@ public class CombatManager : MonoBehaviour
             forestEnemyPos.Remove(forestEnemyPos[y]);
         }
 
+        if(isBossCamp == true)
+        {
+            int y = UnityEngine.Random.Range(0, forestEnemyPos.Count);
+            GameObject temp = Instantiate(bosses[UnityEngine.Random.Range(0, bosses.Count)],
+                new Vector3(forestEnemyPos[y].position.x, forestEnemyPos[y].position.y - 0.2f, forestEnemyPos[y].position.z),
+                Quaternion.Euler(0, 90, 0));
+            placedEnemies.Add(temp);
+            forestEnemyPos.Remove(forestEnemyPos[y]);
+        }
+
         for (int i = 0; i < placedPlayers.Count;i++)
         {
             placedCharacters.Add(placedPlayers[i]);
@@ -108,6 +134,7 @@ public class CombatManager : MonoBehaviour
 
     public void WastelandArenaSetUp()
     {
+        wasteland = true;
         dpm.SaveGame();
         explorationCanvas.enabled = false;
         wasInCombat = true;
@@ -158,6 +185,7 @@ public class CombatManager : MonoBehaviour
 
     public void ToxicArenaSetUp()
     {
+        toxic = true;
         dpm.SaveGame();
         explorationCanvas.enabled = false;
         wasInCombat = true;
@@ -258,6 +286,22 @@ public class CombatManager : MonoBehaviour
             }
         }
 
+        for (int i = 0; i < players.Count; i++)
+        {
+            enemyLevelUp += players[i].GetComponent<PlayerLevelling>().level;
+        }
+
+        enemyLevelUp = enemyLevelUp / 4;
+
+
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            for (int j = 1; j < enemyLevelUp; j++)
+            {
+                enemies[i].GetComponent<EnemyLevelling>().LevelUp();
+            }
+        }
+
         enemiesLeft = 0;
         playersLeft = 0;
 
@@ -291,7 +335,7 @@ public class CombatManager : MonoBehaviour
                 print("Stopped coroutine");
                 
             }
-
+            yield return new WaitForSeconds(0.2f);
             print(i);
             if (playerOrder[i].gameObject != null)
             {
@@ -312,6 +356,7 @@ public class CombatManager : MonoBehaviour
                 else if (playerOrder[i].gameObject.CompareTag("Enemy"))
                 {
                     print("Enemy Turn Started");
+                    playerOrder[i].GetComponent<EnemyAttack>().enabled = true;
                     EnemyAttack ea = playerOrder[i].GetComponent<EnemyAttack>();
                     ea.isTurn = true;
                     yield return new WaitUntil(() => turnOver == true);
@@ -336,6 +381,8 @@ public class CombatManager : MonoBehaviour
 
     public void CombatOver()
     {
+        hackBar.value -= 100;
+        enemyLevelUp = 0;
         rewardScreen.enabled = false;
         forestPlayerPos.Clear();
         forestEnemyPos.Clear();
@@ -346,11 +393,27 @@ public class CombatManager : MonoBehaviour
         print("positions cleared");
         camManger.ChangeBack();
 
+        if(isBossCamp == true)
+        {
+            objs[objNum].SetActive(false);
+            objNum += 1;
+            objs[objNum].SetActive(true);
+            objNum += 1;
+        }
+
         for (int i = 0; i < players.Count; i++)
         {
             players[i].transform.position = pTransforms[i];
             players[i].transform.rotation = Quaternion.Euler(0, 0, 0);
             PlayerCombat playerCombat = players[i].GetComponent<PlayerCombat>();
+            PlayerStats ps = players[i].GetComponent<PlayerStats>();
+            ps.playerExp += 30;
+            ps.playerMoney += 25;
+            ps.playerHealth += 15;
+            if(ps.playerHealth > ps.playerMaxHealth)
+            {
+                ps.playerHealth = ps.playerMaxHealth;
+            }
             playerCombat.isInOrder = false;
             PlayerController pc = players[i].GetComponent<PlayerController>();
             Loadsystem ls = players[i].GetComponent<Loadsystem>();
@@ -376,5 +439,17 @@ public class CombatManager : MonoBehaviour
         explorationCanvas.enabled = true;
         pm.combatSomething = true;
         print("Combat Over");
+        StartCoroutine(WaitBeforeTown());
+    }
+
+    public void EndTut()
+    {
+        tutorialAttackDisplayChance.SetActive(false);
+    }
+
+    public IEnumerator WaitBeforeTown()
+    {
+        yield return new WaitForSeconds(1f);
+        cc.ShowTown();
     }
 }

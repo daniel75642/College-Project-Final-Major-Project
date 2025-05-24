@@ -89,4 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponArmourName: Shotgun
+  weaponArmourType: Weapon
   weaponArmourCost: 55
+  physicalDamage: 0
+  intDamage: 0
+  steadyDamage: 30
+  defense: 0
+  intDefense: 0

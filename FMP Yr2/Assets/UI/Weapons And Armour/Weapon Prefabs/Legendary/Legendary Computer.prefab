@@ -89,4 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponArmourName: Computer
+  weaponArmourType: Weapon
   weaponArmourCost: 55
+  physicalDamage: 0
+  intDamage: 28
+  steadyDamage: 0
+  defense: 0
+  intDefense: 0

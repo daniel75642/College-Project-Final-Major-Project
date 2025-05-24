@@ -89,4 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponArmourName: Chestplate
+  weaponArmourType: Chestplate
   weaponArmourCost: 25
+  physicalDamage: 0
+  intDamage: 0
+  steadyDamage: 0
+  defense: 2
+  intDefense: 1

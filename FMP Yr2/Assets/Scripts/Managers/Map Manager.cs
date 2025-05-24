@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
-using UnityEditor.EditorTools;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -30,6 +29,8 @@ public class MapManager : MonoBehaviour, IDataPersistence
     public bool mapMade;
 
     public Vector3 startPos;
+
+    public int startRow, startCol;
 
     // Start is called before the first frame update    
     void Start()
@@ -66,7 +67,7 @@ public class MapManager : MonoBehaviour, IDataPersistence
                         GameObject temp = Instantiate(floorTiles[1], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r + startRow; gc.col = q + startCol;
                     }
 
                     else if (q == 22 && r == 22)
@@ -74,7 +75,7 @@ public class MapManager : MonoBehaviour, IDataPersistence
                         GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r + startRow; gc.col = q + startCol;
                     }
 
                     else
@@ -83,7 +84,7 @@ public class MapManager : MonoBehaviour, IDataPersistence
                         GameObject temp = Instantiate(floorTiles[floorTile], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapEvenRows.Add(temp);
                         rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r + startRow; gc.col = q + startCol;
                     }
 
                 }
@@ -95,7 +96,7 @@ public class MapManager : MonoBehaviour, IDataPersistence
                         GameObject temp = Instantiate(floorTiles[1], startPos + new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r + startRow; gc.col = q + startCol;
                     }
 
 
@@ -104,7 +105,7 @@ public class MapManager : MonoBehaviour, IDataPersistence
                         GameObject temp = Instantiate(floorTiles[0], startPos + new Vector3(rowDist, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r + startRow; gc.col = q + startCol;
                     }
 
                     else
@@ -113,7 +114,7 @@ public class MapManager : MonoBehaviour, IDataPersistence
                         GameObject temp = Instantiate(floorTiles[floorTile], startPos + new Vector3(rowDist + 0.5f, 0, columnDist), Quaternion.identity);
                         mapOddRows.Add(temp);
                         rowDist += 1f;
-                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r; gc.col = q;
+                        gc = temp.GetComponent<GrabCoordinates>(); gc.row = r + startRow; gc.col = q + startCol;
                     }
 
                 }

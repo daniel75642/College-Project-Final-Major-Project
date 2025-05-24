@@ -7,10 +7,14 @@ public class PlayerInventory : MonoBehaviour
 {
     public List<GameObject> itemsBought, inventorySlots, spareSlots, filledSlots;
 
+    public PlayerStats stats;
+
     public int itemsChecked;
 
-    public GameObject weaponSlot, helmetSlot, chestplateSlot, bootSlot;
+    public void Update()
+    {
 
+    }
     public void SetInventory()
     {
         if(itemsBought.Count >= 1)
@@ -23,10 +27,5 @@ public class PlayerInventory : MonoBehaviour
             }
         }
         itemsBought.Clear();
-    }
-
-    public void clickOnItem()
-    {
-
     }
 }

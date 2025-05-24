@@ -1,5 +1,4 @@
 using JetBrains.Annotations;
-using Microsoft.Unity.VisualStudio.Editor;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,7 +30,7 @@ public class Shop : MonoBehaviour
     public PlayerStats[] playersStats;
     public PlayerInventory[] inventories;
 
-    public GameObject itemDisplay, cantBuy;
+    public GameObject itemDisplay, armourDisplay, cantBuy;
 
     public void Start()
     {
@@ -159,6 +158,7 @@ public class Shop : MonoBehaviour
                     selectButtons[i].GetComponent<Button>().enabled = false;
                     selectButtons[i].GetComponent<UnityEngine.UI.Image>().color = Color.red;
                     itemDisplay.SetActive(false);
+                    armourDisplay.SetActive(false);
                 }
 
                 else

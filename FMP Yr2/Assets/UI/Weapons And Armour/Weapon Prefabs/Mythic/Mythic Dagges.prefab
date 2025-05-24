@@ -89,4 +89,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponArmourName: Daggers
+  weaponArmourType: Weapon
   weaponArmourCost: 62
+  physicalDamage: 36
+  intDamage: 0
+  steadyDamage: 0
+  defense: 0
+  intDefense: 0

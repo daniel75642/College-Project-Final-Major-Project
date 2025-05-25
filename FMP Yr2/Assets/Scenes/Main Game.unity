@@ -5776,7 +5776,7 @@ Transform:
   m_GameObject: {fileID: 52034069}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.5, y: 0.2, z: 12.9749975}
+  m_LocalPosition: {x: 117.3, y: 0.2, z: 118.3}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -83172,7 +83172,7 @@ Transform:
   m_GameObject: {fileID: 745954542}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.5, y: 0.2, z: 12.9749975}
+  m_LocalPosition: {x: 117.3, y: 0.2, z: 118.3}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -152691,7 +152691,7 @@ Transform:
   m_GameObject: {fileID: 1398041415}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.5, y: 0.2, z: 12.9749975}
+  m_LocalPosition: {x: 117.3, y: 0.2, z: 118.3}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -157414,6 +157414,8 @@ MonoBehaviour:
   cams:
   - {fileID: 963194227}
   - {fileID: 911154384}
+  - {fileID: 598228877}
+  - {fileID: 192074976}
   CombatManager: {fileID: 1904289943}
 --- !u!1 &1437794821
 GameObject:
@@ -166001,7 +166003,7 @@ Transform:
   m_GameObject: {fileID: 1511900707}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.5, y: 0.2, z: 12.9749975}
+  m_LocalPosition: {x: 117.3, y: 0.2, z: 118.3}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_ConstrainProportionsScale: 0
   m_Children:

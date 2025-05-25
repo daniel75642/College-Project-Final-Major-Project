@@ -18,7 +18,17 @@ public class Mouse : MonoBehaviour
     {
         screenPos = Input.mousePosition;
 
-        if(CombatManager.inCombat == true)
+        if (CombatManager.inCombat == true && CombatManager.toxic == true)
+        {
+            ray = cams[3].ScreenPointToRay(screenPos);
+        }
+
+        if (CombatManager.inCombat == true && CombatManager.wasteland == true)
+        {
+            ray = cams[2].ScreenPointToRay(screenPos);
+        }
+
+        if (CombatManager.inCombat == true && CombatManager.forest == true)
         {
             ray = cams[1].ScreenPointToRay(screenPos);
         }
